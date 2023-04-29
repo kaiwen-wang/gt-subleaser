@@ -18,12 +18,12 @@ Object.keys(data).forEach((item) => {
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-    const [semesterPreference, setSemesterPreference] = useState(["all"]);
+    const [semesterPreference, setSemesterPreference] = useState(null);
     const [maxPrice, setMaxPrice] = useState(Math.ceil(maximumDataPrice / 100) * 100);
     // const [maxPrice, setMaxPrice] = useState(Math.ceil(maximumDataPrice / 100) * 100);
     const [genderPreference, setGenderPreference] = useState(null);
     const [soloBathroomPreference, setSoloBathroomPreference] = useState(false);
-    const [maxRoommates, setMaxRoommates] = useState(10);
+    const [maxRoommates, setMaxRoommates] = useState(null);
     const [moveIn, setMoveIn] = useState(null);
     const [moveOut, setMoveOut] = useState(null);
 

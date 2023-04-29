@@ -15,8 +15,25 @@ export default async function FilteredPostsApi(req, res) {
 
     let query = supabase.from('subleases').select()
 
-    // If price is less than maxPrice
     query = query.lte('monthly_price', maxPrice)
+
+
+    // if (semesterPreference !== "null") {
+    //     query = query.eq("semester", semesterPreference)
+    // }
+    if (moveIn !== "null") {
+        query = query.gte('move_in', moveIn)
+    }
+    if (moveOut !== "null") {
+        query = query.lte('move_out', moveOut)
+    }
+    if (genderPreference !== "null") {
+        query = query.eq("gender_preference", genderPreference)
+    }
+    if (maxRoommates !== "null") {
+        query = query.gte('total_bedrooms', parseInt(maxRoommates) + 1)
+    }
+
 
 
     // sort query
@@ -43,9 +60,6 @@ export default async function FilteredPostsApi(req, res) {
 
     // Bathroom Preference: Either "solo" or "shared." Should implement a "2+" shared but not important for now. It is a boolean. False = solo, True = shared.
 
-    // MaxRoommates: Simply limit total_rooms - 1 to be less than or equal to maxRoommates.
-
-    // MoveIn/Moveout: have to compare a date somehow.
 
 
 

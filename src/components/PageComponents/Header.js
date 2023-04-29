@@ -11,6 +11,8 @@ import SemesterMenu from "../FilterMenus/SemesterMenu";
 import GenderMenu from "../FilterMenus/GenderMenu";
 import PressAnimationButton from "../PressAnimationButton";
 import MoveInMenu from "../FilterMenus/MoveInMenu";
+import MoveOutMenu from "@/components/FilterMenus/MoveOutMenu";
+import MaxRoommatesMenu from "../FilterMenus/MaxRoommatesMenu";
 
 export default function Header({ showFilters }) {
   const [isPinned, setIsPinned] = useState(false);
@@ -76,13 +78,13 @@ export default function Header({ showFilters }) {
         <div className="mx-auto border-t px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
           <div className="flex items-center gap-4">
             <div className="flex gap-3 overflow-auto whitespace-nowrap bg-gradient-to-l from-gray-500/5 to-white py-3 pl-0.5 pr-2">
-              <PopoverMenu name="Semester" props={<SemesterMenu />} />
+              {/* <PopoverMenu name="Semester" props={<SemesterMenu />} /> */}
               <PopoverMenu name="Gender" props={<GenderMenu />} />
               <PopoverMenu name="Price" props={<PriceMenu />} />
-              <PopoverMenu name={"Bathroom"} />
-              <PopoverMenu name={"Max Roommates"} />
+              {/* <PopoverMenu name={"Bathroom"} /> */}
+              <PopoverMenu name={"Max Roommates"} props={<MaxRoommatesMenu />} />
               <PopoverMenu name={"Move In"} props={<MoveInMenu />} />
-              <PopoverMenu name={"Move Out"} />
+              <PopoverMenu name={"Move Out"} props={<MoveOutMenu />} />
               {/* <PopoverMenu name={"Building Type"} /> */}
               {/* <PopoverMenu name={"Pets"} /> */}
               {/* <PopoverMenu name={"Parking"} /> */}
