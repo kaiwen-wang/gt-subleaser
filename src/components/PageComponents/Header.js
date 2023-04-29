@@ -10,6 +10,7 @@ import PriceMenu from "../FilterMenus/PriceMenu";
 import SemesterMenu from "../FilterMenus/SemesterMenu";
 import GenderMenu from "../FilterMenus/GenderMenu";
 import PressAnimationButton from "../PressAnimationButton";
+import MoveInMenu from "../FilterMenus/MoveInMenu";
 
 export default function Header({ showFilters }) {
   const [isPinned, setIsPinned] = useState(false);
@@ -80,7 +81,7 @@ export default function Header({ showFilters }) {
               <PopoverMenu name="Price" props={<PriceMenu />} />
               <PopoverMenu name={"Bathroom"} />
               <PopoverMenu name={"Max Roommates"} />
-              <PopoverMenu name={"Move In"} />
+              <PopoverMenu name={"Move In"} props={<MoveInMenu />} />
               <PopoverMenu name={"Move Out"} />
               {/* <PopoverMenu name={"Building Type"} /> */}
               {/* <PopoverMenu name={"Pets"} /> */}
