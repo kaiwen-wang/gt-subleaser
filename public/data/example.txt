@@ -286,3 +286,4 @@ Check supabase security rules so I don't get spammed
 Make it possible for people to disable listings. Maybe through email somehow.
 Make the display page look better.
 Fix sort menus and stuff
+    on the right track

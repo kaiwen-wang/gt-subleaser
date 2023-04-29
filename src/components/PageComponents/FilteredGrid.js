@@ -39,54 +39,7 @@ export default function FilteredGrid({ postsData, error }) {
                       </div>
                     </div> */}
 
-                    <div className="relative w-full pt-[95%]">
-                      <div className="absolute inset-x-0 top-0 z-30">
-                        <div className="flex">
-                          {item.semester.map((item, index) => {
-                            let color = "bg-gray-300"
-                            let emoji = "⌛"
-                            if (item.includes("Fall")) {
-                              color = "bg-amber-700/40"
-                              emoji = "🍂"
-                            }
-                            if (item.includes("Spring")) {
-                              color = "bg-lime-500/40"
-                              emoji = "🌱"
-                            }
-                            if (item.includes("Summer")) {
-                              color = "bg-blue-500/40"
-                              emoji = "☀️"
-                            }
-
-                            return (
-                              <div
-                                key={index}
-                                className={`ml-2 mt-2 max-w-fit whitespace-nowrap rounded-full ${color} px-2 py-1 text-xs font-semibold backdrop-blur-md text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]`}>
-                                <span className="mr-0.5">{emoji}</span>{" "}
-                                {item}
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </div>
-                      <div className="absolute inset-x-0 bottom-0 z-30">
-                        <div className="flex justify-end px-2 pb-2">
-                          {item.roommate_demographics.map((person, i) => {
-                            return (
-                              <Image
-                                src={`/people/${person === "F" ? "woman" : ""}${person === "M" ? "man" : ""}${person === "O" && item.gender_preference === "female" ? "missing-woman" : ""}${person === "O" && item.gender_preference === "male" ? "missing-man" : ""}${person === "O" && item.gender_preference === "not-important" ? "missing-neutral" : ""}.gif`
-                                }
-                                key={i}
-                                alt="stfu"
-                                width="12"
-                                height="12"
-                              />
-                            )
-                          })}
-                        </div>
-                      </div>
-                      <SkellyImage url={item.id} name={key} />
-                    </div>
+                    <SkellyImage url={item.id} name={key} item={item} />
                   </div>
                   <div className="mt-0.5 flex justify-between">
                     <p className="font-medium tracking-wide">
