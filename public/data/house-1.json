@@ -1,0 +1,129 @@
+{
+    "1": {
+        "url": "https://preview.redd.it/2icy84dhjvz71.jpg?width=640&crop=smart&auto=webp&s=e0b4774b457078ed8d0fcc0d7e49e1b878b7653c",
+        "neighborhood": "Inspire Atlanta",
+        "price": 1349,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment",
+        "gender-preference": "any",
+        "free-bedrooms": 1,
+        "total-bedrooms": 4,
+        "total-bathrooms": 4,
+        "pets-allowed": "no",
+        "move-in": "2021-08-01",
+        "move-out": "2022-05-31",
+        "parking": "no, street, garage, lot, paid, free"
+    },
+    "2": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",
+        "neighborhood": "Paloma West",
+        "price": 1129,
+        "semester": "Fall",
+        "semester-year": "2087",
+        "building-type": "apartment"
+    },
+    "3": {
+        "url": "https://media.vrbo.com/lodging/84000000/83580000/83572900/83572891/8edbc93c.f10.jpg",
+        "neighborhood": "Home Park",
+        "price": 850,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "House"
+    },
+    "4": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",
+        "neighborhood": "The Mark",
+        "price": 900,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "5": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "The Standard",
+        "price": 1200,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "6": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "SQ5",
+        "price": 1350,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "7": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "Buckhead",
+        "price": 900,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "90": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "Midtown",
+        "price": 1400,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "10": {
+        "url": "https://preview.redd.it/2icy84dhjvz71.jpg?width=640&crop=smart&auto=webp&s=e0b4774b457078ed8d0fcc0d7e49e1b878b7653c",
+        "neighborhood": "Inspire Atlanta",
+        "price": 1240,
+        "semester": "Spring",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "20": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",
+        "neighborhood": "Paloma West",
+        "price": 800,
+        "semester": "Summer",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "30": {
+        "url": "https://media.vrbo.com/lodging/84000000/83580000/83572900/83572891/8edbc93c.f10.jpg",
+        "neighborhood": "Home Park",
+        "price": 700,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "40": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "The Mark",
+        "price": 1249,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "50": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "The Standard",
+        "price": 1249,
+        "semester": "Summer",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "60": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "SQ5",
+        "price": 1249,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "70": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "Buckhead",
+        "price": 1249,
+        "semester": "Fall",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    },
+    "9": {
+        "url": "https://images1.apartments.com/i2/rw-EQp8Y05RZFk5a1RotovGQlt5xDV1mIqRKfY-PiRQ/117/paloma-west-midtown-atlanta-ga-building-photo.jpg?p=1",        "neighborhood": "Midtown",
+        "price": 1249,
+        "semester": "Spring",
+        "semester-year": "2023",
+        "building-type": "apartment"
+    }
+}
