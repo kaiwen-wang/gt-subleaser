@@ -15,17 +15,18 @@ const OPTIONS = {};
 const SLIDE_COUNT = 5;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
-
-export async function getStaticProps({ params }) {
-  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+export async function getServerSideProps({ params }) {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
 
   let { data, error } = await supabase
-    .from('subleases')
+    .from("subleases")
     .select()
-    .eq('id', params.id)
+    .eq("id", params.id);
 
-  // I think it's wrapped around an object or array thing
-  data = data[0]
+  data = data[0];
 
   return {
     props: {
@@ -34,27 +35,48 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export async function getStaticPaths() {
-  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+// export async function getStaticProps({ params }) {
+//   const supabase = createClient(
+//     process.env.NEXT_PUBLIC_SUPABASE_URL,
+//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+//   );
 
-  let { data, error } = await supabase
-    .from('subleases')
-    .select('id')
+//   let { data, error } = await supabase
+//     .from("subleases")
+//     .select()
+//     .eq("id", params.id);
 
-  let paths = data.map((sublease) => {
-    return {
-      params: {
-        id: sublease.id.toString(), // Changed this line to provide the id property
-      },
-    };
-  });
+//   // I think it's wrapped around an object or array thing so getting first element is needed. It's not getting the first element of anything.
+//   data = data[0];
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
 
+// export async function getStaticPaths() {
+//   const supabase = createClient(
+//     process.env.NEXT_PUBLIC_SUPABASE_URL,
+//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+//   );
+
+//   let { data, error } = await supabase.from("subleases").select("id");
+
+//   let paths = data.map((sublease) => {
+//     return {
+//       params: {
+//         id: sublease.id.toString(), // Changed this line to provide the id property
+//       },
+//     };
+//   });
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 
 export default function Listing(props) {
   const { data } = props;
@@ -76,17 +98,15 @@ export default function Listing(props) {
                 <button className="rounded-full px-4 py-2 text-sm font-medium outline outline-gray-200 hover:bg-gray-100">
                   Contact
                 </button>
-                <p className="text-xs">Clicks: {data.contact_clicks} | Views: {data.total_views}</p>
+                <p className="text-xs">
+                  Clicks: {data.contact_clicks} | Views: {data.total_views}
+                </p>
               </div>
             </div>
             <div className="bg-white">
               <div className="rounded-md px-4 py-4 outline outline-1 outline-gray-700">
-                <h1 className="mb-4 text-2xl font-semibold">
-                  {data.title}
-                </h1>
-                <div className="prose mt-2">
-                  {data.description}
-                </div>
+                <h1 className="mb-4 text-2xl font-semibold">{data.title}</h1>
+                <div className="prose mt-2">{data.description}</div>
               </div>
 
               <h2 className="mb-2 mt-2 text-center text-xl font-semibold">
@@ -95,10 +115,7 @@ export default function Listing(props) {
               <div className="rounded-lg p-4 outline outline-gray-200">
                 <div className="h-50">Availability:</div>
                 {data.semester}
-
-
                 {data.move_in}
-
                 MOve out:
                 {data.move_out}
               </div>
@@ -217,7 +234,7 @@ export default function Listing(props) {
                         <EmblaCarousel slides={SLIDES} options={OPTIONS} />
                     </section> */}
         </div>
-      </main >
+      </main>
     </>
   );
 }

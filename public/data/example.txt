@@ -293,4 +293,19 @@ Carousel for front page
 Check supabase security rules so I don't get spammed
 Make it possible for people to disable listings. Maybe through email somehow.
 Make the display page look better.
+gender menu page stuff
+- upload error page
 
+
+Hard shit that I haven't done yet:
+- generating individual pages on database change
+- getting maxPrice properly done
+- pagination
+
+
+Hard shit I will do:
+- email confirmation/deletion?
+- 
+
+
+FYI: 2.5k winter graduates on campus.
