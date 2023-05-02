@@ -3,8 +3,15 @@ import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 
 import { BsFillCaretDownFill } from "react-icons/bs";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
-export default function PopoverMenu({ props, name }) {
+export default function PopoverMenu({
+  props,
+  name,
+  isActive,
+  contextSetter,
+  defaultValue,
+}) {
   let [referenceElement, setReferenceElement] = useState();
   let [popperElement, setPopperElement] = useState();
   let [arrowElement, setArrowElement] = useState(null);
@@ -20,15 +27,30 @@ export default function PopoverMenu({ props, name }) {
       <Popover.Button
         ref={setReferenceElement}
         className={`
-                ui-open:text-opacity-20
-                bordershadow-scale-600 group inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium outline outline-0 outline-gray-200 bg-white text-gray-700 hover:bg-gray-100`}
+                ui-open:text-opacity-20 ${
+                  isActive ? "bg-gray-200/80" : "bg-white "
+                }
+                 bordershadow-scale-600 group inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium outline outline-0 outline-gray-200 text-gray-700 hover:bg-gray-100`}
       >
         <span className="whitespace-nowrap">{name}</span>
-        <BsFillCaretDownFill
-          className={`
+        {isActive ? (
+          <div className="relative flex items-center pl-1 pr-[1.13rem] ">
+            <XMarkIcon
+              className={`
+        absolute left-0 ml-1 w-7 shrink-0 rounded px-1 py-1 hover:bg-gray-300`}
+              onClick={(e) => {
+                e.preventDefault();
+                contextSetter(defaultValue);
+              }}
+            />
+          </div>
+        ) : (
+          <BsFillCaretDownFill
+            className={`
                    ml-2 h-2 w-2  group-hover:text-opacity-80`}
-          aria-hidden="true"
-        />
+            aria-hidden="true"
+          />
+        )}
       </Popover.Button>
 
       <Popover.Panel

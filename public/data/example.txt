@@ -213,6 +213,11 @@ How to advertise:
 - List of all people interning in a semester
 
 
+Easiest default:
+Winter gradutes X Spring transfers
+
+
+
 Problems:
 - summer glut
 - leasing to off-campus people
@@ -278,12 +283,14 @@ posted 8 hours ago
 
 Honestly now that I constrained my scope like crazy I probably just need the following:
 
-Carousel for front page
-A little bit of better data validation on the upload page
 Remove the anchor links
     done
+Fix sort menus and stuff
+    on the right track
+    Make the "X" appear when the menu is selected
+A little bit of better data validation on the upload page
+Carousel for front page
 Check supabase security rules so I don't get spammed
 Make it possible for people to disable listings. Maybe through email somehow.
 Make the display page look better.
-Fix sort menus and stuff
-    on the right track
+

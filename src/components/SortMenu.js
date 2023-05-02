@@ -25,53 +25,50 @@ export default function SortMenu() {
         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 bg-white focus:outline-none">
           <div className="px-1 py-1 ">
             <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? "text-white bg-violet-500" : "text-gray-900"
-                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  onClick={() => setSortFormula("increasingPrice")}
-                >
-                  {active ? (
-                    <EditActiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <EditInactiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  )}
-                  Price Low to High
-                </button>
-              )}
+              <button
+                className={`${
+                  sortFormula == "increasingPrice"
+                    ? "text-white bg-violet-500"
+                    : "text-gray-900"
+                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                onClick={() => setSortFormula("increasingPrice")}
+              >
+                {sortFormula == "increasingPrice" ? (
+                  <EditActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
+                ) : (
+                  <EditInactiveIcon
+                    className="mr-2 h-5 w-5"
+                    aria-hidden="true"
+                  />
+                )}
+                Price Low to High
+              </button>
             </Menu.Item>
             <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? "text-white bg-violet-500" : "text-gray-900"
-                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                  onClick={() => setSortFormula("decreasingPrice")}
-                >
-                  {active ? (
-                    <DuplicateActiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <DuplicateInactiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  )}
-                  Price High to Low
-                </button>
-              )}
+              <button
+                className={`${
+                  sortFormula == "decreasingPrice"
+                    ? "text-white bg-violet-500"
+                    : "text-gray-900"
+                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                onClick={() => setSortFormula("decreasingPrice")}
+              >
+                {sortFormula == "decreasingPrice" ? (
+                  <DuplicateActiveIcon
+                    className="mr-2 h-5 w-5"
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <DuplicateInactiveIcon
+                    className="mr-2 h-5 w-5"
+                    aria-hidden="true"
+                  />
+                )}
+                Price High to Low
+              </button>
             </Menu.Item>
           </div>
-          <div className="px-1 py-1">
+          {/* <div className="px-1 py-1">
             <Menu.Item>
               {({ active }) => (
                 <button
@@ -116,7 +113,7 @@ export default function SortMenu() {
                 </button>
               )}
             </Menu.Item>
-          </div>
+          </div> */}
           {/* <div className="px-1 py-1">
                             <Menu.Item>
                                 {({ active }) => (

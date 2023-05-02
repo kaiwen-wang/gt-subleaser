@@ -14,8 +14,65 @@ import MoveInMenu from "../FilterMenus/MoveInMenu";
 import MoveOutMenu from "@/components/FilterMenus/MoveOutMenu";
 import MaxRoommatesMenu from "../FilterMenus/MaxRoommatesMenu";
 
+import { useContext } from "react";
+import { AppContext } from "/src/components/AppState.js";
+
 export default function Header({ showFilters }) {
   const [isPinned, setIsPinned] = useState(false);
+
+  let { genderPreference, setGenderPreference } = useContext(AppContext);
+  let { maxPrice, setMaxPrice } = useContext(AppContext);
+  let { maxTopPrice } = useContext(AppContext);
+  let { maxRoommates, setMaxRoommates } = useContext(AppContext);
+  let { moveIn, setMoveIn } = useContext(AppContext);
+  let { moveOut, setMoveOut } = useContext(AppContext);
+
+  const filterMenuOptions = [
+    {
+      id: "gender",
+      isActive: genderPreference !== null,
+      displayName:
+        genderPreference !== null
+          ? genderPreference.charAt(0).toUpperCase() + genderPreference.slice(1)
+          : "Your Gender",
+      contextSetter: setGenderPreference,
+      defaultValue: null,
+      component: <GenderMenu />,
+    },
+    {
+      id: "price",
+      isActive: maxPrice !== maxTopPrice,
+      displayName: maxPrice !== maxTopPrice ? "Price: $" + maxPrice : "Price",
+      contextSetter: setMaxPrice,
+      defaultValue: maxTopPrice,
+      component: <PriceMenu />,
+    },
+    {
+      id: "maxRoommates",
+      isActive: maxRoommates !== null,
+      displayName:
+        maxRoommates !== null ? "Roommates: " + maxRoommates : "Max Roommates",
+      contextSetter: setMaxRoommates,
+      defaultValue: null,
+      component: <MaxRoommatesMenu />,
+    },
+    {
+      id: "moveIn",
+      isActive: moveIn !== null,
+      displayName: moveIn !== null ? `In: ${moveIn}` : "Move In",
+      contextSetter: setMoveIn,
+      defaultValue: null,
+      component: <MoveInMenu />,
+    },
+    {
+      id: "moveOut",
+      isActive: moveOut !== null,
+      displayName: moveOut !== null ? `Out: ${moveOut}` : "Move Out",
+      contextSetter: setMoveOut,
+      defaultValue: null,
+      component: <MoveOutMenu />,
+    },
+  ];
 
   // This is fine performance wise; I checked react for updates
   useEffect(() => {
@@ -33,24 +90,11 @@ export default function Header({ showFilters }) {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(entries => {
-  //     entries.forEach(entry => {
-  //       setIsPinned(entry.isIntersecting);
-  //     });
-  //   });
-
-  //   observer.observe(stickyRef.current);
-
-  //   return () => {
-  //     observer.unobserve(stickyRef.current);
-  //   };
-  // }, []);
-
   return (
     <header
-      className={`sticky top-0 z-50 bg-white ${isPinned ? "border-b-0 shadow-md" : ""
-        } ${showFilters ? "" : "border-b"}`}
+      className={`sticky top-0 z-50 bg-white ${
+        isPinned ? "border-b-0 shadow-md" : ""
+      } ${showFilters ? "" : "border-b"}`}
     >
       <div className="relative mx-auto px-6  sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
         <div className="flex items-center justify-between py-2.5 ">
@@ -69,7 +113,6 @@ export default function Header({ showFilters }) {
             {/* <div>
               <UserIcon />
             </div> */}
-            {/* <PressAnimationButton /> */}
           </div>
         </div>
       </div>
@@ -78,18 +121,16 @@ export default function Header({ showFilters }) {
         <div className="mx-auto border-t px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
           <div className="flex items-center gap-4">
             <div className="flex gap-3 overflow-auto whitespace-nowrap bg-gradient-to-l from-gray-500/5 to-white py-3 pl-0.5 pr-2">
-              {/* <PopoverMenu name="Semester" props={<SemesterMenu />} /> */}
-              <PopoverMenu name="Gender" props={<GenderMenu />} />
-              <PopoverMenu name="Price" props={<PriceMenu />} />
-              {/* <PopoverMenu name={"Bathroom"} /> */}
-              <PopoverMenu name={"Max Roommates"} props={<MaxRoommatesMenu />} />
-              <PopoverMenu name={"Move In"} props={<MoveInMenu />} />
-              <PopoverMenu name={"Move Out"} props={<MoveOutMenu />} />
-              {/* <PopoverMenu name={"Building Type"} /> */}
-              {/* <PopoverMenu name={"Pets"} /> */}
-              {/* <PopoverMenu name={"Parking"} /> */}
-              {/* <PopoverMenu name={"Appliances"} /> */}
-              {/* <PopoverMenu name={"Furniture"} /> */}
+              {filterMenuOptions.map((option) => (
+                <PopoverMenu
+                  key={option.id}
+                  isActive={option.isActive}
+                  name={option.displayName}
+                  contextSetter={option.contextSetter}
+                  defaultValue={option.defaultValue}
+                  props={option.component}
+                />
+              ))}
             </div>
             <SortMenu />
           </div>

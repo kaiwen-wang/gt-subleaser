@@ -38,7 +38,7 @@ export default function Home() {
 
 
   // Apparently data changes when the context changes. Is this normal?
-  const { data, error } = useSWR(`/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}`, fetcher)
+  const { data, error } = useSWR(`/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}`, fetcher)
 
 
   return (

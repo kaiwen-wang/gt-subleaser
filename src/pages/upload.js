@@ -5,6 +5,10 @@ import Toggle from "@/components/PageComponents/Toggle";
 
 import Image from "next/image";
 
+import { useRouter } from "next/router";
+
+
+
 import {
   PhotoIcon,
   DocumentTextIcon,
@@ -62,6 +66,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function Upload({ idNum }) {
+
+  const router = useRouter()
+
+
   const inputFileRef = useRef(null);
 
 
@@ -221,7 +229,10 @@ export default function Upload({ idNum }) {
       console.error(error);
     } else {
       console.log("New record added:", data);
+      // redirect to /success
+
     }
+    router.push(`/success?id=${idNum}`);
   }
 
   return (
@@ -465,7 +476,7 @@ export default function Upload({ idNum }) {
                   Photos
                 </label>
                 <p>
-                  Include the bedroom, bathroom, and kitchen/living area with photos you've personally taken.
+                  Photos you've personally taken will produce the best response. Include the bedroom, bathroom, and kitchen/living area.
                 </p>
 
                 <input

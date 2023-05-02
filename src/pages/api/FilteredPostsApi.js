@@ -8,7 +8,7 @@ export default async function FilteredPostsApi(req, res) {
     let maxRoommates = req.query.roommates
     let moveIn = req.query.movein
     let moveOut = req.query.moveout
-    // let sortFormula = req.query.sort;
+    let sortFormula = req.query.sort;
 
 
     const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
@@ -46,15 +46,16 @@ export default async function FilteredPostsApi(req, res) {
 
     // unsorted.sort((a, b) => data[a].price - data[b].price);
     // } 
-    // if (sortFormula === "increasingPrice") {
-    //     query.order('monthly_price', { ascending: true })
+    console.log(sortFormula)
+    if (sortFormula === "increasingPrice") {
+        query.order('monthly_price', { ascending: true })
 
-    //     // unsorted.sort((a, b) => data[a].price - data[b].price);
-    // } else if (sortFormula === "decreasingPrice") {
-    //     query.order('monthly_price', { ascending: false })
+        // unsorted.sort((a, b) => data[a].price - data[b].price);
+    } else if (sortFormula === "decreasingPrice") {
+        query.order('monthly_price', { ascending: false })
 
-    //     // unsorted.sort((a, b) => data[b].price - data[a].price);
-    // }
+        // unsorted.sort((a, b) => data[b].price - data[a].price);
+    }
 
     // Gender Preference: If null, then show all. If male show only male. If female show only female.
 
