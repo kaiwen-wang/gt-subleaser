@@ -7,12 +7,8 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/20/solid";
-import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+import { supabase } from "@/utils/supabase";
 
 export default function SkellyImage({ name, url, item }) {
   const [isLoaded, setIsLoaded] = useState(false);

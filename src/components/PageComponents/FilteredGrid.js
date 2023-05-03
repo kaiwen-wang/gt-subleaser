@@ -1,4 +1,3 @@
-import data from "public/data/house-1.json";
 import SkellyImage from "@/components/PageComponents/SkellyImage";
 
 import { AppContext } from "/src/components/AppState.js";
@@ -8,30 +7,11 @@ import Image from "next/image";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
+import { timeAgo } from "@/utils/timeAgo";
+
 export default function FilteredGrid({ postsData, error }) {
   let { maxPrice, setMaxPrice } = useContext(AppContext);
   let parsedError = error ? JSON.parse(error) : null;
-
-  function timeAgo(timestamp) {
-    const currentTime = new Date();
-    const inputTime = new Date(timestamp);
-    const timeDifference = currentTime - inputTime;
-
-    const seconds = Math.floor(timeDifference / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (days > 0) {
-      return days === 1 ? `${days} day ago` : `${days} days ago`;
-    } else if (hours > 0) {
-      return hours === 1 ? `${hours} hour ago` : `${hours} hours ago`;
-    } else if (minutes > 0) {
-      return minutes === 1 ? `${minutes} minute ago` : `${minutes} minutes ago`;
-    } else {
-      return "a few seconds ago";
-    }
-  }
 
   return (
     <div className="mx-auto mt-2 px-6 pb-12 sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
@@ -41,6 +21,7 @@ export default function FilteredGrid({ postsData, error }) {
           postsData.map((item) => {
             let key = item.id;
 
+            
             if (item.monthly_price <= maxPrice) {
               return (
                 <Link key={key} href={`/listings/${key}`}>

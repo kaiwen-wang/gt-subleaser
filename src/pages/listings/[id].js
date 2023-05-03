@@ -1,19 +1,48 @@
-import Head from "next/head";
-
 import { AppContext } from "/src/components/AppState.js";
-import { useContext, useEffect } from "react";
-
-import Header from "@/components/PageComponents/Header";
-import Footer from "@/components/PageComponents/Footer";
-
 import EmblaCarousel from "@/components/Carousel/Carousel";
+import HeadElement from "@/components/PageComponents/HeadElement";
+import Header from "@/components/PageComponents/Header";
+import { supabase } from "@/utils/supabase";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
-import HeadElement from "@/components/PageComponents/HeadElement";
-
-const OPTIONS = {};
-const SLIDE_COUNT = 5;
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+// export async function getStaticProps({ params }) {
+//   const supabase = createClient(
+//     process.env.NEXT_PUBLIC_SUPABASE_URL,
+//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+//   );
+//   let { data, error } = await supabase
+//     .from("subleases")
+//     .select()
+//     .eq("id", params.id);
+//   // I think it's wrapped around an object or array thing so getting first element is needed. It's not getting the first element of anything.
+//   data = data[0];
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
+// export async function getStaticPaths() {
+//   const supabase = createClient(
+//     process.env.NEXT_PUBLIC_SUPABASE_URL,
+//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+//   );
+//   let { data, error } = await supabase.from("subleases").select("id");
+//   let paths = data.map((sublease) => {
+//     return {
+//       params: {
+//         id: sublease.id.toString(), // Changed this line to provide the id property
+//       },
+//     };
+//   });
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
+import { useState } from "react";
 
 export async function getServerSideProps({ params }) {
   const supabase = createClient(
@@ -26,6 +55,8 @@ export async function getServerSideProps({ params }) {
     .select()
     .eq("id", params.id);
 
+  // check error
+
   data = data[0];
 
   return {
@@ -35,51 +66,48 @@ export async function getServerSideProps({ params }) {
   };
 }
 
-// export async function getStaticProps({ params }) {
-//   const supabase = createClient(
-//     process.env.NEXT_PUBLIC_SUPABASE_URL,
-//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-//   );
-
-//   let { data, error } = await supabase
-//     .from("subleases")
-//     .select()
-//     .eq("id", params.id);
-
-//   // I think it's wrapped around an object or array thing so getting first element is needed. It's not getting the first element of anything.
-//   data = data[0];
-
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// }
-
-// export async function getStaticPaths() {
-//   const supabase = createClient(
-//     process.env.NEXT_PUBLIC_SUPABASE_URL,
-//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-//   );
-
-//   let { data, error } = await supabase.from("subleases").select("id");
-
-//   let paths = data.map((sublease) => {
-//     return {
-//       params: {
-//         id: sublease.id.toString(), // Changed this line to provide the id property
-//       },
-//     };
-//   });
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
-
 export default function Listing(props) {
+  const router = useRouter();
+  let url = router.query.id;
+  const [supabaseURL, setSupabaseURL] = useState([]);
+
   const { data } = props;
+
+  useEffect(() => {
+    downloadFilesInFolder();
+  }, [url]);
+
+  async function downloadFilesInFolder() {
+    // List all files in the folder
+    const { data, error } = await supabase.storage
+      .from("sublease-images")
+      .list(`${url}/`);
+
+    if (error) {
+      throw error;
+    }
+
+    // loop through data and download list file names
+    const tempSupabaseURL = [];
+    for (const file of data) {
+      let path = `${url}/${file.name}`;
+
+      const { data: fileContent, error: downloadError } = await supabase.storage
+        .from("sublease-images")
+        .download(path);
+
+      if (downloadError) {
+        throw downloadError;
+      }
+
+      // Create a Blob with the file content and create a local URL
+      const fileBlob = new Blob([fileContent], { type: "image/*" });
+      const fileUrl = URL.createObjectURL(fileBlob);
+      tempSupabaseURL.push(fileUrl);
+    }
+
+    setSupabaseURL(tempSupabaseURL);
+  }
 
   return (
     <>
@@ -90,17 +118,18 @@ export default function Listing(props) {
         <div className="container mx-auto pb-8 pt-4">
           <div className="grid grid-cols-2">
             <div className="sticky top-20 grid max-h-64 grid-cols-2 grid-rows-2 gap-2 pr-4">
-              <div className="bg-gray-500"></div>
-              <div className="bg-gray-500"></div>
-              <div className="bg-gray-500"></div>
-              <div className="bg-gray-500"></div>
-              <div className="mt-8">
-                <button className="rounded-full px-4 py-2 text-sm font-medium outline outline-gray-200 hover:bg-gray-100">
-                  Contact
-                </button>
-                <p className="text-xs">
-                  Clicks: {data.contact_clicks} | Views: {data.total_views}
-                </p>
+              <div className="grid grid-cols-2 gap-4">
+                {supabaseURL.map((url) => (
+                  <div key={url} className="w-full h-full">
+                    <Image
+                      src={url}
+                      alt="example"
+                      width={500}
+                      height={500}
+                      layout="responsive"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
             <div className="bg-white">
@@ -229,10 +258,6 @@ export default function Listing(props) {
               </div>
             </div>
           </div>
-
-          {/* <section className="sandbox__carousel">
-                        <EmblaCarousel slides={SLIDES} options={OPTIONS} />
-                    </section> */}
         </div>
       </main>
     </>
