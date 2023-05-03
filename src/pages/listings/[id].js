@@ -158,7 +158,7 @@ export default function Listing(props) {
             </div>
           ))}
         </div>
-        <div className="mt-16 prose mx-auto max-w-2xl">
+        <div className="mt-16 prose mx-auto max-w-2xl mb-16">
           <p className="mt-2 text-gray-500">{data.description}</p>
         </div>
         {/* <div className="grid grid-cols-2 gap-3 text-sm font-medium [&>*]:rounded-md [&>*]:px-3 [&>*]:pb-2 [&>*]:pt-3 [&>*]:outline [&>*]:outline-gray-200">
