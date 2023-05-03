@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-
-import Image from "next/image";
+import { supabase } from "@/utils/supabase";
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/20/solid";
-
-import { supabase } from "@/utils/supabase";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function SkellyImage({ name, url, item }) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -62,7 +60,7 @@ export default function SkellyImage({ name, url, item }) {
   return (
     <div className="relative w-full pt-[95%]">
       {!isLoaded ? (
-        <div className="absolute inset-x-0 top-0 z-[10] h-full w-full animate-pulse bg-gray-100"></div>
+        <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
       ) : null}
       <div className="absolute inset-x-0 top-0 z-30">
         <div className="flex">

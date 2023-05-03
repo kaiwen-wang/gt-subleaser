@@ -1,14 +1,16 @@
-import Head from "next/head";
-
-import UserIcon from "@/components/PageComponents/UserIcon";
+import ApplianceSelect from "@/components/ApplianceSelect";
+import HeadElement from "@/components/PageComponents/HeadElement";
 import Toggle from "@/components/PageComponents/Toggle";
-
-import Image from "next/image";
-
-import { useRouter } from "next/router";
-
-
-
+import UserIcon from "@/components/PageComponents/UserIcon";
+import BigPicture from "@/components/UploadForms/BigPicture";
+import CoverImage from "@/components/UploadForms/CoverImage";
+import Description from "@/components/UploadForms/Description";
+import HouseDetails from "@/components/UploadForms/HouseDetails";
+import Pricing from "@/components/UploadForms/Pricing";
+import Timing from "@/components/UploadForms/Timing";
+import Title from "@/components/UploadForms/Title";
+import { classifySemesters } from "@/utils/classifySemesters";
+import { supabase } from "@/utils/supabase";
 import {
   PhotoIcon,
   DocumentTextIcon,
@@ -32,21 +34,12 @@ import {
   CloudArrowUpIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-
 import { createClient } from "@supabase/supabase-js";
-
+import Head from "next/head";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState, useCallback, useEffect } from "react";
-import ApplianceSelect from "@/components/ApplianceSelect";
-import Description from "@/components/UploadForms/Description";
-import Title from "@/components/UploadForms/Title";
-import HeadElement from "@/components/PageComponents/HeadElement";
-import BigPicture from "@/components/UploadForms/BigPicture";
-import Timing from "@/components/UploadForms/Timing";
-import Pricing from "@/components/UploadForms/Pricing";
-import HouseDetails from "@/components/UploadForms/HouseDetails";
-
-import { useRef } from 'react'
-import CoverImage from "@/components/UploadForms/CoverImage";
+import { useRef } from "react";
 
 export async function getServerSideProps(context) {
   const supabase = createClient(
@@ -66,18 +59,14 @@ export async function getServerSideProps(context) {
 }
 
 export default function Upload({ idNum }) {
-
-  const router = useRouter()
-
+  const router = useRouter();
 
   const inputFileRef = useRef(null);
-
 
   const [uploadimgs, setuploadimgs] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [loadingIndices, setLoadingIndices] = useState([]);
-
 
   function deleteImage(index) {
     const newImages = [...uploadimgs];
@@ -103,11 +92,6 @@ export default function Upload({ idNum }) {
   const amenitiesListFunciton = (data) => {
     setAmenitiesList(data);
   };
-
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
 
   const handleImageSubmit = async (event, img) => {
     event.preventDefault();
@@ -135,78 +119,6 @@ export default function Upload({ idNum }) {
     handleImageSubmit(e, e.target.files[0]);
   };
 
-
-  function classifySemesters(data) {
-    const moveIn = new Date(data.move_in);
-    const moveOut = new Date(data.move_out);
-
-    let semesterData = [];
-
-    for (
-      let year = moveIn.getFullYear();
-      year <= moveOut.getFullYear();
-      year++
-    ) {
-      // console.log(year)
-
-      const springStart = new Date(year - 1, 11, 31); // Dec 31
-      const springEnd = new Date(year, 4, 15); // May 15
-      const summerEnd = new Date(year, 7, 15); // August 15
-      const winterEnd = new Date(year, 11, 31); // December 31
-
-      // console.log(springStart, springEnd, summerEnd, winterEnd)
-
-      const springLength = Math.floor(
-        (springEnd - springStart) / (1000 * 60 * 60 * 24)
-      );
-      const summerLength = Math.floor(
-        (summerEnd - springEnd) / (1000 * 60 * 60 * 24)
-      );
-      const winterLength = Math.floor(
-        (winterEnd - summerEnd) / (1000 * 60 * 60 * 24)
-      );
-
-      const springOverlap =
-        Math.max(
-          Math.min(moveOut, springEnd) - Math.max(moveIn, springStart),
-          0
-        ) /
-        (1000 * 60 * 60 * 24);
-      const summerOverlap =
-        Math.max(
-          Math.min(moveOut, summerEnd) - Math.max(moveIn, springEnd),
-          0
-        ) /
-        (1000 * 60 * 60 * 24);
-      const winterOverlap =
-        Math.max(
-          Math.min(moveOut, winterEnd) - Math.max(moveIn, summerEnd),
-          0
-        ) /
-        (1000 * 60 * 60 * 24);
-
-      const springPercentage = springOverlap / springLength;
-      const summerPercentage = summerOverlap / summerLength;
-      const winterPercentage = winterOverlap / winterLength;
-
-      if (springPercentage >= 0.6 && !semesterData.includes(`Spring ${year}`)) {
-        semesterData.push(`Spring ${year}`);
-      }
-      if (summerPercentage >= 0.6 && !semesterData.includes(`Summer ${year}`)) {
-        semesterData.push(`Summer ${year}`);
-      }
-      if (winterPercentage >= 0.6 && !semesterData.includes(`Fall ${year}`)) {
-        semesterData.push(`Fall ${year}`);
-      }
-    }
-
-    // semesterData is empty, then it is a short-term lease
-    if (semesterData.length === 0) {
-      semesterData.push("Short-term lease");
-    }
-    return semesterData;
-  }
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -230,10 +142,9 @@ export default function Upload({ idNum }) {
     } else {
       console.log("New record added:", data);
       // redirect to /success
-
     }
     router.push(`/success?id=${idNum}`);
-  }
+  };
 
   return (
     <>
@@ -476,7 +387,8 @@ export default function Upload({ idNum }) {
                   Photos
                 </label>
                 <p>
-                  Photos you've personally taken will produce the best response. Include the bedroom, bathroom, and kitchen/living area.
+                  Photos you've personally taken will produce the best response.
+                  Include the bedroom, bathroom, and kitchen/living area.
                 </p>
 
                 <input
@@ -486,20 +398,25 @@ export default function Upload({ idNum }) {
                   onChange={handleImageUpload}
                   className="mt-2"
                   ref={inputFileRef} // Add ref to the input element
-
                 />
                 <div className="mt-2 flex h-64  items-center gap-2 overflow-x-auto rounded-md border px-2 border-gray-400">
                   {uploadimgs.length !== 0 ? (
                     uploadimgs.map((img, index) => (
-                      <CoverImage img={img} key={index}
-                        id={idNum} index={index} loading={loading} deleteImage={deleteImage} />
+                      <CoverImage
+                        img={img}
+                        key={index}
+                        id={idNum}
+                        index={index}
+                        loading={loading}
+                        deleteImage={deleteImage}
+                      />
                     ))
                   ) : (
-                    <div className="relative h-60 w-60 rounded-md outline outline-black"
-                    >
-                      <span className="cursor-pointer text-center w-full h-full flex items-center justify-center"
-                        onClick={() => inputFileRef.current.click()
-                        }>
+                    <div className="relative h-60 w-60 rounded-md outline outline-black">
+                      <span
+                        className="cursor-pointer text-center w-full h-full flex items-center justify-center"
+                        onClick={() => inputFileRef.current.click()}
+                      >
                         No files yet!<br></br>
                         Upload an image
                       </span>
@@ -694,8 +611,8 @@ export default function Upload({ idNum }) {
               </button>
             </form>
           </div>
-        </div >
-      </div >
+        </div>
+      </div>
     </>
   );
 }

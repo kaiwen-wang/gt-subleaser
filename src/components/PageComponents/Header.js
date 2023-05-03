@@ -1,78 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import SortMenu from "@/components/SortMenu";
+import HeaderfilterMenu from "./HeaderFilterMenu";
 import Toggle from "@/components/PageComponents/Toggle";
-import PopoverMenu from "src/components/PopoverMenu.js";
-
 import Link from "next/link";
+import React, { useState, useEffect, useRef } from "react";
 
-import UserIcon from "@/components/PageComponents/UserIcon";
-import PriceMenu from "../FilterMenus/PriceMenu";
-import SemesterMenu from "../FilterMenus/SemesterMenu";
-import GenderMenu from "../FilterMenus/GenderMenu";
-import PressAnimationButton from "../PressAnimationButton";
-import MoveInMenu from "../FilterMenus/MoveInMenu";
-import MoveOutMenu from "@/components/FilterMenus/MoveOutMenu";
-import MaxRoommatesMenu from "../FilterMenus/MaxRoommatesMenu";
-
-import { useContext } from "react";
-import { AppContext } from "/src/components/AppState.js";
-
-export default function Header({ showFilters }) {
+export default function Header({ showFilters, smallContainer = false }) {
   const [isPinned, setIsPinned] = useState(false);
-
-  let { genderPreference, setGenderPreference } = useContext(AppContext);
-  let { maxPrice, setMaxPrice } = useContext(AppContext);
-  let { maxTopPrice } = useContext(AppContext);
-  let { maxRoommates, setMaxRoommates } = useContext(AppContext);
-  let { moveIn, setMoveIn } = useContext(AppContext);
-  let { moveOut, setMoveOut } = useContext(AppContext);
-
-  const filterMenuOptions = [
-    {
-      id: "gender",
-      isActive: genderPreference !== null,
-      displayName:
-        genderPreference !== null
-          ? genderPreference.charAt(0).toUpperCase() + genderPreference.slice(1)
-          : "Your Gender",
-      contextSetter: setGenderPreference,
-      defaultValue: null,
-      component: <GenderMenu />,
-    },
-    {
-      id: "price",
-      isActive: maxPrice !== maxTopPrice,
-      displayName: maxPrice !== maxTopPrice ? "Price: $" + maxPrice : "Price",
-      contextSetter: setMaxPrice,
-      defaultValue: maxTopPrice,
-      component: <PriceMenu />,
-    },
-    {
-      id: "maxRoommates",
-      isActive: maxRoommates !== null,
-      displayName:
-        maxRoommates !== null ? "Roommates: " + maxRoommates : "Max Roommates",
-      contextSetter: setMaxRoommates,
-      defaultValue: null,
-      component: <MaxRoommatesMenu />,
-    },
-    {
-      id: "moveIn",
-      isActive: moveIn !== null,
-      displayName: moveIn !== null ? `In: ${moveIn}` : "Move In",
-      contextSetter: setMoveIn,
-      defaultValue: null,
-      component: <MoveInMenu />,
-    },
-    {
-      id: "moveOut",
-      isActive: moveOut !== null,
-      displayName: moveOut !== null ? `Out: ${moveOut}` : "Move Out",
-      contextSetter: setMoveOut,
-      defaultValue: null,
-      component: <MoveOutMenu />,
-    },
-  ];
 
   // This is fine performance wise; I checked react for updates
   useEffect(() => {
@@ -96,14 +28,20 @@ export default function Header({ showFilters }) {
         isPinned ? "border-b-0 shadow-md" : ""
       } ${showFilters ? "" : "border-b"}`}
     >
-      <div className="relative mx-auto px-6  sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
+      <div
+        className={`relative mx-auto ${
+          smallContainer
+            ? "container"
+            : "px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl"
+        }`}
+      >
         <div className="flex items-center justify-between py-2.5 ">
           <h1 className="hidden items-center text-2xl font-semibold text-gray-800 sm:flex">
             <Link href="/">🐝 GT Subleaser</Link>
           </h1>
           <div className="flex w-full items-center gap-2.5 sm:max-w-fit sm:justify-between">
             <Link href="/upload">
-              <div className="bordershadow-scale-600 rounded-full px-3.5 py-2.5 text-sm font-medium outline outline-0  outline-gray-200 hover:bg-gray-100">
+              <div className="bordershadow-scale-600 rounded-full px-3.5 py-2.5 text-sm font-medium  hover:bg-gray-100">
                 <span>Sublease your place</span>
               </div>
             </Link>
@@ -117,48 +55,7 @@ export default function Header({ showFilters }) {
         </div>
       </div>
 
-      {showFilters === true ? (
-        <div className="mx-auto border-t px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
-          <div className="flex items-center gap-4">
-            <div className="flex gap-3 overflow-auto whitespace-nowrap bg-gradient-to-l from-gray-500/5 to-white py-3 pl-0.5 pr-2">
-              {filterMenuOptions.map((option) => (
-                <PopoverMenu
-                  key={option.id}
-                  isActive={option.isActive}
-                  name={option.displayName}
-                  contextSetter={option.contextSetter}
-                  defaultValue={option.defaultValue}
-                  props={option.component}
-                />
-              ))}
-            </div>
-            <SortMenu />
-          </div>
-          {/* <div className="grid grid-cols-8 items-center gap-4">
-            <div className="relative col-span-6 max-w-fit md:col-span-7">
-              <div className="flex gap-3 overflow-auto whitespace-nowrap px-0.5 py-3">
-                <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-l from-white/0 to-white"></div>
-                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-r from-white/0 to-white"></div>
-                <PopoverMenu name="Semester" props={<SemesterMenu />} />
-                <PopoverMenu name="Gender" props={<GenderMenu />} />
-                <PopoverMenu name="Price" props={<PriceMenu />} />
-                <PopoverMenu name={"Bathroom"} />
-                <PopoverMenu name={"Max Roommates"} />
-                <PopoverMenu name={"Move In"} />
-                <PopoverMenu name={"Move Out"} />
-                <PopoverMenu name={"Building Type"} />
-                <PopoverMenu name={"Pets"} />
-                <PopoverMenu name={"Parking"} />
-                <PopoverMenu name={"Appliances"} />
-                <PopoverMenu name={"Furniture"} />
-              </div>
-            </div>
-            <div className="col-span-2 flex justify-end md:col-span-1">
-              <SortMenu className="" />
-            </div>
-          </div> */}
-        </div>
-      ) : null}
+      {showFilters === true ? <HeaderfilterMenu /> : null}
     </header>
   );
 }

@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import { AppContext } from "/src/components/AppState.js";
+import { useContext } from "react";
 
 export default function GenderMenu() {
   let { genderPreference, setGenderPreference } = useContext(AppContext);
@@ -18,6 +18,7 @@ export default function GenderMenu() {
         onChange={(e) => {
           setGenderPreference(e.target.value);
         }}
+        value={genderPreference}
       >
         <option value="not-important">Not Important</option>
         <option value="female">Female</option>

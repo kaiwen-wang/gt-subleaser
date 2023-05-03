@@ -28,11 +28,13 @@ export default async function FilteredPostsApi(req, res) {
   if (moveOut !== "null") {
     query = query.lte("move_out", moveOut);
   }
-  if (genderPreference !== "null") {
+  if (genderPreference == "male" || genderPreference == "female") {
+    // not important, male, female
+    // male and female are working properly
     query = query.eq("gender_preference", genderPreference);
   }
   if (maxRoommates !== "null") {
-    query = query.gte("total_bedrooms", parseInt(maxRoommates) + 1);
+    query = query.lte("total_bedrooms", parseInt(maxRoommates) + 1);
   }
 
   // sort query

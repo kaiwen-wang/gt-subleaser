@@ -288,18 +288,23 @@ Remove the anchor links
 Fix sort menus and stuff
     on the right track
     Make the "X" appear when the menu is selected
+
 A little bit of better data validation on the upload page
-Carousel for front page
 Check supabase security rules so I don't get spammed
 Make it possible for people to disable listings. Maybe through email somehow.
 Make the display page look better.
+Carousel for front page
+
 gender menu page stuff
+    - done
 - upload error page
 
 
 Hard shit that I haven't done yet:
 - generating individual pages on database change
+    - done ez pz
 - getting maxPrice properly done
+    - idc
 - pagination
 
 
