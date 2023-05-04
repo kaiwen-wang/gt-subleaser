@@ -1,3 +1,4 @@
+import { convertDate } from "@/utils/convertDate";
 import { supabase } from "@/utils/supabase";
 import {
   ArrowLeftCircleIcon,
@@ -62,36 +63,37 @@ export default function SkellyImage({ name, url, item }) {
       {!isLoaded ? (
         <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
       ) : null}
-      <div className="absolute inset-x-0 top-0 z-30">
-        <div className="flex">
+      <div className="absolute pl-2 inset-x-0 top-0 z-30">
+        <div className=" mt-2 flex max-w-fit whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold backdrop-blur-sm text-white bg-zinc-500/50 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
+          {convertDate(item.move_in) + " to " + convertDate(item.move_out)}
+        </div>
+        <div className="flex  mt-1.5 gap-1 max-w-fit ">
           {item.semester.map((item, index) => {
-            let color = "bg-gray-300";
+            let color = "bg-stone-500";
             let emoji = "⌛";
             if (item.includes("Fall")) {
-              color = "bg-amber-700/40";
+              color = "bg-amber-600";
               emoji = "🍂";
             }
             if (item.includes("Spring")) {
-              color = "bg-lime-500/40";
+              color = "bg-lime-500";
               emoji = "🌱";
             }
             if (item.includes("Summer")) {
-              color = "bg-blue-500/40";
+              color = "bg-sky-500";
               emoji = "☀️";
             }
 
             return (
               <div
                 key={index}
-                className={`ml-2 mt-2 max-w-fit whitespace-nowrap rounded-full ${color} px-2 py-1 text-xs font-semibold backdrop-blur-md text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]`}
+                className={`whitespace-nowrap rounded-full ${color} px-2 py-1 text-xs font-semibold backdrop-blur-sm text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]`}
               >
-                <span className="mr-0.5">{emoji}</span> {item}
+                {/* <span className="mr-0.5">{emoji}</span> */}
+                {item}
               </div>
             );
           })}
-        </div>
-        <div className="ml-2 mt-2 flex max-w-fit whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold backdrop-blur-md text-white bg-gray-500 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
-          {item.move_in.slice(5) + " to " + item.move_out.slice(5)}
         </div>
       </div>
       <div className="absolute inset-x-0 bottom-0 z-30 flex">
@@ -123,12 +125,12 @@ export default function SkellyImage({ name, url, item }) {
           })}
         </div>
         {item.gender_preference === "female" ? (
-          <div className="mb-2 rounded-full px-2 py-1 text-xs font-medium bg-pink-300 ">
+          <div className="mb-2 rounded-full px-2 py-1 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] ">
             Women Only
           </div>
         ) : null}
         {item.gender_preference === "male" ? (
-          <div className="mb-2 rounded-full px-2 py-1 text-xs font-medium bg-blue-300">
+          <div className="mb-2 rounded-full px-2 py-1 text-xs font-medium bg-blue-300 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
             Men Only
           </div>
         ) : null}
@@ -144,7 +146,7 @@ export default function SkellyImage({ name, url, item }) {
           }
           // src=""
           key={name}
-          alt="stupid"
+          alt="An image of a room"
           fill="true"
           sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,

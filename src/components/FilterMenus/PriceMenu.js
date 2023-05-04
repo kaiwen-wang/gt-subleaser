@@ -31,6 +31,7 @@ export default function PriceMenu() {
         value={maxPrice}
         step="5"
         onChange={(e) => {
+          // Probably because of the slider
           // setMaxPrice(e.target.value)
           // console.log(e.target.value)
         }}

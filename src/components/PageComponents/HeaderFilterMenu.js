@@ -71,7 +71,7 @@ export default function HeaderfilterMenu() {
   return (
     <div className="mx-auto border-t px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
       <div className="flex items-center gap-4">
-        <div className="flex gap-3 overflow-auto whitespace-nowrap bg-gradient-to-l from-gray-500/5 to-white py-3 pl-0.5 pr-2">
+        <div className="flex gap-3 overflow-auto whitespace-nowrap dark:bg-none bg-gradient-to-l from-gray-500/5 to-white py-3 pl-0.5 pr-2">
           {filterMenuOptions.map((option) => (
             <PopoverMenu
               key={option.id}

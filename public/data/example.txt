@@ -220,8 +220,15 @@ Winter gradutes X Spring transfers
 
 Problems:
 - summer glut
+    fixed by ncr interns lol
 - leasing to off-campus people
 - If people can directly contact someone, do they know where the leasing is coming from?
+
+
+Fall Graduates -> Spring Transfers
+Spring Graduates -> Companies
+
+
 
 
 
@@ -288,6 +295,7 @@ Remove the anchor links
 Fix sort menus and stuff
     on the right track
     Make the "X" appear when the menu is selected
+    done
 
 A little bit of better data validation on the upload page
 Check supabase security rules so I don't get spammed
@@ -296,22 +304,27 @@ Carousel for front page
 
 
 Make the display page look better.
+    - done(ish)
 gender menu page stuff
     - done
+    - make the menu clickable on first click
 - upload error page
 
 
-Hard shit that I haven't done yet:
+lighthouse alt tags
+
+Hard stuff that I haven't done yet:
 - generating individual pages on database change
     - done ez pz
 - getting maxPrice properly done
-    - idc
-- pagination
+    - actually important lol
+    - lol nvm this easy ez
 
 
-Hard shit I will do:
+Hard stuff I will do:
 - email confirmation/deletion?
-- 
+- pagination
+- design on the front page for filter menus
 
 
 FYI: 2.5k winter graduates on campus.

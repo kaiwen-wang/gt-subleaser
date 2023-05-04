@@ -17,7 +17,9 @@ export default async function FilteredPostsApi(req, res) {
 
   let query = supabase.from("subleases").select();
 
-  query = query.lte("monthly_price", maxPrice);
+  if (maxPrice !== "null") {
+    query = query.lte("monthly_price", maxPrice);
+  }
 
   // if (semesterPreference !== "null") {
   //     query = query.eq("semester", semesterPreference)
@@ -39,12 +41,12 @@ export default async function FilteredPostsApi(req, res) {
 
   // sort query
   // if (sortFormula === "newestPosts") {
-  //     query.order('created_at', { ascending: false })
+  // query.order("created_at", { ascending: false });
 
-  //     // unsorted.sort((a, b) => data[b].price - data[a].price);
-  //   } else if (sortFormula === "oldestPosts") {
-  //     query.order('created_at', { ascending: true })
-
+  // unsorted.sort((a, b) => data[b].price - data[a].price);
+  // } else if (sortFormula === "oldestPosts") {
+  query.order("created_at", { ascending: false });
+  // }
   // unsorted.sort((a, b) => data[a].price - data[b].price);
   // }
   if (sortFormula === "increasingPrice") {
