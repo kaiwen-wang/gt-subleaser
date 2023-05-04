@@ -10,9 +10,12 @@ export default function HeadElement({ title, desc }) {
         property="og:description"
         content="No spam, modern tech, easy to use. Take a look today!"
       />
-      <meta property="og:image" content="public/opengraph.jpeg" />
+      <meta property="og:image" content="/opengraph.jpeg" />
+      <meta name="robots" content="all" />
+      <meta name="google" content="nositelinkssearchbox" />
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+
       {/* <link rel="icon" href="/favicon.ico" /> */}
       <link
         rel="icon"

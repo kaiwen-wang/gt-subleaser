@@ -325,6 +325,7 @@ Hard stuff I will do:
 - email confirmation/deletion?
 - pagination
 - design on the front page for filter menus
+- filters and noindex the pages
 
 
 FYI: 2.5k winter graduates on campus.
