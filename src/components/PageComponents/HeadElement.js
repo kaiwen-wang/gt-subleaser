@@ -5,15 +5,12 @@ export default function HeadElement({ title, desc }) {
     <Head>
       <title>{title}</title>
       <meta name="description" content={desc} />
-      <meta
-        property="og:title"
-        content="Georgia Tech Subleaser | Midtown, Home Park, Atlantic Station, and more"
-      />
+      <meta property="og:title" content="Georgia Tech Subleaser" />
       <meta
         property="og:description"
-        content="Subleases in Midtown Atlanta by GT students who are graduating, studying abroad, or interning. No spam, modern tech, easy to use."
+        content="No spam, modern tech, easy to use. Take a look today!"
       />
-      <meta property="og:image" content="/public/opengraph.jpeg" />
+      <meta property="og:image" content="public/opengraph.jpeg" />
 
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* <link rel="icon" href="/favicon.ico" /> */}
