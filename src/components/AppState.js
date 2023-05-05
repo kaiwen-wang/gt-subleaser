@@ -4,14 +4,14 @@ import React, { createContext, useState } from "react";
 import { useEffect } from "react";
 
 // loop through data and find the max price
-// This isn't accurate anymore. In order to find the max price I have to do a supabase import.
-// let maximumDataPrice = 0;
-// Object.keys(data).forEach((item) => {
-//   let price = data[item].price;
-//   if (price > maximumDataPrice) {
-//     maximumDataPrice = price;
-//   }
-// });
+// This isn't accurate anymore. In order to find the max price I have to do a supabase import. fuck.
+let maximumDataPrice = 0;
+Object.keys(data).forEach((item) => {
+  let price = data[item].price;
+  if (price > maximumDataPrice) {
+    maximumDataPrice = price;
+  }
+});
 
 export const AppContext = createContext();
 

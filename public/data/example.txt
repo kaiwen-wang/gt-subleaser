@@ -202,20 +202,6 @@ How to make money:
 - Charge external people to be able to create an account and see listings (idk if you wanna introduce this variability of non-students, the thing is students want to sublease their place to no matter whom)
 
 
-Say: hey I'll find a subleaser for you, 100 bucks
-Go to companies say: hey I'll find housing for all of your incoming summer interns
-    - Let incoming interns log onto a special portal
-
-
-Promote your own post only goes so far
-    
-
-
-sPeCiAL cOmPaNy PoRtAL
-
-
-
-
 How to advertise:
 - Posters around school
 - Major mailing lists
@@ -335,43 +321,11 @@ Hard stuff that I haven't done yet:
     - lol nvm this easy ez
 
 
-Possible to break the date values
-Possible to have an error when uploading if the pricing is "null"
-
-
-Pagination still needs a bit of work but overall okay.
-
 Hard stuff I will do:
 - email confirmation/deletion?
 - pagination
-    done
-    make it have a loading text or spinner, idk
-    obviously this causes the filter menus to break
 - design on the front page for filter menus
-
-
-upload drag and drop
-clicking on form and scrolling down causes it TO CHANGE NUMBER!
-
-
+- filters and noindex the pages
 
 
 FYI: 2.5k winter graduates on campus.
-
-
-
-Useful: floor of apartment
-
-
-about
-
-Georgia Tech students are unique for getting so many internships. However, that also means they're often off-campus during the year or coming back in the spring. I realized none of the available subleasing options served students well.
-
-Students post paragraphs of text containing the same information: price, duration, roommates, etc. The Facebook groups are a long timeline--poored suited for many options at a time, and third party sites have all been slow and unintuitive.
-
-We aim to become the #1 subleasing destination for all Georgia Tech students, if not Atlanta. The unique situations of winter graduates, transfer students, and students interning in Atlanta will all be well served by GT Subleaser.
-
-
-wishlish:
-- better imports, esp. around react
-- way to artifically slow down API requests so I can look at their loading states
