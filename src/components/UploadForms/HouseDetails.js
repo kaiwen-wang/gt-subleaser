@@ -50,6 +50,7 @@ export default function HouseDetails({
             min="0"
             max="20"
             required
+            onWheel={(e) => e.target.blur()}
             onChange={(e) => {
               // if target value is less than 0 then set it to 0
               if (parseInt(e.target.value) < 0) {
@@ -88,6 +89,7 @@ export default function HouseDetails({
             min={1}
             max={totalBedrooms}
             required
+            onWheel={(e) => e.target.blur()}
             onChange={(e) => {
               if (parseInt(e.target.value) < 1) {
                 // stop the user from entering a num less 1
@@ -151,6 +153,7 @@ export default function HouseDetails({
           min="1"
           max="20"
           required
+          onWheel={(e) => e.target.blur()}
           onChange={(e) => setTotalBathrooms(parseInt(e.target.value))}
         />
       </div>

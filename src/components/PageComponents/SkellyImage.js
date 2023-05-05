@@ -97,7 +97,7 @@ export default function SkellyImage({ name, url, item }) {
         </div>
       </div>
       <div className="absolute inset-x-0 bottom-0 z-30 flex">
-        <div className="flex justify-start px-2 pb-2">
+        <div className="flex justify-start px-2 pb-2 h-6">
           {item.roommate_demographics.map((person, i) => {
             return (
               <Image
@@ -117,9 +117,10 @@ export default function SkellyImage({ name, url, item }) {
                     : ""
                 }.gif`}
                 key={i}
-                alt="stfu"
-                width="12"
-                height="12"
+                alt={"Roommates"}
+                width={12}
+                height={12}
+                style={{ width: "auto", height: "auto" }}
               />
             );
           })}

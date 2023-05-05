@@ -139,11 +139,12 @@ export default function Upload({ idNum }) {
 
     if (error) {
       console.error(error);
+      alert("Server Error: " + error.message + ". Please change your input.");
     } else {
       console.log("New record added:", data);
       // redirect to /success
+      router.push(`/success?id=${idNum}`);
     }
-    router.push(`/success?id=${idNum}`);
   };
 
   return (
