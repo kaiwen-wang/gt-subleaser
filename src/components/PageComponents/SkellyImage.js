@@ -61,6 +61,7 @@ export default function SkellyImage({ name, url, item }) {
   return (
     <div className="relative w-full pt-[95%]">
       {!isLoaded ? (
+        // Grey bg when not loaded
         <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
       ) : null}
       <div className="absolute pl-2 inset-x-0 top-0 z-30">

@@ -22,7 +22,7 @@ export default function FilteredGrid({ postsData, error }) {
               return (
                 <Link key={key} href={`/listings/${key}`}>
                   <div className="group relative overflow-hidden rounded-xl shadow-md">
-                    {/* <div className="absolute inset-y-0 left-0 z-20 ">
+                    <div className="absolute inset-y-0 left-0 z-20 ">
                       <div className="flex h-full items-center justify-center">
                         <div className="hidden h-10 w-10 -translate-x-2/4 items-center justify-center rounded-full shadow-md group-hover:flex group-hover:bg-white">
                           <ChevronLeftIcon className="hidden h-4 w-4 translate-x-2 group-hover:block" />
@@ -35,7 +35,7 @@ export default function FilteredGrid({ postsData, error }) {
                           <ChevronRightIcon className="hidden h-4 w-4 -translate-x-2 group-hover:block" />
                         </div>
                       </div>
-                    </div> */}
+                    </div>
 
                     <SkellyImage url={item.id} name={key} item={item} />
                   </div>

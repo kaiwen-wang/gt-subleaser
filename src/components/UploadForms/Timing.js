@@ -55,7 +55,7 @@ export default function Timing() {
             className="w-full rounded border p-2 border-gray-400"
             min={moveInDate}
             // max date is moveInDate plus 1 year
-            max={getOffsetDate(1, 0, 0, moveInDate)}
+            max={getOffsetDate(2, 0, 0, moveInDate)}
           />
         </div>
       </div>

@@ -151,6 +151,7 @@ export default function HouseDetails({
           name="total_bathrooms"
           className="w-full rounded border p-2 border-gray-400"
           min="1"
+          // step="0.5"
           max="20"
           required
           onWheel={(e) => e.target.blur()}
