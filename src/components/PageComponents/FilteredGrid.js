@@ -36,7 +36,8 @@ export default function FilteredGrid({
         {/* if postsData is not undefined */}
         {postsData && postsData.length !== 0 ? (
           postsData.map((item, index) => {
-            let key = item.id;
+            let key = index;
+            console.log(index);
             // check if item.semester is not array
             // ONLY HERE for TESTING purposes when SUPABASE changes ARRAY TYPE to JSON
             if (!Array.isArray(item.semester)) {

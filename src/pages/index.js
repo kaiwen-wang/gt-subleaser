@@ -43,7 +43,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const loadMoreItems = () => {
-    console.log(pages);
     setLoading(true);
     setPages((prevPage) => prevPage + 1);
   };
@@ -58,7 +57,7 @@ export default function Home() {
 
   useEffect(() => {
     if (data && data.length > 0) {
-      setItems((prevItems) => [...prevItems, ...data]);
+      setItems((items) => [...items, ...data]);
       setLoading(false);
     }
   }, [data]);
