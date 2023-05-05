@@ -29,7 +29,7 @@ export default function BigPicture() {
           <option value="Midtown">Midtown</option>
           <option value="Home Park">Home Park</option>
           <option value="Atlantic Station">Atlantic Station</option>
-          <option value="North Avenue NW">North Avenue NW</option>
+          <option value="North Avenue">North Avenue</option>
           <option value="West Midtown">West Midtown</option>
           <option value="Downtown">Downtown</option>
           <option value="Metro Atlanta (ITP)">Metro Atlanta (ITP)</option>

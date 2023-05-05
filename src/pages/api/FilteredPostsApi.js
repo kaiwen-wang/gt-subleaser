@@ -1,3 +1,4 @@
+import { supabase } from "@/utils/supabase";
 import { createClient } from "@supabase/supabase-js";
 
 export default async function FilteredPostsApi(req, res) {
@@ -9,13 +10,12 @@ export default async function FilteredPostsApi(req, res) {
   let moveIn = req.query.movein;
   let moveOut = req.query.moveout;
   let sortFormula = req.query.sort;
+  let pages = req.query.pages;
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
-
-  let query = supabase.from("subleases").select();
+  let query = supabase
+    .from("sublease-test-3")
+    .select()
+    .range(11 * (pages - 1), 11 * pages);
 
   if (maxPrice !== "null") {
     query = query.lte("monthly_price", maxPrice);
