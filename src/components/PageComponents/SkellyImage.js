@@ -68,7 +68,7 @@ export default function SkellyImage({ name, url, item }) {
         <div className=" mt-2 flex max-w-fit whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold backdrop-blur-sm text-white bg-zinc-500/50 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
           {convertDate(item.move_in) + " to " + convertDate(item.move_out)}
         </div>
-        <div className="flex  mt-1.5 gap-1 max-w-fit ">
+        <div className="flex  mt-[0.35rem] gap-1 max-w-fit ">
           {item.semester.map((item, index) => {
             let color = "bg-stone-500";
             let emoji = "⌛";
@@ -97,8 +97,8 @@ export default function SkellyImage({ name, url, item }) {
           })}
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 z-30 flex">
-        <div className="flex justify-start px-2 pb-2 h-6">
+      <div className="absolute inset-x-0 bottom-0 z-30 flex items-end">
+        <div className="flex justify-start px-2 pb-2 h-7">
           {item.roommate_demographics.map((person, i) => {
             return (
               <Image
@@ -127,12 +127,12 @@ export default function SkellyImage({ name, url, item }) {
           })}
         </div>
         {item.gender_preference === "female" ? (
-          <div className="mb-2 rounded-full px-2 py-1 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] ">
+          <div className="mb-2 rounded-full px-1.5 py-0.5 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] ">
             Women Only
           </div>
         ) : null}
         {item.gender_preference === "male" ? (
-          <div className="mb-2 rounded-full px-2 py-1 text-xs font-medium bg-blue-300 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
+          <div className="mb-2 rounded-full px-1.5 py-0.5 text-xs font-medium bg-blue-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
             Men Only
           </div>
         ) : null}

@@ -20,7 +20,7 @@ export default function FilteredGrid({ postsData, error }) {
 
             if (item.monthly_price <= maxPrice) {
               return (
-                <Link key={key} href={`/listings/${key}`}>
+                <Link key={key} href={`/listings/${key}`} target="_blank">
                   <div className="group relative overflow-hidden rounded-xl shadow-md">
                     <div className="absolute inset-y-0 left-0 z-20 ">
                       <div className="flex h-full items-center justify-center">
@@ -54,8 +54,13 @@ export default function FilteredGrid({ postsData, error }) {
                   <div className="-mt-0.5 flex justify-between text-sm text-gray-500">
                     <span>
                       {item.free_rooms} Bed{" "}
-                      {item.private_bathroom ? "1" : "Shared"} Bath in a{" "}
-                      {item.total_bedrooms}B/{item.total_bathrooms}B
+                      {item.private_bathroom
+                        ? `${Math.min(
+                            item.total_bathrooms,
+                            1 * item.free_rooms
+                          )}`
+                        : `Shared`}{" "}
+                      Bath in a {item.total_bedrooms}B/{item.total_bathrooms}B
                     </span>
                   </div>
                   <span className="block text-sm">

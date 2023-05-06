@@ -328,7 +328,13 @@ Hard stuff I will do:
 - filters and noindex the pages
 
 
+add an X on the menus for mobile, and don't open the grid when the menu is open
+
+
 apparently you can break the "number" input by adding in "e"
 
 
 FYI: 2.5k winter graduates on campus.
+
+
+filling images properly is probably the biggest pain of the ass

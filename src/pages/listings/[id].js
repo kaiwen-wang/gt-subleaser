@@ -103,16 +103,25 @@ export default function Listing(props) {
       tempSupabaseURL.push(fileUrl);
     }
 
+    // console.log(tempSupabaseURL[0]);
     setSupabaseURL(tempSupabaseURL);
   }
 
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  useEffect(() => {
+    setRefreshKey(refreshKey + 1);
+  }, [supabaseURL]);
+
   const [leaseTime, setLeaseTime] = useState(false);
+  const OPTIONS = {};
 
   return (
     <>
       <HeadElement />
 
       <Header smallContainer={true} />
+
       <main className="container mx-auto pt-8">
         <div className="flex justify-between">
           <p className="text-sm text-gray-500">{`Listing ID: ${data.id}`}</p>
@@ -143,21 +152,8 @@ export default function Listing(props) {
         >
           Contact
         </button>
-        <div className="border relative h-64 w-[60%] mx-auto sm:aspect-[2/1] rounded-3xl overflow-hidden sm:h-full ">
-          {supabaseURL.map((url) => (
-            <div key={url} className="relative w-full h-full bg-gray-500">
-              <Image
-                src={url}
-                alt="example"
-                // width={200}
-                // height={200}
-                fill="true"
-                style={{ objectFit: "cover" }}
-              />
-              <div className="absolute bottom-0 left-0">Hi</div>
-            </div>
-          ))}
-        </div>
+        <EmblaCarousel options={OPTIONS} supabaseURL={supabaseURL} />
+
         <div className="mt-16 prose mx-auto max-w-2xl mb-16">
           <p className="mt-2 text-gray-500">{data.description}</p>
         </div>
