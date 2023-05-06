@@ -152,7 +152,9 @@ export default function Listing(props) {
         >
           Contact
         </button>
-        <EmblaCarousel options={OPTIONS} supabaseURL={supabaseURL} />
+        <div className="flex rounded-md border border-black max-w-fit overflow-hidden">
+          <EmblaCarousel options={OPTIONS} supabaseURL={supabaseURL} />
+        </div>
 
         <div className="mt-16 prose mx-auto max-w-2xl mb-16">
           <p className="mt-2 text-gray-500">{data.description}</p>
