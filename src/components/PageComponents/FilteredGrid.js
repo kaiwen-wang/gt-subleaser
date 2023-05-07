@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useContext, useEffect } from "react";
 
 export default function FilteredGrid({ postsData, error }) {
-  let { maxPrice, setMaxPrice } = useContext(AppContext);
   let parsedError = error ? JSON.parse(error) : null;
 
   const observer = useRef();
@@ -36,7 +35,10 @@ export default function FilteredGrid({ postsData, error }) {
             if (item.monthly_price <= maxPrice) {
               return (
                 // <Link key={key} href={`/listings/${key}`} target="_blank">
-                <div key={meow}>
+                <div
+                  key={meow}
+                  ref={index === postsData.length - 1 ? lastItemRef : null}
+                >
                   <div className="group border-1 rounded-xl relative overflow-hidden border border-black shadow-md">
                     {/* <div className=" absolute inset-y-0 left-0 z-20">
                       <div className="flex items-center justify-center h-full">
