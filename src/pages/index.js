@@ -7,7 +7,7 @@ import HeadElement from "@/components/PageComponents/HeadElement";
 import Header from "@/components/PageComponents/Header";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import useSWR from "swr";
 
 function classNames(...classes) {
@@ -49,7 +49,7 @@ export default function Home() {
 
   // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
   const { data, error } = useSWR(
-    `/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}`,
+    `/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}&pages=${pages}`,
     fetcher
   );
 
@@ -62,7 +62,7 @@ export default function Home() {
     }
   }, [data]);
 
-return (
+  return (
     <>
       <HeadElement
         title="Georgia Tech Subleaser | Midtown, Home Park, Atlantic Station, and more"

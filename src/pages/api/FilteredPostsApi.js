@@ -9,22 +9,20 @@ export default async function FilteredPostsApi(req, res) {
   let moveIn = req.query.movein;
   let moveOut = req.query.moveout;
   let sortFormula = req.query.sort;
+  let pages = req.query.pages;
 
-
-const supabase = createClient(
+  const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
 
-
   let query = supabase
     .from("subleases")
     .select()
-    .range(6 * (pages - 1), (6 * (pages - 1) + 5));
-// 1, 5
-// 6, 10
-    
-  
+    .range(6 * (pages - 1), 6 * (pages - 1) + 5);
+  // 1, 5
+  // 6, 10
+
   if (maxPrice !== "null") {
     query = query.lte("monthly_price", maxPrice);
   }
@@ -49,7 +47,7 @@ const supabase = createClient(
 
   // sort query
   //if (sortFormula === "newestPosts") {
-    //query.order("created_at", { ascending: false });
+  //query.order("created_at", { ascending: false });
 
   // unsorted.sort((a, b) => data[b].price - data[a].price);
   // } else if (sortFormula === "oldestPosts") {
