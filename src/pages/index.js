@@ -39,13 +39,30 @@ export default function Home() {
   } = useContext(AppContext);
   let { sortFormula } = useContext(AppContext);
 
-  // Apparently data changes when the context changes. Is this normal?
+  const [pages, setPages] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const loadMoreItems = () => {
+    setLoading(true);
+    setPages(pages + 1);
+  };
+
+  // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
   const { data, error } = useSWR(
     `/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}`,
     fetcher
   );
 
-  return (
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      setItems((items) => [...items, ...data]);
+      setLoading(false);
+    }
+  }, [data]);
+
+return (
     <>
       <HeadElement
         title="Georgia Tech Subleaser | Midtown, Home Park, Atlantic Station, and more"

@@ -10,13 +10,21 @@ export default async function FilteredPostsApi(req, res) {
   let moveOut = req.query.moveout;
   let sortFormula = req.query.sort;
 
-  const supabase = createClient(
+
+const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
 
-  let query = supabase.from("subleases").select();
 
+  let query = supabase
+    .from("subleases")
+    .select()
+    .range(6 * (pages - 1), (6 * (pages - 1) + 5));
+// 1, 5
+// 6, 10
+    
+  
   if (maxPrice !== "null") {
     query = query.lte("monthly_price", maxPrice);
   }
@@ -40,13 +48,13 @@ export default async function FilteredPostsApi(req, res) {
   }
 
   // sort query
-  if (sortFormula === "newestPosts") {
-    query.order("created_at", { ascending: false });
+  //if (sortFormula === "newestPosts") {
+    //query.order("created_at", { ascending: false });
 
-    // unsorted.sort((a, b) => data[b].price - data[a].price);
-  } else if (sortFormula === "oldestPosts") {
-    query.order("created_at", { ascending: false });
-  }
+  // unsorted.sort((a, b) => data[b].price - data[a].price);
+  // } else if (sortFormula === "oldestPosts") {
+  // query.order("created_at", { ascending: false });
+  // }
   // unsorted.sort((a, b) => data[a].price - data[b].price);
   // }
   if (sortFormula === "increasingPrice") {

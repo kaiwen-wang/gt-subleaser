@@ -15,6 +15,7 @@ export default function FilteredGrid({ postsData, error }) {
       <div className="grid grid-cols-1 gap-3 xs:grid-cols-2 md:grid-cols-3 lg:gap-4 xl:gap-4 xl:grid-cols-4 2xl:grid-cols-5  3xl:grid-cols-6">
         {/* if postsData is not undefined */}
         {postsData && postsData.length !== 0 ? (
+
           postsData.map((item) => {
             let meow = item.id;
 
