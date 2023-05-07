@@ -22,7 +22,7 @@ export default function FilteredGrid({ postsData, error }) {
               return (
                 // <Link key={key} href={`/listings/${key}`} target="_blank">
                 <div key={meow}>
-                  <div className="group relative overflow-hidden border border-1  rounded-xl shadow-md">
+                  <div className="group relative overflow-hidden border border-1 border-black  rounded-xl shadow-md">
                     {/* <div className="absolute inset-y-0 left-0 z-20 ">
                       <div className="flex h-full items-center justify-center">
                         <div className="hidden h-10 w-10 -translate-x-2/4 items-center justify-center rounded-full shadow-md group-hover:flex group-hover:bg-white">

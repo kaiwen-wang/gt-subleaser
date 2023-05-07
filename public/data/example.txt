@@ -311,6 +311,11 @@ gender menu page stuff
 - upload error page
 
 
+
+change the bath upload so it stops doing "shared bath"
+
+
+
 lighthouse alt tags
 
 Hard stuff that I haven't done yet:
@@ -323,11 +328,10 @@ Hard stuff that I haven't done yet:
 
 Hard stuff I will do:
 - email confirmation/deletion?
-- pagination
 - design on the front page for filter menus
-- filters and noindex the pages
 
 
+- pagination
 add an X on the menus for mobile, and don't open the grid when the menu is open
 
 

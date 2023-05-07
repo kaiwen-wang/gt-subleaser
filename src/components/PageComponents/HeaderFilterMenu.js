@@ -70,7 +70,7 @@ export default function HeaderfilterMenu() {
 
   return (
     <div className=" border-t">
-      <div className="mx-auto px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
+      <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 mx-auto">
         <div className="flex items-center gap-4">
           <div className="flex gap-3 overflow-auto whitespace-nowrap dark:bg-none bg-gradient-to-l from-gray-500/5 to-white py-3 pl-0.5 pr-2">
             {filterMenuOptions.map((option) => (
@@ -86,11 +86,11 @@ export default function HeaderfilterMenu() {
           </div>
           <SortMenu />
         </div>
-        {/* <div className="grid grid-cols-8 items-center gap-4">
-      <div className="relative col-span-6 max-w-fit md:col-span-7">
+        {/* <div className="grid items-center grid-cols-8 gap-4">
+      <div className="max-w-fit md:col-span-7 relative col-span-6">
       <div className="flex gap-3 overflow-auto whitespace-nowrap px-0.5 py-3">
-      <div className="absolute inset-y-0 left-0 w-8 bg-gradient-to-l from-white/0 to-white"></div>
-      <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-r from-white/0 to-white"></div>
+      <div className="bg-gradient-to-l from-white/0 to-white absolute inset-y-0 left-0 w-8"></div>
+      <div className="bg-gradient-to-r from-white/0 to-white absolute inset-y-0 right-0 w-8"></div>
       <PopoverMenu name="Semester" props={<SemesterMenu />} />
       <PopoverMenu name="Gender" props={<GenderMenu />} />
       <PopoverMenu name="Price" props={<PriceMenu />} />
@@ -105,7 +105,7 @@ export default function HeaderfilterMenu() {
       <PopoverMenu name={"Furniture"} />
       </div>
       </div>
-      <div className="col-span-2 flex justify-end md:col-span-1">
+      <div className="md:col-span-1 flex justify-end col-span-2">
       <SortMenu className="" />
       </div>
     </div> */}

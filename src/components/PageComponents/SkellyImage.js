@@ -93,12 +93,12 @@ export default function SkellyImage({ freudID, url, item }) {
   }
 
   return (
-    <div className="relative w-full pt-[95%]">
+    <div className="relative w-full pt-[95%] group">
       {/* {!isLoaded ? (
         // Grey bg when not loaded
         <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
       ) : null} */}
-      <div className="absolute pl-2 inset-x-0 top-0 z-30">
+      <div className="absolute pl-2 inset-x-0 top-0 z-30 group-hover:opacity-0">
         <div className=" mt-2 flex max-w-fit whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold backdrop-blur-sm text-white bg-zinc-500/50 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
           {convertDate(item.move_in) + " to " + convertDate(item.move_out)}
         </div>
@@ -131,7 +131,7 @@ export default function SkellyImage({ freudID, url, item }) {
           })}
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 z-30 flex items-end">
+      <div className="absolute inset-x-0 bottom-0 z-30 flex items-end group-hover:opacity-0">
         <div className="flex justify-start px-2 pb-2 h-7">
           {item.roommate_demographics.map((person, i) => {
             return (

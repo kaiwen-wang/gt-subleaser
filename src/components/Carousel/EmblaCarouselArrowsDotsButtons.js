@@ -7,8 +7,8 @@ export const DotButton = (props) => {
   return (
     <button
       className={`${
-        selected ? "bg-white" : "bg-white/50"
-      } h-3 w-3 rounded-full`}
+        selected ? "bg-white " : "bg-white/40"
+      } h-2 w-2 rounded-full opacity-0 backdrop-blur group-hover:opacity-100 `}
       type="button"
       onClick={onClick}
     ></button>
@@ -21,15 +21,21 @@ export const PrevButton = (props) => {
   return (
     <button
       className={`${
-        enabled ? "" : "opacity-30"
-      } absolute inset-y-0 left-0 cursor-pointer z-30 `}
+        enabled ? "group-hover:opacity-100  " : "group-hover:opacity-30 "
+      } absolute inset-y-0 left-0 cursor-pointer  z-30 hidden group-hover:flex `}
       onClick={onClick}
       disabled={!enabled}
     >
-      {/* <div className="h-10 w-10 bg-red-500"></div> */}
-      <div className="flex h-full items-center justify-center">
-        <div className=" h-10 w-10 -translate-x-2/4 items-center justify-center rounded-full shadow-md flex bg-white">
-          <ChevronLeftIcon className=" h-4 w-4 translate-x-2 " />
+      <div
+        className={`flex h-full items-center  pr-8 justify-center
+        ${
+          enabled
+            ? `hover:scale-110 transition-all origin-left`
+            : "cursor-default"
+        }`}
+      >
+        <div className="-translate-x-2/4 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md">
+          <ChevronLeftIcon className=" w-4 h-4 translate-x-2" />
         </div>
       </div>
     </button>
@@ -42,15 +48,21 @@ export const NextButton = (props) => {
   return (
     <button
       className={`${
-        enabled ? "" : "opacity-30"
-      } absolute inset-y-0 right-0 cursor-pointer z-30 `}
+        enabled ? "group-hover:opacity-100" : "group-hover:opacity-30"
+      } absolute inset-y-0 right-0 cursor-pointer z-30 hidden group-hover:flex`}
       onClick={onClick}
       disabled={!enabled}
     >
-      {/* <div className="h-10 w-10 bg-red-500"></div> */}
-      <div className="flex h-full items-center justify-center">
-        <div className=" h-10 w-10 translate-x-2/4 items-center justify-center rounded-full shadow-md flex bg-white">
-          <ChevronRightIcon className=" h-4 w-4 -translate-x-2 " />
+      <div
+        className={`flex h-full items-center pl-8 justify-center
+        ${
+          enabled
+            ? `hover:scale-110 transition-all origin-right`
+            : "cursor-default"
+        }`}
+      >
+        <div className=" translate-x-2/4 flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md">
+          <ChevronRightIcon className=" w-4 h-4 -translate-x-2" />
         </div>
       </div>
     </button>
