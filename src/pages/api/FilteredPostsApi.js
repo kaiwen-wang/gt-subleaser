@@ -13,10 +13,12 @@ export default async function FilteredPostsApi(req, res) {
   let pages = req.query.pages;
 
   let query = supabase
-    .from("sublease-test-3")
+    .from("subleases")
     .select()
-    .range(11 * (pages - 1), 11 * pages);
-
+    .range(6 * (pages - 1), (6 * (pages - 1) + 5));
+// 1, 5
+// 6, 10
+    
   if (maxPrice !== "null") {
     query = query.lte("monthly_price", maxPrice);
   }

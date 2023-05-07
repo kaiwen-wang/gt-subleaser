@@ -44,7 +44,7 @@ export default function Home() {
 
   const loadMoreItems = () => {
     setLoading(true);
-    setPages((prevPage) => prevPage + 1);
+    setPages(pages + 1);
   };
 
   // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
