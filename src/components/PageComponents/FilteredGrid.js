@@ -29,6 +29,12 @@ export default function FilteredGrid({
     [loadMoreItems]
   );
 
+  // useEffect(() => {
+  //   console.log("postsData", postsData);
+  //   console.log("postData", postsData.length);
+  //   console.log(loading);
+  // }, [postsData, loading]);
+
   return (
     <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 pb-12 mx-auto mt-2">
       <div className="xs:grid-cols-2 md:grid-cols-3 lg:gap-4 xl:gap-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 grid grid-cols-1 gap-3">

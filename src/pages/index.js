@@ -53,11 +53,15 @@ export default function Home() {
     fetcher
   );
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(null);
 
   useEffect(() => {
     if (data && data.length > 0) {
-      setItems((items) => [...items, ...data]);
+      if (items) {
+        setItems((items) => [...items, ...data]);
+      } else {
+        setItems(data);
+      }
       setLoading(false);
     }
   }, [data]);
