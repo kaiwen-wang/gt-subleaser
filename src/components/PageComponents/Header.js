@@ -31,8 +31,8 @@ export default function Header({ showFilters, smallContainer = false }) {
       <div
         className={`relative mx-auto ${
           smallContainer
-            ? "container"
-            : "px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl"
+            ? "container px-2"
+            : "px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl "
         }`}
       >
         <div className="flex items-center justify-between py-2.5 ">

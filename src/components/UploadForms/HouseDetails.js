@@ -50,6 +50,7 @@ export default function HouseDetails({
             min="0"
             max="20"
             required
+            onWheel={(e) => e.target.blur()}
             onChange={(e) => {
               // if target value is less than 0 then set it to 0
               if (parseInt(e.target.value) < 0) {
@@ -88,6 +89,7 @@ export default function HouseDetails({
             min={1}
             max={totalBedrooms}
             required
+            onWheel={(e) => e.target.blur()}
             onChange={(e) => {
               if (parseInt(e.target.value) < 1) {
                 // stop the user from entering a num less 1
@@ -137,22 +139,26 @@ export default function HouseDetails({
       </div>
 
       <div className="">
-        <label
-          className="mb-2 mt-4 block text-lg font-medium"
-          id="total_bathrooms"
-        >
-          Total Bathrooms
-        </label>
-        <input
-          type="number"
-          id="total_bathrooms"
-          name="total_bathrooms"
-          className="w-full rounded border p-2 border-gray-400"
-          min="1"
-          max="20"
-          required
-          onChange={(e) => setTotalBathrooms(parseInt(e.target.value))}
-        />
+        <div>
+          <label
+            className="mb-2 mt-4 block text-lg font-medium"
+            id="total_bathrooms"
+          >
+            Total Bathrooms
+          </label>
+          <input
+            type="number"
+            id="total_bathrooms"
+            name="total_bathrooms"
+            className="w-full rounded border p-2 border-gray-400"
+            min="1"
+            // step="0.5"
+            max="20"
+            required
+            onWheel={(e) => e.target.blur()}
+            onChange={(e) => setTotalBathrooms(parseInt(e.target.value))}
+          />
+        </div>
       </div>
 
       <div className="flex items-center mt-1 mb-2">

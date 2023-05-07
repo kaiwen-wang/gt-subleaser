@@ -1,57 +1,66 @@
-
-import { getCurrentDate } from '@/utils/date.js'
-import { useState } from 'react'
+import { getCurrentDate, getOffsetDate } from "@/utils/date.js";
+import { useState } from "react";
 
 export default function Timing() {
-    const [moveInDate, setMoveInDate] = useState(getCurrentDate());
+  const [moveInDate, setMoveInDate] = useState(getCurrentDate());
 
-    const handleMoveInChange = (event) => {
-        setMoveInDate(event.target.value);
-    };
+  let minMoveInDate = getOffsetDate();
+  let maxMoveInDate = getOffsetDate(1);
 
-    return (
-        <>
-            <div className="grid grid-cols-2 gap-4">
-                <div>
-                    <label
-                        htmlFor="move_in"
-                        className="mb-2 block text-lg font-medium"
-                        id="move_in"
-                    >
-                        Earliest Move-in
-                    </label>
-                    <input
-                        type="date"
-                        name="move_in"
-                        className="w-full rounded border p-2 border-gray-400"
-                        min={getCurrentDate()}
-                        onChange={handleMoveInChange}
+  const handleMoveInChange = (event) => {
+    let inputValue = event.target.value;
 
-                    />
-                </div>
-                <div>
-                    <label
-                        htmlFor="move_out"
-                        className="mb-2 block text-lg font-medium"
-                        id="move_out"
+    // Check if the input value is within the min and max range
+    if (inputValue < minMoveInDate) {
+      inputValue = minMoveInDate;
+    } else if (inputValue > maxMoveInDate) {
+      inputValue = maxMoveInDate;
+    }
 
-                    >
-                        Latest Move-out
-                    </label>
-                    <input
-                        type="date"
-                        name="move_out"
-                        className="w-full rounded border p-2 border-gray-400"
-                        min={moveInDate}
-                        // max date is moveInDate plus 1 year
-                        max={new Date(new Date(moveInDate).setFullYear(new Date(moveInDate).getFullYear() + 1)).toISOString().split('T')[0]}
-                    />
-                </div>
+    setMoveInDate(inputValue);
+  };
 
+  return (
+    <>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label
+            htmlFor="move_in"
+            className="mb-2 block text-lg font-medium"
+            id="move_in"
+          >
+            Earliest Move-in
+          </label>
+          <input
+            type="date"
+            name="move_in"
+            className="w-full rounded border p-2 border-gray-400"
+            min={minMoveInDate}
+            // max is currentDate plus one year
+            max={maxMoveInDate}
+            onChange={handleMoveInChange}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="move_out"
+            className="mb-2 block text-lg font-medium"
+            id="move_out"
+          >
+            Latest Move-out
+          </label>
+          <input
+            type="date"
+            name="move_out"
+            className="w-full rounded border p-2 border-gray-400"
+            min={moveInDate}
+            // max date is moveInDate plus 1 year
+            max={getOffsetDate(2, 0, 0, moveInDate)}
+          />
+        </div>
+      </div>
 
-            </div>
-
-            {/* <div className="mt-2">
+      {/* <div className="mt-2">
                 <label
                     className="mb-2 block text-lg font-medium"
                     id="semester"
@@ -69,6 +78,6 @@ export default function Timing() {
                     <option value="summer">Summer</option>
                 </select>
             </div> */}
-        </>
-    )
+    </>
+  );
 }

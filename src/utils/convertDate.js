@@ -1,6 +1,12 @@
 export function convertDate(inputDate) {
   const date = new Date(inputDate);
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const currentYear = new Date().getFullYear();
+  let options = { year: "numeric", month: "long", day: "numeric" };
+
+  if (date.getFullYear() === currentYear) {
+    options = { month: "long", day: "numeric" };
+  }
+
   const formattedDate = date.toLocaleDateString("en-US", options);
 
   const day = date.getDate();

@@ -30,5 +30,18 @@
     /* box-shadow: inset -6px 0 9px -10px rgba(0,0,0,0.8); */
 /* } */
 
-/* @import "embla.css";
-@import "sandbox.css"; */
+.embla {
+    --slide-spacing: 0rem;
+    --slide-size: 100%;
+  }
+  
+  .embla__container {
+    margin-left: calc(var(--slide-spacing) * -1);
+  }
+  
+  .embla__slide {
+    flex: 0 0 var(--slide-size);
+    padding-left: var(--slide-spacing);
+  }
+  
+  

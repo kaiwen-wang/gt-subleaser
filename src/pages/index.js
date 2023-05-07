@@ -7,7 +7,7 @@ import HeadElement from "@/components/PageComponents/HeadElement";
 import Header from "@/components/PageComponents/Header";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import useSWR from "swr";
 
 function classNames(...classes) {
@@ -49,7 +49,7 @@ export default function Home() {
 
   // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
   const { data, error } = useSWR(
-    `/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}&pages=${pages}`,
+    `/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}`,
     fetcher
   );
 
@@ -62,19 +62,14 @@ export default function Home() {
     }
   }, [data]);
 
-  return (
+return (
     <>
       <HeadElement
         title="Georgia Tech Subleaser | Midtown, Home Park, Atlantic Station, and more"
         desc="Subleases in Midtown Atlanta by GT students who are graduating, studying abroad, or interning. No spam, modern tech, easy to use."
       />
       <Header showFilters={true} />
-      <FilteredGrid
-        postsData={items}
-        error={JSON.stringify(error)}
-        loadMoreItems={loadMoreItems}
-        loading={loading}
-      />
+      <FilteredGrid postsData={data} error={JSON.stringify(error)} />
     </>
   );
 }
