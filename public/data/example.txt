@@ -294,13 +294,10 @@ Remove the anchor links
     done
 Fix sort menus and stuff
     on the right track
-    Make the "X" appear when the menu is selected
     done
 
-A little bit of better data validation on the upload page
-Check supabase security rules so I don't get spammed
-Make it possible for people to disable listings. Maybe through email somehow.
 Carousel for front page
+    -done
 
 
 Make the display page look better.
@@ -308,15 +305,11 @@ Make the display page look better.
 gender menu page stuff
     - done
     - make the menu clickable on first click
+        - not worth
 - upload error page
+    - done
 
 
-
-change the bath upload so it stops doing "shared bath"
-
-
-
-lighthouse alt tags
 
 Hard stuff that I haven't done yet:
 - generating individual pages on database change
@@ -332,13 +325,22 @@ Hard stuff I will do:
 
 
 - pagination
+    works
+
+
+TODO:
+lighthouse alt tags
+change the bath upload so it stops doing "shared bath"
 add an X on the menus for mobile, and don't open the grid when the menu is open
+Make the "X" appear when the menu is selected
+A little bit of better data validation on the upload page
+Check supabase security rules so I don't get spammed
+Make it possible for people to disable listings. Maybe through email somehow.
 
 
 apparently you can break the "number" input by adding in "e"
 
 
 FYI: 2.5k winter graduates on campus.
-
 
 filling images properly is probably the biggest pain of the ass
