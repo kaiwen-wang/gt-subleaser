@@ -10,12 +10,26 @@ export default function FilteredGrid({ postsData, error }) {
   let { maxPrice, setMaxPrice } = useContext(AppContext);
   let parsedError = error ? JSON.parse(error) : null;
 
+  const observer = useRef();
+  const lastItemRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          loadMoreItems();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loadMoreItems]
+  );
+
   return (
-    <div className="mx-auto mt-2 px-6 pb-12 sm:px-8 xl:px-12 3xl:max-w-screen-3xl">
-      <div className="grid grid-cols-1 gap-3 xs:grid-cols-2 md:grid-cols-3 lg:gap-4 xl:gap-4 xl:grid-cols-4 2xl:grid-cols-5  3xl:grid-cols-6">
+    <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 pb-12 mx-auto mt-2">
+      <div className="xs:grid-cols-2 md:grid-cols-3 lg:gap-4 xl:gap-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 grid grid-cols-1 gap-3">
         {/* if postsData is not undefined */}
         {postsData && postsData.length !== 0 ? (
-
           postsData.map((item) => {
             let meow = item.id;
 
@@ -23,18 +37,18 @@ export default function FilteredGrid({ postsData, error }) {
               return (
                 // <Link key={key} href={`/listings/${key}`} target="_blank">
                 <div key={meow}>
-                  <div className="group relative overflow-hidden border border-1 border-black  rounded-xl shadow-md">
-                    {/* <div className="absolute inset-y-0 left-0 z-20 ">
-                      <div className="flex h-full items-center justify-center">
-                        <div className="hidden h-10 w-10 -translate-x-2/4 items-center justify-center rounded-full shadow-md group-hover:flex group-hover:bg-white">
-                          <ChevronLeftIcon className="hidden h-4 w-4 translate-x-2 group-hover:block" />
+                  <div className="group border-1 rounded-xl relative overflow-hidden border border-black shadow-md">
+                    {/* <div className=" absolute inset-y-0 left-0 z-20">
+                      <div className="flex items-center justify-center h-full">
+                        <div className="-translate-x-2/4 group-hover:flex group-hover:bg-white items-center justify-center hidden w-10 h-10 rounded-full shadow-md">
+                          <ChevronLeftIcon className="group-hover:block hidden w-4 h-4 translate-x-2" />
                         </div>
                       </div>
                     </div>
-                    <div className="absolute inset-y-0 right-0 z-20 ">
-                      <div className="flex h-full items-center justify-center">
-                        <div className="hidden h-10 w-10 translate-x-2/4 items-center justify-center rounded-full shadow-md group-hover:flex group-hover:bg-white">
-                          <ChevronRightIcon className="hidden h-4 w-4 -translate-x-2 group-hover:block" />
+                    <div className=" absolute inset-y-0 right-0 z-20">
+                      <div className="flex items-center justify-center h-full">
+                        <div className="translate-x-2/4 group-hover:flex group-hover:bg-white items-center justify-center hidden w-10 h-10 rounded-full shadow-md">
+                          <ChevronRightIcon className="group-hover:block hidden w-4 h-4 -translate-x-2" />
                         </div>
                       </div>
                     </div> */}
