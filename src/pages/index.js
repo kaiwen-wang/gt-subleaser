@@ -69,7 +69,12 @@ export default function Home() {
         desc="Subleases in Midtown Atlanta by GT students who are graduating, studying abroad, or interning. No spam, modern tech, easy to use."
       />
       <Header showFilters={true} />
-      <FilteredGrid postsData={data} error={JSON.stringify(error)} />
+      <FilteredGrid
+        postsData={items}
+        error={JSON.stringify(error)}
+        loadMoreItems={loadMoreItems}
+        loading={loading}
+      />
     </>
   );
 }
