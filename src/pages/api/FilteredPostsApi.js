@@ -67,9 +67,12 @@ export default async function FilteredPostsApi(req, res) {
 
   const { data, error } = await query;
 
+  // wait 2 seconds
+  // setTimeout(() => {
   if (error) {
     res.status(500).json({ error: error.message });
   } else {
     res.status(200).json(data);
   }
+  // }, 1000);
 }

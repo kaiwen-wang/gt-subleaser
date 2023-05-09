@@ -93,7 +93,7 @@ export default function SkellyImage({ freudID, url, item }) {
   }
 
   return (
-    <div className="relative w-full pt-[95%] group ">
+    <div className="relative w-full pt-[95%] group bg-gray-300 ">
       {/* {!isLoaded ? (
         // Grey bg when not loaded
         <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
@@ -131,11 +131,11 @@ export default function SkellyImage({ freudID, url, item }) {
           })}
         </div>
       </div>
-      <div className="group-hover:opacity-0 absolute inset-x-0 bottom-0 z-30 flex items-end">
-        <div className="h-7 flex justify-start px-2 pb-2">
+      <div className="group-hover:opacity-0 absolute inset-x-0 bottom-0 z-30 flex items-end gap-1.5 mb-2 ml-2">
+        <div className=" flex items-center justify-start">
           {item.roommate_demographics.map((person, i) => {
             return (
-              <Image
+              <img
                 src={`/people/${person === "F" ? "woman" : ""}${
                   person === "M" ? "man" : ""
                 }${
@@ -153,27 +153,26 @@ export default function SkellyImage({ freudID, url, item }) {
                 }.gif`}
                 key={i}
                 alt={"Roommates"}
-                width="0"
-                height="0"
-                sizes="100vw"
-                style={{ width: "100%", height: "auto" }}
+                width={"auto"}
+                height={"auto"}
+                // style={{ width: "auto", height: "55%" }}
               />
             );
           })}
         </div>
         {item.gender_preference === "female" ? (
-          <div className="mb-2 rounded-full px-1.5 py-0.5 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] ">
+          <div className="rounded-full px-1.5 py-0.5 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
             Women Only
           </div>
         ) : null}
         {item.gender_preference === "male" ? (
-          <div className="mb-2 rounded-full px-1.5 py-0.5 text-xs font-medium bg-blue-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
+          <div className="rounded-full px-1.5 py-0.5 text-xs font-medium bg-blue-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
             Men Only
           </div>
         ) : null}
       </div>
       {supabaseURL ? (
-        <div className="absolute top-0 z-0 flex items-center justify-center w-full h-full bg-gray-500">
+        <div className=" absolute top-0 z-0 flex items-center justify-center w-full h-full">
           <EmblaCarousel
             supabaseURL={supabaseURL}
             url={url}

@@ -1,18 +1,9 @@
 import { AppContext } from "/src/components/AppState.js";
-// import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Account from "@/components/Account.js";
-import EmblaCarousel from "@/components/Carousel/Carousel";
 import FilteredGrid from "@/components/PageComponents/FilteredGrid";
 import HeadElement from "@/components/PageComponents/HeadElement";
 import Header from "@/components/PageComponents/Header";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import useSWR, { useSWRConfig } from "swr";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -49,17 +40,11 @@ export default function Home() {
   };
 
   // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, isValidating } = useSWR(
     `/api/FilteredPostsApi?&price=${maxPrice}&gender=${genderPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}&pages=${pages}`,
     fetcher
   );
   const { cache, mutate, ...extraConfig } = useSWRConfig();
-
-  // useEffect(() => {
-  //   console.log("data", data);
-  //   console.log("error", error);
-  //   console.log("dataIsLoading", isLoading);
-  // }, [data, error, isLoading]);
 
   // the actual posts that get passed down
   const [items, setItems] = useState([]);
@@ -76,26 +61,18 @@ export default function Home() {
     }
   }, [data, triggerReset]);
 
-  // TODO source of bug
-  useEffect(() => {
-    // if (items && items.length > 0) {
-    // console.log("items exist");
-    // console.log(
-    //   maxPrice,
-    //   genderPreference,
-    //   maxRoommates,
-    //   moveIn,
-    //   moveOut,
-    //   cache,
-    //   mutate
-    // );
-    // } else {
-    // console.log(items);
+  // It's possible strict mode may break this TODO:
+  // TODO:
+  const maxPriceChanged = useRef(0);
 
-    setItems([]);
-    setPages(1);
-    setTriggerReset(!triggerReset);
-    // }
+  useEffect(() => {
+    if (maxPriceChanged.current > 2) {
+      setItems([]);
+      setPages(1);
+      setTriggerReset(!triggerReset);
+    } else {
+      maxPriceChanged.current = maxPriceChanged.current + 1;
+    }
   }, [
     semesterPreference,
     maxPrice,
@@ -120,6 +97,7 @@ export default function Home() {
         loadMoreItems={loadMoreItems}
         loading={loading}
         dataIsLoading={isLoading}
+        isValidating={isValidating}
       />
     </>
   );
