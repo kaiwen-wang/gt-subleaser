@@ -93,7 +93,7 @@ export default function SkellyImage({ freudID, url, item }) {
   }
 
   return (
-    <div className="relative w-full pt-[95%] group rounded-xl overflow-hidden">
+    <div className="relative w-full pt-[95%] group ">
       {/* {!isLoaded ? (
         // Grey bg when not loaded
         <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
@@ -132,7 +132,7 @@ export default function SkellyImage({ freudID, url, item }) {
         </div>
       </div>
       <div className="group-hover:opacity-0 absolute inset-x-0 bottom-0 z-30 flex items-end">
-        <div className="h-7 flex justify-start px-2 pb-2">
+        <div className="h-7 rounded-xl flex justify-start px-2 pb-2 overflow-hidden">
           {item.roommate_demographics.map((person, i) => {
             return (
               <Image
