@@ -178,7 +178,7 @@ export default function SkellyImage({ freudID, url, item }) {
             supabaseURL={supabaseURL}
             url={url}
             freudID={freudID}
-            className="rounded-xl overflow-hidden"
+            className=""
             // className={`${isLoaded ? "" : "hidden"} relative`}
           />
         </div>

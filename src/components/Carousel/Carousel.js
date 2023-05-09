@@ -52,10 +52,10 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
   }, [supabaseURL]);
 
   return (
-    <div className="embla  relative w-full h-full">
+    <div className="embla relative w-full h-full">
       <Link href={`/listings/${freudID}`} target="_blank">
         <div key={refreshKey} ref={emblaRef} className=" w-full h-full">
-          <div className="embla__container  flex h-full">
+          <div className="embla__container rounded-xl flex h-full overflow-hidden">
             {supabaseURL.map((url, index) => (
               <div className="embla__slide relative flex-shrink-0" key={index}>
                 {/* <div className="absolute top-0 right-0 w-12 h-12 m-2 text-center bg-blue-500">
