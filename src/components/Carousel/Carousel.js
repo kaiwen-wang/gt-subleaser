@@ -52,17 +52,17 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
   }, [supabaseURL]);
 
   return (
-    <div className="embla relative w-full h-full ">
+    <div className="embla  relative w-full h-full">
       <Link href={`/listings/${freudID}`} target="_blank">
         <div key={refreshKey} ref={emblaRef} className=" w-full h-full">
-          <div className="flex embla__container h-full ">
+          <div className="embla__container  flex h-full">
             {supabaseURL.map((url, index) => (
-              <div className="relative flex-shrink-0 embla__slide" key={index}>
-                {/* <div className="absolute top-0 right-0 w-12 h-12 bg-blue-500 text-center m-2">
+              <div className="embla__slide relative flex-shrink-0" key={index}>
+                {/* <div className="absolute top-0 right-0 w-12 h-12 m-2 text-center bg-blue-500">
                     {index + 1}
                   </div> */}
                 <Image
-                  className="block w-full h-full object-cover embla__slide__img"
+                  className="embla__slide__img block object-cover w-full h-full"
                   src={url}
                   alt="Alt text"
                   fill={true}
@@ -82,7 +82,7 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
       <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
       <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
 
-      <div className="flex items-center justify-center gap-2 absolute h-8 inset-x-0 bottom-0 z-50">
+      <div className="absolute inset-x-0 bottom-0 z-50 flex items-center justify-center h-8 gap-2">
         {scrollSnaps.map((_, index) => (
           <DotButton
             key={index}

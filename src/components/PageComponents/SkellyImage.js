@@ -98,7 +98,7 @@ export default function SkellyImage({ freudID, url, item }) {
         // Grey bg when not loaded
         <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
       ) : null} */}
-      <div className="absolute pl-2 inset-x-0 top-0 z-30 group-hover:opacity-0">
+      <div className="group-hover:opacity-0 absolute inset-x-0 top-0 z-30 pl-2">
         <div className=" mt-2 flex max-w-fit whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold backdrop-blur-sm text-white bg-zinc-500/50 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
           {convertDate(item.move_in) + " to " + convertDate(item.move_out)}
         </div>
@@ -131,8 +131,8 @@ export default function SkellyImage({ freudID, url, item }) {
           })}
         </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 z-30 flex items-end group-hover:opacity-0">
-        <div className="flex justify-start px-2 pb-2 h-7">
+      <div className="group-hover:opacity-0 absolute inset-x-0 bottom-0 z-30 flex items-end">
+        <div className="h-7 flex justify-start px-2 pb-2">
           {item.roommate_demographics.map((person, i) => {
             return (
               <Image
@@ -153,9 +153,10 @@ export default function SkellyImage({ freudID, url, item }) {
                 }.gif`}
                 key={i}
                 alt={"Roommates"}
-                width={12}
-                height={12}
-                style={{ width: "auto", height: "auto" }}
+                width="0"
+                height="0"
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }}
               />
             );
           })}
@@ -172,7 +173,7 @@ export default function SkellyImage({ freudID, url, item }) {
         ) : null}
       </div>
       {supabaseURL ? (
-        <div className="flex absolute top-0 w-full h-full bg-gray-500  items-center justify-center">
+        <div className="absolute top-0 flex items-center justify-center w-full h-full bg-gray-500">
           <EmblaCarousel
             supabaseURL={supabaseURL}
             url={url}

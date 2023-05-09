@@ -16,13 +16,13 @@ export default function PriceMenu() {
         Maximum price you'll pay per month
       </span>
 
-      {/* <Slider
+      <Slider
         className="mt-4"
         defaultValue={[maxPrice]}
         max={[maxTopPrice]}
-        min={minPrice}
-        step={5}
-      /> */}
+        min={0}
+        step={100}
+      />
 
       {/* input for max price */}
       <input

@@ -22,9 +22,9 @@ export function Slider({ className, ...props }) {
       onValueChange={(value) => {
         // ideally change the display value.
         // setPriceDisplayValue(value);
+        setMaxPrice(value);
       }}
       onValueCommit={(value) => {
-        setMaxPrice(value);
         // setMaxPrice(value);
         // setPriceDisplayValue(value);
         // probably change something and reload it

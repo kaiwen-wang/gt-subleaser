@@ -80,17 +80,17 @@ export default function Home() {
   useEffect(() => {
     // if (items && items.length > 0) {
     // console.log("items exist");
-    console.log(
-      maxPrice,
-      genderPreference,
-      maxRoommates,
-      moveIn,
-      moveOut,
-      cache,
-      mutate
-    );
+    // console.log(
+    //   maxPrice,
+    //   genderPreference,
+    //   maxRoommates,
+    //   moveIn,
+    //   moveOut,
+    //   cache,
+    //   mutate
+    // );
     // } else {
-    console.log(items);
+    // console.log(items);
 
     setItems([]);
     setPages(1);
