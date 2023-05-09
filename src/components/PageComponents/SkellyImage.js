@@ -93,7 +93,7 @@ export default function SkellyImage({ freudID, url, item }) {
   }
 
   return (
-    <div className="relative w-full pt-[95%] group">
+    <div className="relative w-full pt-[95%] group rounded-xl overflow-hidden">
       {/* {!isLoaded ? (
         // Grey bg when not loaded
         <div className="absolute inset-x-0 top-0 z-[10] h-full w-full bg-gray-100"></div>
