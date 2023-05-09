@@ -30,12 +30,6 @@ export default function FilteredGrid({
     [loadMoreItems]
   );
 
-  // useEffect(() => {
-  //   console.log("postsData", postsData);
-  //   // console.log("postData", postsData.length);
-  //   // console.log(loading);
-  // }, [postsData]);
-
   return (
     <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 pb-12 mx-auto mt-2">
       <div className="xs:grid-cols-2 md:grid-cols-3 lg:gap-4 xl:gap-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 grid grid-cols-1 gap-3">
@@ -51,21 +45,6 @@ export default function FilteredGrid({
                 ref={index === postsData.length - 1 ? lastItemRef : null}
               >
                 <div className="group border-1 rounded-xl relative overflow-hidden border border-black shadow-md">
-                  {/* <div className=" absolute inset-y-0 left-0 z-20">
-                      <div className="flex items-center justify-center h-full">
-                        <div className="-translate-x-2/4 group-hover:flex group-hover:bg-white items-center justify-center hidden w-10 h-10 rounded-full shadow-md">
-                          <ChevronLeftIcon className="group-hover:block hidden w-4 h-4 translate-x-2" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className=" absolute inset-y-0 right-0 z-20">
-                      <div className="flex items-center justify-center h-full">
-                        <div className="translate-x-2/4 group-hover:flex group-hover:bg-white items-center justify-center hidden w-10 h-10 rounded-full shadow-md">
-                          <ChevronRightIcon className="group-hover:block hidden w-4 h-4 -translate-x-2" />
-                        </div>
-                      </div>
-                    </div> */}
-
                   <SkellyImage url={item.id} freudID={meow} item={item} />
                 </div>
                 <div className="mt-0.5 flex justify-between">

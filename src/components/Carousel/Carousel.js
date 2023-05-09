@@ -52,13 +52,9 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
   }, [supabaseURL]);
 
   return (
-    <div className="embla relative w-full h-full">
+    <div className="embla relative w-full h-full overflow-hidden">
       <Link href={`/listings/${freudID}`} target="_blank">
-        <div
-          key={refreshKey}
-          ref={emblaRef}
-          className=" rounded-xl w-full h-full overflow-hidden"
-        >
+        <div key={refreshKey} ref={emblaRef} className=" w-full h-full">
           <div className="embla__container flex h-full">
             {supabaseURL.map((url, index) => (
               <div className="embla__slide relative flex-shrink-0" key={index}>
@@ -72,10 +68,10 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
                   fill={true}
                   // width={500}
                   // height={500}
-                  sizes="(max-width: 768px) 100vw,
-                  (max-width: 1200px) 50vw,
-                  33vw"
-                  style={{ objectFit: "cover" }}
+                  // sizes="(max-width: 768px) 100vw,
+                  // (max-width: 1200px) 50vw,
+                  // 33vw"
+                  //     style={{ objectFit: "cover" }}
                 />
               </div>
             ))}
