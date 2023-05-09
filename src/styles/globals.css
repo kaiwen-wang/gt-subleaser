@@ -11,6 +11,12 @@
     }
 } */
 
+* {
+  touch-action: none;
+-ms-touch-action: none;
+
+}
+
 
 .bordershadow-scale-600 {
     box-shadow:
