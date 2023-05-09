@@ -58,7 +58,7 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
           <div className="embla__container flex h-full">
             {supabaseURL.map((url, index) => (
               <div
-                className="embla__slide relative flex-shrink-0 overflow-hidden"
+                className="embla__slide rounded-xl relative flex-shrink-0 overflow-hidden"
                 key={index}
               >
                 {/* <div className="absolute top-0 right-0 w-12 h-12 m-2 text-center bg-blue-500">
