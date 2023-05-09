@@ -173,12 +173,12 @@ export default function SkellyImage({ freudID, url, item }) {
         ) : null}
       </div>
       {supabaseURL ? (
-        <div className="absolute top-0 flex items-center justify-center w-full h-full bg-gray-500">
+        <div className="absolute top-0 z-0 flex items-center justify-center w-full h-full bg-gray-500">
           <EmblaCarousel
             supabaseURL={supabaseURL}
             url={url}
             freudID={freudID}
-            className=""
+            className="z-20"
             // className={`${isLoaded ? "" : "hidden"} relative`}
           />
         </div>
