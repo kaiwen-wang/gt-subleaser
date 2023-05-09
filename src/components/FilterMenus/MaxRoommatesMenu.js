@@ -9,14 +9,14 @@ export default function MaxRoommatesMenu() {
       <span className="flex items-center">
         <span className="text-sm font-medium text-gray-900">Max Roommates</span>
       </span>
-      <span className="block text-sm text-gray-500 mb-2">
-        House with less than this # of people
+      <span className="block mb-2 text-sm text-gray-500">
+        Maximum total rooms in house
       </span>
 
       <input
-        className="w-full rounded border p-1 border-gray-400"
+        className="w-full p-1 border border-gray-400 rounded"
         type="number"
-        min="0"
+        min="1"
         value={maxRoommates}
         onChange={(e) => {
           if (e.target.value === "") {

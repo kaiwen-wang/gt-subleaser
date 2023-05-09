@@ -11,6 +11,7 @@ export default function FilteredGrid({
   error,
   loadMoreItems,
   loading,
+  dataIsLoading,
 }) {
   let parsedError = error ? JSON.parse(error) : null;
 
@@ -31,9 +32,9 @@ export default function FilteredGrid({
 
   // useEffect(() => {
   //   console.log("postsData", postsData);
-  //   console.log("postData", postsData.length);
-  //   console.log(loading);
-  // }, [postsData, loading]);
+  //   // console.log("postData", postsData.length);
+  //   // console.log(loading);
+  // }, [postsData]);
 
   return (
     <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 pb-12 mx-auto mt-2">
@@ -46,7 +47,7 @@ export default function FilteredGrid({
             return (
               // <Link key={key} href={`/listings/${key}`} target="_blank">
               <div
-                key={meow}
+                key={`${meow}-${index}`}
                 ref={index === postsData.length - 1 ? lastItemRef : null}
               >
                 <div className="group border-1 rounded-xl relative overflow-hidden border border-black shadow-md">
@@ -101,9 +102,9 @@ export default function FilteredGrid({
                 parsedError.info.error +
                 " Code " +
                 parsedError.status
-              : postsData && postsData.length === 0
-              ? "No results found"
-              : "Loading..."}
+              : dataIsLoading
+              ? "Loading..."
+              : "No results found"}
           </p>
         )}
       </div>

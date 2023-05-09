@@ -9,16 +9,16 @@ export default function GenderMenu() {
       <span className="flex items-center">
         <span className="text-sm font-medium text-gray-900">Your Gender</span>
       </span>
-      <span className="mb-2 block text-sm text-gray-500">
+      <span className="block mb-2 text-sm text-gray-500">
         Show gender-specific subleases
       </span>
 
       <select
-        className="mt-1 w-full rounded border p-1 border-gray-400"
+        className="w-full p-1 mt-1 border border-gray-400 rounded"
         onChange={(e) => {
           setGenderPreference(e.target.value);
         }}
-        value={genderPreference}
+        value={genderPreference ? genderPreference : "not-important"}
       >
         <option value="not-important">Not Important</option>
         <option value="female">Female</option>

@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/utils/supabase";
 
 export default async function FilteredPostsApi(req, res) {
   let semesterPreference = req.query.semester;
@@ -11,11 +11,6 @@ export default async function FilteredPostsApi(req, res) {
   let sortFormula = req.query.sort;
   let pages = req.query.pages;
 
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
-
   let query = supabase
     .from("subleases")
     .select()
@@ -23,26 +18,27 @@ export default async function FilteredPostsApi(req, res) {
   // 1, 5
   // 6, 10
 
-  if (maxPrice !== "null") {
+  if (maxPrice !== "") {
     query = query.lte("monthly_price", maxPrice);
   }
 
   // if (semesterPreference !== "null") {
   //     query = query.eq("semester", semesterPreference)
   // }
-  if (moveIn !== "null") {
+  if (moveIn !== "") {
     query = query.gte("move_in", moveIn);
   }
-  if (moveOut !== "null") {
+  if (moveOut !== "") {
     query = query.lte("move_out", moveOut);
   }
-  if (genderPreference == "male" || genderPreference == "female") {
+  // if (genderPreference == "male" || genderPreference == "female") {
+  if (genderPreference !== "") {
     // not important, male, female
     // male and female are working properly
     query = query.eq("gender_preference", genderPreference);
   }
-  if (maxRoommates !== "null") {
-    query = query.lte("total_bedrooms", parseInt(maxRoommates) + 1);
+  if (maxRoommates !== "") {
+    query = query.lte("total_bedrooms", parseInt(maxRoommates));
   }
 
   // sort query

@@ -1,6 +1,6 @@
 import { AppContext } from "/src/components/AppState.js";
 import { getCurrentDate } from "@/utils/date";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function MoveOutMenu() {
   let { moveOut, setMoveOut } = useContext(AppContext);
@@ -10,12 +10,12 @@ export default function MoveOutMenu() {
       <span className="flex items-center">
         <span className="text-sm font-medium text-gray-900">Move Out Date</span>
       </span>
-      <span className="block text-sm text-gray-500 mb-2">
+      <span className="block mb-2 text-sm text-gray-500">
         Last day you'll stay
       </span>
 
       <input
-        className="w-full rounded border p-2 border-gray-400"
+        className="w-full p-2 border border-gray-400 rounded"
         type="date"
         min={getCurrentDate()}
         value={moveOut}

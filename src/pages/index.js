@@ -8,7 +8,7 @@ import Header from "@/components/PageComponents/Header";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useContext, useState, useEffect } from "react";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -36,11 +36,12 @@ export default function Home() {
     maxRoommates,
     moveIn,
     moveOut,
+    sortFormula,
   } = useContext(AppContext);
-  let { sortFormula } = useContext(AppContext);
 
   const [pages, setPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  // This loading is only for pagination. The other loading is for the initial fetch.
 
   const loadMoreItems = () => {
     setLoading(true);
@@ -48,12 +49,21 @@ export default function Home() {
   };
 
   // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
-  const { data, error } = useSWR(
-    `/api/FilteredPostsApi?semester=${semesterPreference}&price=${maxPrice}&gender=${genderPreference}&bathroom=${bathroomPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}&pages=${pages}`,
+  const { data, error, isLoading } = useSWR(
+    `/api/FilteredPostsApi?&price=${maxPrice}&gender=${genderPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}&pages=${pages}`,
     fetcher
   );
+  const { cache, mutate, ...extraConfig } = useSWRConfig();
 
-  const [items, setItems] = useState(null);
+  // useEffect(() => {
+  //   console.log("data", data);
+  //   console.log("error", error);
+  //   console.log("dataIsLoading", isLoading);
+  // }, [data, error, isLoading]);
+
+  // the actual posts that get passed down
+  const [items, setItems] = useState([]);
+  const [triggerReset, setTriggerReset] = useState(false);
 
   useEffect(() => {
     if (data && data.length > 0) {
@@ -64,7 +74,38 @@ export default function Home() {
       }
       setLoading(false);
     }
-  }, [data]);
+  }, [data, triggerReset]);
+
+  // TODO source of bug
+  useEffect(() => {
+    // if (items && items.length > 0) {
+    // console.log("items exist");
+    console.log(
+      maxPrice,
+      genderPreference,
+      maxRoommates,
+      moveIn,
+      moveOut,
+      cache,
+      mutate
+    );
+    // } else {
+    console.log(items);
+
+    setItems([]);
+    setPages(1);
+    setTriggerReset(!triggerReset);
+    // }
+  }, [
+    semesterPreference,
+    maxPrice,
+    genderPreference,
+    bathroomPreference,
+    maxRoommates,
+    moveIn,
+    moveOut,
+    sortFormula,
+  ]);
 
   return (
     <>
@@ -78,6 +119,7 @@ export default function Home() {
         error={JSON.stringify(error)}
         loadMoreItems={loadMoreItems}
         loading={loading}
+        dataIsLoading={isLoading}
       />
     </>
   );

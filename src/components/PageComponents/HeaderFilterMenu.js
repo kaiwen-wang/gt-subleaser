@@ -15,6 +15,7 @@ export default function HeaderfilterMenu() {
   let { genderPreference, setGenderPreference } = useContext(AppContext);
   let { maxPrice, setMaxPrice } = useContext(AppContext);
   let { maxTopPrice } = useContext(AppContext);
+  let { priceDisplayValue } = useContext(AppContext);
   let { maxRoommates, setMaxRoommates } = useContext(AppContext);
   let { moveIn, setMoveIn } = useContext(AppContext);
   let { moveOut, setMoveOut } = useContext(AppContext);
@@ -22,15 +23,15 @@ export default function HeaderfilterMenu() {
   const filterMenuOptions = [
     {
       id: "gender",
-      isActive: genderPreference !== null,
+      isActive: genderPreference !== "",
       displayName:
-        genderPreference !== null
+        genderPreference !== ""
           ? genderPreference
               .replaceAll("-", " ")
               .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
           : "Your Gender",
       contextSetter: setGenderPreference,
-      defaultValue: null,
+      defaultValue: "",
       component: <GenderMenu />,
     },
     {
@@ -43,27 +44,27 @@ export default function HeaderfilterMenu() {
     },
     {
       id: "maxRoommates",
-      isActive: maxRoommates !== null,
+      isActive: maxRoommates !== "",
       displayName:
-        maxRoommates !== null ? "Roommates: " + maxRoommates : "Max Roommates",
+        maxRoommates !== "" ? "Max Rooms: " + maxRoommates : "Max Rooms",
       contextSetter: setMaxRoommates,
-      defaultValue: null,
+      defaultValue: "",
       component: <MaxRoommatesMenu />,
     },
     {
       id: "moveIn",
-      isActive: moveIn !== null,
-      displayName: moveIn !== null ? `In: ${moveIn}` : "Move In",
+      isActive: moveIn !== "",
+      displayName: moveIn !== "" ? `In: ${moveIn}` : "Move In",
       contextSetter: setMoveIn,
-      defaultValue: null,
+      defaultValue: "",
       component: <MoveInMenu />,
     },
     {
       id: "moveOut",
-      isActive: moveOut !== null,
-      displayName: moveOut !== null ? `Out: ${moveOut}` : "Move Out",
+      isActive: moveOut !== "",
+      displayName: moveOut !== "" ? `Out: ${moveOut}` : "Move Out",
       contextSetter: setMoveOut,
-      defaultValue: null,
+      defaultValue: "",
       component: <MoveOutMenu />,
     },
   ];

@@ -336,6 +336,7 @@ Make the "X" appear when the menu is selected
 A little bit of better data validation on the upload page
 Check supabase security rules so I don't get spammed
 Make it possible for people to disable listings. Maybe through email somehow.
+Do I run into race conditions in indexjs
 
 
 apparently you can break the "number" input by adding in "e"
