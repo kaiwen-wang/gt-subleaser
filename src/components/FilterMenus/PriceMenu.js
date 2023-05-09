@@ -31,7 +31,7 @@ export default function PriceMenu() {
         min={0}
         max={maxTopPrice}
         value={maxPrice ? maxPrice : ""}
-        step="10"
+        step="100"
         onChange={(e) => {
           // Probably because of the slider
 
