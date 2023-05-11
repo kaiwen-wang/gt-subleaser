@@ -7,10 +7,10 @@ export default function MaxRoommatesMenu() {
   return (
     <>
       <span className="flex items-center">
-        <span className="text-sm font-medium text-gray-900">Max Roommates</span>
+        <span className="text-sm font-medium text-gray-900">Total Rooms</span>
       </span>
       <span className="block mb-2 text-sm text-gray-500">
-        Maximum total rooms in house
+        This many rooms or less
       </span>
 
       <input

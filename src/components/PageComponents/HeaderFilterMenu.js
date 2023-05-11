@@ -46,7 +46,7 @@ export default function HeaderfilterMenu() {
       id: "maxRoommates",
       isActive: maxRoommates !== "",
       displayName:
-        maxRoommates !== "" ? "Max Rooms: " + maxRoommates : "Max Rooms",
+        maxRoommates !== "" ? "Rooms: " + maxRoommates : "Total Rooms",
       contextSetter: setMaxRoommates,
       defaultValue: "",
       component: <MaxRoommatesMenu />,

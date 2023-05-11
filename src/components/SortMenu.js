@@ -13,17 +13,17 @@ export default function SortMenu() {
   let { sortFormula, setSortFormula } = useContext(AppContext);
 
   return (
-    <div className="ml-auto w-fit text-right">
+    <div className="w-fit ml-auto text-right">
       <Menu as="div" className="relative inline-block text-left">
         <Menu.Button className="bordershadow-scale-600 inline-flex justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium outline outline-0 outline-gray-200 text-gray-700 hover:bg-gray-100">
           <span className="">Sort</span>
           <AdjustmentsHorizontalIcon
-            className="ml-2 h-5 w-5"
+            className="w-5 h-5 ml-2"
             aria-hidden="true"
           />
         </Menu.Button>
-        <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 bg-white focus:outline-none">
-          <div className="px-1 py-1 ">
+        <Menu.Items className="ring-1 ring-black ring-opacity-5 focus:outline-none absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg">
+          <div className=" px-1 py-1">
             <Menu.Item>
               <button
                 className={`${
@@ -34,10 +34,10 @@ export default function SortMenu() {
                 onClick={() => setSortFormula("increasingPrice")}
               >
                 {sortFormula == "increasingPrice" ? (
-                  <EditActiveIcon className="mr-2 h-5 w-5" aria-hidden="true" />
+                  <EditActiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
                 ) : (
                   <EditInactiveIcon
-                    className="mr-2 h-5 w-5"
+                    className="w-5 h-5 mr-2"
                     aria-hidden="true"
                   />
                 )}
@@ -55,12 +55,12 @@ export default function SortMenu() {
               >
                 {sortFormula == "decreasingPrice" ? (
                   <DuplicateActiveIcon
-                    className="mr-2 h-5 w-5"
+                    className="w-5 h-5 mr-2"
                     aria-hidden="true"
                   />
                 ) : (
                   <DuplicateInactiveIcon
-                    className="mr-2 h-5 w-5"
+                    className="w-5 h-5 mr-2"
                     aria-hidden="true"
                   />
                 )}
@@ -68,52 +68,51 @@ export default function SortMenu() {
               </button>
             </Menu.Item>
           </div>
-          {/* <div className="px-1 py-1">
+          <div className="px-1 py-1">
             <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? "text-white bg-violet-500" : "text-gray-900"
-                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                >
-                  {active ? (
-                    <ArchiveActiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <ArchiveInactiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  )}
-                  Newest Posts
-                </button>
-              )}
+              <button
+                className={`${
+                  sortFormula === "newest"
+                    ? "text-white bg-violet-500"
+                    : "text-gray-900"
+                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                onClick={() => setSortFormula("newest")}
+              >
+                {sortFormula === "newest" ? (
+                  <ArchiveActiveIcon
+                    className="w-5 h-5 mr-2"
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <ArchiveInactiveIcon
+                    className="w-5 h-5 mr-2"
+                    aria-hidden="true"
+                  />
+                )}
+                Newest Posts
+              </button>
             </Menu.Item>
             <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? "text-white bg-violet-500" : "text-gray-900"
-                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                >
-                  {active ? (
-                    <MoveActiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <MoveInactiveIcon
-                      className="mr-2 h-5 w-5"
-                      aria-hidden="true"
-                    />
-                  )}
-                  Oldest Posts
-                </button>
-              )}
+              <button
+                className={`${
+                  sortFormula === "oldest"
+                    ? "text-white bg-violet-500"
+                    : "text-gray-900"
+                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                onClick={() => setSortFormula("oldest")}
+              >
+                {sortFormula === "oldest" ? (
+                  <MoveActiveIcon className="w-5 h-5 mr-2" aria-hidden="true" />
+                ) : (
+                  <MoveInactiveIcon
+                    className="w-5 h-5 mr-2"
+                    aria-hidden="true"
+                  />
+                )}
+                Oldest Posts
+              </button>
             </Menu.Item>
-          </div> */}
+          </div>
           {/* <div className="px-1 py-1">
                             <Menu.Item>
                                 {({ active }) => (
@@ -123,12 +122,12 @@ export default function SortMenu() {
                                     >
                                         {active ? (
                                             <DeleteActiveIcon
-                                                className="w-5 h-5 mr-2 text-violet-400"
+                                                className="text-violet-400 w-5 h-5 mr-2"
                                                 aria-hidden="true"
                                             />
                                         ) : (
                                             <DeleteInactiveIcon
-                                                className="w-5 h-5 mr-2 text-violet-400"
+                                                className="text-violet-400 w-5 h-5 mr-2"
                                                 aria-hidden="true"
                                             />
                                         )}

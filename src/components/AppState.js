@@ -50,7 +50,7 @@ export function AppProvider({ children }) {
   const [moveIn, setMoveIn] = useState("");
   const [moveOut, setMoveOut] = useState("");
 
-  const [sortFormula, setSortFormula] = useState("increasingPrice");
+  const [sortFormula, setSortFormula] = useState("newest");
 
   return (
     <AppContext.Provider

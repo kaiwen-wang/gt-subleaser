@@ -15,26 +15,17 @@ export default async function FilteredPostsApi(req, res) {
     .from("subleases")
     .select()
     .range(6 * (pages - 1), 6 * (pages - 1) + 5);
-  // 1, 5
-  // 6, 10
 
   if (maxPrice !== "") {
     query = query.lte("monthly_price", maxPrice);
   }
-
-  // if (semesterPreference !== "null") {
-  //     query = query.eq("semester", semesterPreference)
-  // }
   if (moveIn !== "") {
     query = query.gte("move_in", moveIn);
   }
   if (moveOut !== "") {
     query = query.lte("move_out", moveOut);
   }
-  // if (genderPreference == "male" || genderPreference == "female") {
   if (genderPreference !== "") {
-    // not important, male, female
-    // male and female are working properly
     query = query.eq("gender_preference", genderPreference);
   }
   if (maxRoommates !== "") {
@@ -53,26 +44,19 @@ export default async function FilteredPostsApi(req, res) {
   // }
   if (sortFormula === "increasingPrice") {
     query.order("monthly_price", { ascending: true });
-
-    // unsorted.sort((a, b) => data[a].price - data[b].price);
   } else if (sortFormula === "decreasingPrice") {
     query.order("monthly_price", { ascending: false });
-
-    // unsorted.sort((a, b) => data[b].price - data[a].price);
+  } else if (sortFormula === "newest") {
+    query.order("created_at", { ascending: false });
+  } else if (sortFormula === "oldest") {
+    query.order("created_at", { ascending: true });
   }
-
-  // Gender Preference: If null, then show all. If male show only male. If female show only female.
-
-  // Bathroom Preference: Either "solo" or "shared." Should implement a "2+" shared but not important for now. It is a boolean. False = solo, True = shared.
 
   const { data, error } = await query;
 
-  // wait 2 seconds
-  // setTimeout(() => {
   if (error) {
     res.status(500).json({ error: error.message });
   } else {
     res.status(200).json(data);
   }
-  // }, 1000);
 }

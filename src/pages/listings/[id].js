@@ -122,7 +122,7 @@ export default function Listing(props) {
 
       <Header smallContainer={true} />
 
-      <main className="container mx-auto pt-8">
+      <main className="container pt-8 mx-auto">
         <div className="flex justify-between">
           <p className="text-sm text-gray-500">{`Listing ID: ${data.id}`}</p>
           <p className="text-sm text-gray-500">{`Published ${timeAgo(
@@ -131,7 +131,7 @@ export default function Listing(props) {
         </div>
         <h1 className="pt-16 text-2xl font-medium text-center">{data.title}</h1>
         <div
-          className="prose text-center mt-2 text-sm text-gray-500 mb-4 cursor-pointer"
+          className="mt-2 mb-4 text-sm prose text-center text-gray-500 cursor-pointer"
           onClick={() => {
             setLeaseTime(!leaseTime);
           }}
@@ -148,15 +148,12 @@ export default function Listing(props) {
               alert(`${copyText} copied to clipboard.`);
             });
           }}
-          className="block mx-auto mb-16 px-4 py-2 text-sm font-medium text-white bg-gray-400 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 block px-4 py-2 mx-auto mb-16 text-sm font-medium text-white bg-gray-400 rounded-md shadow-sm"
         >
           Contact
         </button>
-        <div className="flex rounded-md border border-black max-w-fit overflow-hidden">
-          <EmblaCarousel options={OPTIONS} supabaseURL={supabaseURL} />
-        </div>
 
-        <div className="mt-16 prose mx-auto max-w-2xl mb-16">
+        <div className="max-w-2xl mx-auto mt-16 mb-16 prose">
           <p className="mt-2 text-gray-500">{data.description}</p>
         </div>
         {/* <div className="grid grid-cols-2 gap-3 text-sm font-medium [&>*]:rounded-md [&>*]:px-3 [&>*]:pb-2 [&>*]:pt-3 [&>*]:outline [&>*]:outline-gray-200">
