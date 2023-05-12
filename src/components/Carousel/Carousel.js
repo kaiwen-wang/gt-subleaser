@@ -64,7 +64,7 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
                 <Image
                   className="embla__slide__img block object-cover w-full h-full"
                   src={url}
-                  alt="Alt text"
+                  alt="Image of sublease listing"
                   fill={true}
                   sizes="(max-width: 550px) 50vw, (max-width: 768px) 33vw, (max-width: 1280px) 25vw, (max-width: 1536px) 20vw, 20vw"
                 />
