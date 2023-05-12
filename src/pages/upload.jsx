@@ -1,7 +1,6 @@
-import ApplianceSelect from "@/components/ApplianceSelect";
-import HeadElement from "@/components/PageComponents/HeadElement";
-import Toggle from "@/components/PageComponents/Toggle";
-import UserIcon from "@/components/PageComponents/UserIcon";
+import ApplianceSelect from "@/components/UploadForms/ApplianceSelect";
+import HeadElement from "@/components/Header/HeadElement";
+import Toggle from "@/components/Header/Elements/Toggle";
 import BigPicture from "@/components/UploadForms/BigPicture";
 import CoverImage from "@/components/UploadForms/CoverImage";
 import Description from "@/components/UploadForms/Description";
@@ -151,11 +150,11 @@ export default function Upload({ idNum }) {
     <>
       <HeadElement />
 
-      <div className="flex h-screen flex-row">
+      <div className="flex flex-row h-screen">
         <div className="!lg:left-0 absolute -left-[280px] top-0 ml-0 flex h-screen w-0 flex-col transition-all lg:relative lg:left-0 lg:w-[420px]">
-          <div className="relative top-0 flex h-screen w-auto flex-col overflow-auto border-r bg-white ">
-            <div className="sticky top-0 z-20 border-b bg-white">
-              <div className="lg:height-auto bg-scale-200 hidden flex-col gap-8 pb-8 pt-8 lg:flex">
+          <div className=" relative top-0 flex flex-col w-auto h-screen overflow-auto bg-white border-r">
+            <div className="sticky top-0 z-20 bg-white border-b">
+              <div className="lg:height-auto bg-scale-200 lg:flex flex-col hidden gap-8 pt-8 pb-8">
                 <a className="flex items-center gap-3 px-10" href="/">
                   <span className="text-2xl font-semibold">
                     🐝 GT Subleaser
@@ -164,8 +163,8 @@ export default function Upload({ idNum }) {
               </div>
             </div>
             <div className=" absolute left-0 right-0 top-[0px] h-screen px-5 py-16 pl-5 transition-all duration-200 ease-out lg:visible lg:relative lg:left-0 lg:top-0 lg:flex lg:px-10 lg:pb-10 lg:pt-0 lg:opacity-100">
-              <div className="relative flex justify-center lg:justify-start">
-                <ul className="relative flex w-full flex-col gap-4">
+              <div className="lg:justify-start relative flex justify-center">
+                <ul className="relative flex flex-col w-full gap-4">
                   <div className="flex flex-col gap-3 pt-8">
                     <span className="font-mono text-sm text-gray-500">
                       BIG PICTURE
@@ -322,24 +321,24 @@ export default function Upload({ idNum }) {
             </div>
           </div>
         </div>
-        <div className="absolute h-screen w-full overflow-auto transition-all ease-out lg:relative lg:ml-0">
+        <div className="lg:relative lg:ml-0 absolute w-full h-screen overflow-auto transition-all ease-out">
           <div className="relative flex flex-col">
             <div className={`top-0 z-10 lg:sticky`} id="header">
               <nav className="flex h-[65px] items-center justify-end border-b bg-white">
-                <div className="mx-auto flex w-full items-center justify-end gap-2 pr-4">
+                <div className="flex items-center justify-end w-full gap-2 pr-4 mx-auto">
                   <Toggle />
                   {/* <UserIcon /> */}
                 </div>
               </nav>
             </div>
 
-            <div className=" mx-auto mt-1  flex  w-full max-w-3xl items-center justify-between p-4 xl:mt-6 xl:p-0">
+            <div className=" xl:mt-6 xl:p-0 flex items-center justify-between w-full max-w-3xl p-4 mx-auto mt-1">
               <span className="font-mono">Listing ID: {idNum}</span>
             </div>
 
             <form
               onSubmit={handleSubmit}
-              className="mx-auto mt-1 w-full max-w-3xl p-4 xl:mt-6 xl:p-0 "
+              className="xl:mt-6 xl:p-0 w-full max-w-3xl p-4 mx-auto mt-1"
             >
               <div className="mb-6">
                 <div className="grid grid-cols-2 gap-4">
@@ -347,7 +346,7 @@ export default function Upload({ idNum }) {
                     <label
                       htmlFor="email"
                       id="email"
-                      className=" block text-lg  font-medium "
+                      className=" block text-lg font-medium"
                     >
                       @gatech.edu Email
                     </label>
@@ -358,14 +357,14 @@ export default function Upload({ idNum }) {
                       pattern=".+@gatech\.edu"
                       size="30"
                       required
-                      className="w-full rounded-md border px-4  py-2 border-gray-400"
+                      className="w-full px-4 py-2 border border-gray-400 rounded-md"
                     />
                   </div>
                   {/* <div>
                     <label
                       htmlFor="email"
                       id="email"
-                      className=" block text-lg  font-medium "
+                      className=" block text-lg font-medium"
                     >
                       Contact Number
                     </label>
@@ -373,7 +372,7 @@ export default function Upload({ idNum }) {
                       type="tel"
                       id="phone"
                       required
-                      className="w-full rounded-md border px-4  py-2 border-gray-400"
+                      className="w-full px-4 py-2 border border-gray-400 rounded-md"
                     />
                   </div> */}
                 </div>
@@ -383,7 +382,7 @@ export default function Upload({ idNum }) {
                 <label
                   htmlFor="cover-image"
                   id="cover-image-label"
-                  className=" block text-lg  font-medium "
+                  className=" block text-lg font-medium"
                 >
                   Photos
                 </label>
@@ -400,7 +399,7 @@ export default function Upload({ idNum }) {
                   className="mt-2"
                   ref={inputFileRef} // Add ref to the input element
                 />
-                <div className="mt-2 flex h-64  items-center gap-2 overflow-x-auto rounded-md border px-2 border-gray-400">
+                <div className="flex items-center h-64 gap-2 px-2 mt-2 overflow-x-auto border border-gray-400 rounded-md">
                   {uploadimgs.length !== 0 ? (
                     uploadimgs.map((img, index) => (
                       <CoverImage
@@ -413,9 +412,9 @@ export default function Upload({ idNum }) {
                       />
                     ))
                   ) : (
-                    <div className="relative h-60 w-60 rounded-md outline outline-black">
+                    <div className="h-60 w-60 outline outline-black relative rounded-md">
                       <span
-                        className="cursor-pointer text-center w-full h-full flex items-center justify-center"
+                        className="flex items-center justify-center w-full h-full text-center cursor-pointer"
                         onClick={() => inputFileRef.current.click()}
                       >
                         No files yet!<br></br>
@@ -426,20 +425,20 @@ export default function Upload({ idNum }) {
                 </div>
               </div>
               <BigPicture />
-              <div className="mb-16 mt-16 border-t border-gray-300"></div>
+              <div className="mt-16 mb-16 border-t border-gray-300"></div>
               <Timing />
-              <div className="mb-16 mt-16 border-t border-gray-300"></div>
+              <div className="mt-16 mb-16 border-t border-gray-300"></div>
               <Pricing />
-              <div className="mb-16 mt-16 border-t border-gray-300"></div>
+              <div className="mt-16 mb-16 border-t border-gray-300"></div>
               <HouseDetails
                 circleColors={circleColors}
                 setCircleColorsFunction={setCircleColorsFunction}
               />
-              <div className="mb-16 mt-16 border-t border-gray-300"></div>
+              <div className="mt-16 mb-16 border-t border-gray-300"></div>
 
               <div className="">
                 <label
-                  className="mb-2 block text-lg font-medium"
+                  className="block mb-2 text-lg font-medium"
                   htmlFor="appliances"
                 >
                   Appliances
@@ -533,7 +532,7 @@ export default function Upload({ idNum }) {
 
               <div className="">
                 <label
-                  className="mb-2 mt-4 block text-lg font-medium"
+                  className="block mt-4 mb-2 text-lg font-medium"
                   htmlFor="allowed"
                   id="allowed"
                 >
@@ -570,13 +569,13 @@ export default function Upload({ idNum }) {
               </div>
               <div className="">
                 <label
-                  className="mb-2 mt-4 block text-lg font-medium"
+                  className="block mt-4 mb-2 text-lg font-medium"
                   htmlFor="amenities"
                   id="amenities"
                 >
                   Amenities
                 </label>
-                <div className="mb-16 grid grid-cols-4 gap-3 text-sm font-medium ">
+                <div className=" grid grid-cols-4 gap-3 mb-16 text-sm font-medium">
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Parking"
@@ -605,7 +604,7 @@ export default function Upload({ idNum }) {
               </div>
 
               <button
-                className="mb-16 rounded px-4 py-2 font-bold text-white bg-blue-500 hover:bg-blue-700"
+                className="hover:bg-blue-700 px-4 py-2 mb-16 font-bold text-white bg-blue-500 rounded"
                 type="submit"
               >
                 Submit for review

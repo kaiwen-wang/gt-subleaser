@@ -1,7 +1,7 @@
 import { AppContext } from "@/components/AppState";
 import FilteredGrid from "@/components/PageComponents/FilteredGrid";
-import HeadElement from "@/components/PageComponents/HeadElement";
-import Header from "@/components/PageComponents/Header";
+import HeadElement from "@/components/Header/HeadElement";
+import Header from "@/components/Header/Header";
 import { useContext, useState, useEffect, useRef } from "react";
 import useSWR, { useSWRConfig, Fetcher } from "swr";
 

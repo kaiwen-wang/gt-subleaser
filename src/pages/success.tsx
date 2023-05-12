@@ -1,5 +1,5 @@
-import HeadElement from "@/components/PageComponents/HeadElement";
-import Header from "@/components/PageComponents/Header";
+import HeadElement from "@/components/Header/HeadElement";
+import Header from "@/components/Header/Header";
 import Link from "next/link";
 
 export default function UploadSuccess() {

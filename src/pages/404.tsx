@@ -1,4 +1,4 @@
-import HeadElement from "@/components/PageComponents/HeadElement";
+import HeadElement from "@/components/Header/HeadElement";
 import Link from "next/link";
 
 export default function Custom404() {

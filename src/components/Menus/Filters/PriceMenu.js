@@ -1,5 +1,5 @@
-import { AppContext } from "/src/components/AppState.js";
-import { Slider } from "@/components/Slider";
+import { AppContext } from "/src/components/AppState";
+import { Slider } from "/src/components/Menus/Filters/Slider";
 import { useContext } from "react";
 
 export default function PriceMenu() {

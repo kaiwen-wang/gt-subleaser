@@ -1,15 +1,16 @@
-import GenderMenu from "../FilterMenus/GenderMenu";
-import MaxRoommatesMenu from "../FilterMenus/MaxRoommatesMenu";
-import MoveInMenu from "../FilterMenus/MoveInMenu";
-import PriceMenu from "../FilterMenus/PriceMenu";
-import SemesterMenu from "../FilterMenus/SemesterMenu";
-import PressAnimationButton from "../PressAnimationButton";
+import GenderMenu from "/src/components/Menus/Filters/GenderMenu";
+import MaxRoommatesMenu from "/src/components/Menus/Filters/MaxRoommatesMenu";
+import MoveInMenu from "/src/components/Menus/Filters/MoveInMenu";
+import MoveOutMenu from "/src/components/Menus/Filters/MoveOutMenu";
+import PriceMenu from "/src/components/Menus/Filters/PriceMenu";
+
+
+
 import { AppContext } from "/src/components/AppState.js";
-import MoveOutMenu from "@/components/FilterMenus/MoveOutMenu";
-import UserIcon from "@/components/PageComponents/UserIcon";
-import SortMenu from "@/components/SortMenu";
+import UserIcon from "/src/components/Header/Elements/UserIcon";
+import SortMenu from "/src/components/Menus/SortMenu";
 import { useContext } from "react";
-import PopoverMenu from "src/components/PopoverMenu.js";
+import PopoverMenu from "src/components/Menus/PopoverMenu";
 
 export default function HeaderfilterMenu() {
   let { genderPreference, setGenderPreference } = useContext(AppContext);

@@ -9,88 +9,27 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import useSWR from "swr";
 
+// TODO: what the hell is freudId?
 export default function SkellyImage({ freudID, url, item }) {
-  const [supabaseURL, setSupabaseURL] = useState(null);
+  const fetcher = async (url) => {
+    const res = await fetch(url);
 
-  useEffect(() => {
-    // downloadFirstFileInFolder();
-    downloadFilesInFolder();
-  }, [url]);
-
-  // async function downloadFirstFileInFolder() {
-  //   try {
-  //     // List all files in the folder
-  //     const { data, error } = await supabase.storage
-  //       .from("sublease-images")
-  //       .list(`${url}/`);
-
-  //     if (error) {
-  //       throw error;
-  //     }
-
-  //     // Get the first file in the folder
-  //     const firstFile = data[0];
-
-  //     if (!firstFile) {
-  //       console.log("No files found in the folder.");
-  //       return;
-  //     } else {
-  //       console.log("First file:", firstFile.name);
-  //     }
-
-  //     let path = `${url}/${firstFile.name}`;
-
-  //     // Download the first file
-  //     const { data: fileContent, error: downloadError } = await supabase.storage
-  //       .from("sublease-images")
-  //       .download(path);
-
-  //     if (downloadError) {
-  //       throw downloadError;
-  //     }
-
-  //     // Create a Blob with the file content and create a local URL
-  //     const fileBlob = new Blob([fileContent], { type: "image/*" });
-  //     const fileUrl = URL.createObjectURL(fileBlob);
-  //     setSupabaseURL(fileUrl);
-  //   } catch (error) {
-  //     console.error("Error downloading the first file:", error.message);
-  //   }
-  // }
-
-  async function downloadFilesInFolder() {
-    // List all files in the folder
-    const { data, error } = await supabase.storage
-      .from("sublease-images")
-      .list(`${url}/`);
-
-    if (error) {
+    if (!res.ok) {
+      const error = new Error("An error occurred while fetching the data.");
+      error.status = res.status;
+      error.info = await res.json();
       throw error;
     }
 
-    // loop through data and download list file names
-    const tempSupabaseURL = [];
-    for (const file of data) {
-      let path = `${url}/${file.name}`;
+    return res.json();
+  };
 
-      const { data: fileContent, error: downloadError } = await supabase.storage
-        .from("sublease-images")
-        .download(path);
-
-      if (downloadError) {
-        throw downloadError;
-      }
-
-      // Create a Blob with the file content and create a local URL
-      const fileBlob = new Blob([fileContent], { type: "image/*" });
-      const fileUrl = URL.createObjectURL(fileBlob);
-      tempSupabaseURL.push(fileUrl);
-    }
-
-    // console.log(tempSupabaseURL[0]);
-    setSupabaseURL(tempSupabaseURL);
-  }
+  const { data, error, isLoading } = useSWR(
+    `/api/DownloadPostImagesApi?url=${url}`,
+    fetcher
+  );
 
   return (
     <div className="relative w-full pt-[95%] group bg-gray-300 ">
@@ -176,10 +115,10 @@ export default function SkellyImage({ freudID, url, item }) {
           </div>
         ) : null}
       </div>
-      {supabaseURL ? (
+      {data ? (
         <div className=" absolute top-0 z-0 flex items-center justify-center w-full h-full">
           <EmblaCarousel
-            supabaseURL={supabaseURL}
+            supabaseURL={data}
             url={url}
             freudID={freudID}
             className="z-20"

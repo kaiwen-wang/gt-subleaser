@@ -1,7 +1,7 @@
 import { AppContext } from "@/components/AppState";
 import EmblaCarousel from "@/components/Carousel/Carousel";
-import HeadElement from "@/components/PageComponents/HeadElement";
-import Header from "@/components/PageComponents/Header";
+import HeadElement from "@/components/Header/HeadElement";
+import Header from "@/components/Header/Header";
 import { convertDate } from "@/utils/convertDate";
 import { supabase } from "@/utils/supabase";
 import { timeAgo } from "@/utils/timeAgo";
