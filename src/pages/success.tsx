@@ -5,9 +5,9 @@ import Link from "next/link";
 export default function UploadSuccess() {
   return (
     <>
-      <HeadElement />
-      <Header />
-      <div className="  mx-auto max-w-lg text-center">
+      <HeadElement title={"Success!"} />
+      <Header showFilters={false} />
+      <div className=" max-w-lg mx-auto text-center">
         <p className="mt-16">
           Congratulations! Your post has been successfully uploaded. It will be
           checked for content and hopefully released shortly. This app is a
@@ -15,7 +15,7 @@ export default function UploadSuccess() {
         </p>
         <br></br>
         <Link href="/">
-          <button className="rounded-full p-2 outline hover:bg-gray-300">
+          <button className="outline hover:bg-gray-300 p-2 rounded-full">
             Back to main page
           </button>
         </Link>

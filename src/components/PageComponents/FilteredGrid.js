@@ -12,7 +12,6 @@ export default function FilteredGrid({
   loadMoreItems,
   loading,
   dataIsLoading,
-  isValidating,
 }) {
   let parsedError = error ? JSON.parse(error) : null;
 

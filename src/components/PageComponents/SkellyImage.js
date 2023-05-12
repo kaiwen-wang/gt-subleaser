@@ -134,25 +134,30 @@ export default function SkellyImage({ freudID, url, item }) {
       <div className="group-hover:opacity-0 absolute inset-x-0 bottom-0 z-30 flex items-end gap-1.5 mb-2 ml-2">
         <div className=" flex items-center justify-start">
           {item.roommate_demographics.map((person, i) => {
+            let roommatePathName = "";
+
+            if (person === "F") {
+              roommatePathName = "woman";
+            } else if (person === "M") {
+              roommatePathName = "man";
+            } else {
+              if (person === "O" && item.gender_preference === "female") {
+                roommatePathName = "missing-woman";
+              } else if (person === "O" && item.gender_preference === "male") {
+                roommatePathName = "missing-man";
+              } else if (
+                person === "O" &&
+                item.gender_preference === "not-important"
+              ) {
+                roommatePathName = "missing-neutral";
+              }
+            }
+
             return (
               <img
-                src={`/people/${person === "F" ? "woman" : ""}${
-                  person === "M" ? "man" : ""
-                }${
-                  person === "O" && item.gender_preference === "female"
-                    ? "missing-woman"
-                    : ""
-                }${
-                  person === "O" && item.gender_preference === "male"
-                    ? "missing-man"
-                    : ""
-                }${
-                  person === "O" && item.gender_preference === "not-important"
-                    ? "missing-neutral"
-                    : ""
-                }.gif`}
+                src={`/images/people/${roommatePathName}.gif`}
                 key={i}
-                alt={"Roommates"}
+                alt={`${roommatePathName}`}
                 width={"auto"}
                 height={"auto"}
                 // style={{ width: "auto", height: "55%" }}
@@ -161,12 +166,12 @@ export default function SkellyImage({ freudID, url, item }) {
           })}
         </div>
         {item.gender_preference === "female" ? (
-          <div className="rounded-full px-1.5 py-0.5 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
+          <div className="rounded-full px-1.5 py-0.5 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] whitespace-nowrap">
             Women Only
           </div>
         ) : null}
         {item.gender_preference === "male" ? (
-          <div className="rounded-full px-1.5 py-0.5 text-xs font-medium bg-blue-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
+          <div className="rounded-full px-1.5 py-0.5 text-xs font-medium bg-blue-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%) whitespace-nowrap">
             Men Only
           </div>
         ) : null}
@@ -185,20 +190,3 @@ export default function SkellyImage({ freudID, url, item }) {
     </div>
   );
 }
-
-/* <Image
-            // src={"https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"} // Use the "url" property of the item
-            src={supabaseURL}
-            // src=""
-            key={name}
-            alt="An image of a room"
-            fill="true"
-            sizes="(max-width: 768px) 100vw,
-        (max-width: 1200px) 50vw,
-        33vw"
-            style={{ objectFit: "cover" }}
-            className="relative"
-            // className={`${isLoaded ? '' : 'invisible'}`}
-
-            // This is useless because onLoadingComplete only is an external URL; now that images are becoming saved locally this serves no purpose.
-          /> */

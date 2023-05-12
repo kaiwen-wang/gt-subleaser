@@ -1,9 +1,9 @@
-import { AppContext } from "/src/components/AppState.js";
+import { AppContext } from "@/components/AppState";
 import FilteredGrid from "@/components/PageComponents/FilteredGrid";
 import HeadElement from "@/components/PageComponents/HeadElement";
 import Header from "@/components/PageComponents/Header";
 import { useContext, useState, useEffect, useRef } from "react";
-import useSWR, { useSWRConfig } from "swr";
+import useSWR, { useSWRConfig, Fetcher } from "swr";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -30,9 +30,9 @@ export default function Home() {
     sortFormula,
   } = useContext(AppContext);
 
+  // This loading is only for pagination. The other isLoading is for the initial fetch.
   const [pages, setPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  // This loading is only for pagination. The other loading is for the initial fetch.
 
   const loadMoreItems = () => {
     setLoading(true);
@@ -40,13 +40,12 @@ export default function Home() {
   };
 
   // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
-  const { data, error, isLoading, isValidating } = useSWR(
+  const { data, error, isLoading } = useSWR(
     `/api/FilteredPostsApi?&price=${maxPrice}&gender=${genderPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}&pages=${pages}`,
     fetcher
   );
-  const { cache, mutate, ...extraConfig } = useSWRConfig();
 
-  // the actual posts that get passed down
+  // Items = actual posts
   const [items, setItems] = useState([]);
   const [triggerReset, setTriggerReset] = useState(false);
 
@@ -61,10 +60,11 @@ export default function Home() {
     }
   }, [data, triggerReset]);
 
-  // It's possible strict mode may break this TODO:
-  // TODO:
+  // Reset the items when the user changes the filters
+  // maxPriceChanged is here to prevent double rendering, as the max price is derived from the database
+  // useRef because useState causes a re-render.
+  // This actually doesn't track maxPrice, it just knows that it renders twice.
   const maxPriceChanged = useRef(0);
-
   useEffect(() => {
     if (maxPriceChanged.current > 2) {
       setItems([]);
@@ -97,7 +97,6 @@ export default function Home() {
         loadMoreItems={loadMoreItems}
         loading={loading}
         dataIsLoading={isLoading}
-        isValidating={isValidating}
       />
     </>
   );
