@@ -10,22 +10,10 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useSWR from "swr";
+import { fetcher } from "@/utils/fetcher";
 
 // TODO: what the hell is freudId?
 export default function SkellyImage({ freudID, url, item }) {
-  const fetcher = async (url) => {
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      const error = new Error("An error occurred while fetching the data.");
-      error.status = res.status;
-      error.info = await res.json();
-      throw error;
-    }
-
-    return res.json();
-  };
-
   const { data, error, isLoading } = useSWR(
     `/api/DownloadPostImagesApi?url=${url}`,
     fetcher

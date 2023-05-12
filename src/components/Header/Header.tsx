@@ -39,7 +39,7 @@ export default function Header({
       <div
         className={`relative mx-auto ${
           smallContainer
-            ? "container px-2"
+            ? "container"
             : "px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl "
         }`}
       >

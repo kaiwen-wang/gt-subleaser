@@ -4,19 +4,7 @@ import HeadElement from "@/components/Header/HeadElement";
 import Header from "@/components/Header/Header";
 import { useContext, useState, useEffect, useRef } from "react";
 import useSWR, { useSWRConfig, Fetcher } from "swr";
-
-const fetcher = async (url) => {
-  const res = await fetch(url);
-
-  if (!res.ok) {
-    const error = new Error("An error occurred while fetching the data.");
-    error.status = res.status;
-    error.info = await res.json();
-    throw error;
-  }
-
-  return res.json();
-};
+import { fetcher } from "@/utils/fetcher";
 
 export default function Home() {
   let {
