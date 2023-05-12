@@ -46,8 +46,6 @@ export default function Listing({ data }) {
 
   const OPTIONS = {};
 
-  // console.log(data);
-
   return (
     <>
       <HeadElement title={"GT Subleaser"} />

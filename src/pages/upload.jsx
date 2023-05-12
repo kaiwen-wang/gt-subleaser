@@ -33,19 +33,13 @@ import {
   CloudArrowUpIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { createClient } from "@supabase/supabase-js";
-import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useCallback, useEffect } from "react";
 import { useRef } from "react";
 
-export async function getServerSideProps(context) {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
-
+// Create a new ID whenever someone goes to the upload page
+export async function getServerSideProps() {
   const { data, error } = await supabase
     .from("newpage_subleases")
     .insert({})
