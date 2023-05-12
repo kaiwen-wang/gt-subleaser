@@ -101,7 +101,7 @@ export default function Upload({ idNum }) {
       console.error("Error uploading image:", imageError);
       return;
     } else {
-      console.log("New record added:");
+      console.log("New record added");
     }
     setLoading(false);
   };

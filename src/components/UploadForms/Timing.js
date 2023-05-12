@@ -26,7 +26,7 @@ export default function Timing() {
         <div>
           <label
             htmlFor="move_in"
-            className="mb-2 block text-lg font-medium"
+            className="block mb-2 text-lg font-medium"
             id="move_in"
           >
             Earliest Move-in
@@ -34,17 +34,18 @@ export default function Timing() {
           <input
             type="date"
             name="move_in"
-            className="w-full rounded border p-2 border-gray-400"
+            className="w-full p-2 border border-gray-400 rounded"
             min={minMoveInDate}
             // max is currentDate plus one year
             max={maxMoveInDate}
             onChange={handleMoveInChange}
+            required
           />
         </div>
         <div>
           <label
             htmlFor="move_out"
-            className="mb-2 block text-lg font-medium"
+            className="block mb-2 text-lg font-medium"
             id="move_out"
           >
             Latest Move-out
@@ -52,17 +53,18 @@ export default function Timing() {
           <input
             type="date"
             name="move_out"
-            className="w-full rounded border p-2 border-gray-400"
+            className="w-full p-2 border border-gray-400 rounded"
             min={moveInDate}
             // max date is moveInDate plus 1 year
             max={getOffsetDate(2, 0, 0, moveInDate)}
+            required
           />
         </div>
       </div>
 
       {/* <div className="mt-2">
                 <label
-                    className="mb-2 block text-lg font-medium"
+                    className="block mb-2 text-lg font-medium"
                     id="semester"
                     htmlFor="semester"
                 >
@@ -71,7 +73,7 @@ export default function Timing() {
                 <select
                     multiple
                     name="semester"
-                    className="w-full rounded border p-2 border-gray-400"
+                    className="w-full p-2 border border-gray-400 rounded"
                 >
                     <option value="fall">Fall</option>
                     <option value="spring">Spring</option>
