@@ -27,7 +27,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/pages/index.jsx", "src/utils/classifySemesters.js"  ],
   "exclude": [
     "node_modules"
   ]

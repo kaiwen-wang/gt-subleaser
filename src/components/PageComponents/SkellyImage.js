@@ -166,7 +166,7 @@ export default function SkellyImage({ freudID, url, item }) {
           })}
         </div>
         {item.gender_preference === "female" ? (
-          <div className="rounded-full px-1.5 py-0.5 text-xs font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] whitespace-nowrap">
+          <div className="rounded-full px-1.5 py-0.5 text-xs  font-medium bg-rose-500 text-white [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)] whitespace-nowrap">
             Women Only
           </div>
         ) : null}

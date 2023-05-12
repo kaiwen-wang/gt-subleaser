@@ -1,4 +1,4 @@
-import { AppContext } from "/src/components/AppState.js";
+import { AppContext } from "@/components/AppState";
 import EmblaCarousel from "@/components/Carousel/Carousel";
 import HeadElement from "@/components/PageComponents/HeadElement";
 import Header from "@/components/PageComponents/Header";
@@ -9,41 +9,6 @@ import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
-// export async function getStaticProps({ params }) {
-//   const supabase = createClient(
-//     process.env.NEXT_PUBLIC_SUPABASE_URL,
-//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-//   );
-//   let { data, error } = await supabase
-//     .from("subleases")
-//     .select()
-//     .eq("id", params.id);
-//   // I think it's wrapped around an object or array thing so getting first element is needed. It's not getting the first element of anything.
-//   data = data[0];
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// }
-// export async function getStaticPaths() {
-//   const supabase = createClient(
-//     process.env.NEXT_PUBLIC_SUPABASE_URL,
-//     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-//   );
-//   let { data, error } = await supabase.from("subleases").select("id");
-//   let paths = data.map((sublease) => {
-//     return {
-//       params: {
-//         id: sublease.id.toString(), // Changed this line to provide the id property
-//       },
-//     };
-//   });
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
 import { useState } from "react";
 
 export async function getServerSideProps({ params }) {
@@ -118,9 +83,9 @@ export default function Listing(props) {
 
   return (
     <>
-      <HeadElement />
+      <HeadElement title={"GT Subleaser"} />
 
-      <Header smallContainer={true} />
+      <Header smallContainer={true} showFilters={false} />
 
       <main className="container pt-8 mx-auto">
         <div className="flex justify-between">

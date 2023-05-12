@@ -1,23 +1,25 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from "@/utils/supabase";
 
-export default async function FilteredPostsApi(req, res) {
-  let semesterPreference = req.query.semester;
-  let maxPrice = req.query.price;
-  let genderPreference = req.query.gender;
-  let soloBathroomPreference = req.query.bathroom;
-  let maxRoommates = req.query.roommates;
-  let moveIn = req.query.movein;
-  let moveOut = req.query.moveout;
-  let sortFormula = req.query.sort;
-  let pages = req.query.pages;
+export default async function FilteredPostsApi(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  let maxPrice = req.query.price as string;
+  let genderPreference = req.query.gender as string;
+  let maxRoommates = req.query.roommates as string;
+  let moveIn = req.query.movein as string;
+  let moveOut = req.query.moveout as string;
+  let sortFormula = req.query.sort as string;
+  let pages = req.query.pages as string;
 
   let query = supabase
     .from("subleases")
     .select()
-    .range(6 * (pages - 1), 6 * (pages - 1) + 5);
+    .range(6 * (parseInt(pages) - 1), 6 * (parseInt(pages) - 1) + 5);
 
   if (maxPrice !== "") {
-    query = query.lte("monthly_price", maxPrice);
+    query = query.lte("monthly_price", parseInt(maxPrice));
   }
   if (moveIn !== "") {
     query = query.gte("move_in", moveIn);
@@ -32,16 +34,6 @@ export default async function FilteredPostsApi(req, res) {
     query = query.lte("total_bedrooms", parseInt(maxRoommates));
   }
 
-  // sort query
-  //if (sortFormula === "newestPosts") {
-  //query.order("created_at", { ascending: false });
-
-  // unsorted.sort((a, b) => data[b].price - data[a].price);
-  // } else if (sortFormula === "oldestPosts") {
-  // query.order("created_at", { ascending: false });
-  // }
-  // unsorted.sort((a, b) => data[a].price - data[b].price);
-  // }
   if (sortFormula === "increasingPrice") {
     query.order("monthly_price", { ascending: true });
   } else if (sortFormula === "decreasingPrice") {

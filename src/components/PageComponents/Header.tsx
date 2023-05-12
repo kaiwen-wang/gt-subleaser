@@ -3,7 +3,15 @@ import Toggle from "@/components/PageComponents/Toggle";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 
-export default function Header({ showFilters, smallContainer = false }) {
+interface HeaderProps {
+  showFilters?: boolean;
+  smallContainer?: boolean;
+}
+
+export default function Header({
+  showFilters = false,
+  smallContainer = false,
+}: HeaderProps) {
   const [isPinned, setIsPinned] = useState(false);
 
   // This is fine performance wise; I checked react for updates
@@ -36,7 +44,7 @@ export default function Header({ showFilters, smallContainer = false }) {
         }`}
       >
         <div className="flex items-center justify-between py-2.5 ">
-          <h1 className="hidden items-center text-2xl font-semibold text-gray-800 sm:flex">
+          <h1 className="sm:flex items-center hidden text-2xl font-semibold text-gray-800">
             <Link href="/">🐝 GT Subleaser</Link>
           </h1>
           <div className="flex w-full items-center gap-2.5 sm:max-w-fit sm:justify-between">
@@ -45,7 +53,7 @@ export default function Header({ showFilters, smallContainer = false }) {
                 <span>Sublease your place</span>
               </div>
             </Link>
-            <div className="ml-auto flex items-center sm:ml-0">
+            <div className="sm:ml-0 flex items-center ml-auto">
               <Toggle />
             </div>
             {/* <div>
