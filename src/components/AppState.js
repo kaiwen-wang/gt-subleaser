@@ -1,5 +1,4 @@
-import { supabase } from "@/utils/supabase";
-import data from "public/data/house-1.json";
+import { supabase } from "/src/utils/supabase";
 import React, { createContext, useState } from "react";
 import { useEffect } from "react";
 
