@@ -51,6 +51,8 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
     }, 1);
   }, [supabaseURL]);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <div className="embla relative w-full h-full overflow-hidden">
       <Link href={`/listings/${freudID}`} target="_blank">
@@ -62,11 +64,16 @@ export default function EmblaCarousel({ supabaseURL, url, freudID }) {
                     {index + 1}
                   </div> */}
                 <Image
-                  className="embla__slide__img block object-cover w-full h-full"
+                  className={`embla__slide__img block object-cover w-full h-full ${
+                    imageLoaded ? "opacity-100" : "opacity-0"
+                  }`}
                   src={url}
                   alt="Image of sublease listing"
                   fill={true}
                   sizes="(max-width: 550px) 50vw, (max-width: 768px) 33vw, (max-width: 1280px) 25vw, (max-width: 1536px) 20vw, 20vw"
+                  onLoadingComplete={() => {
+                    setImageLoaded(true);
+                  }}
                 />
               </div>
             ))}

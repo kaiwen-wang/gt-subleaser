@@ -1,5 +1,5 @@
 import { AppContext } from "@/components/AppState";
-import EmblaCarousel from "@/components/Carousel/Carousel";
+import EmblaCarousel from "@/components/PageComponents/Carousel/Carousel";
 import HeadElement from "@/components/Header/HeadElement";
 import Header from "@/components/Header/Header";
 import { convertDate } from "@/utils/convertDate";
