@@ -21,10 +21,9 @@ export default function SkellyImage({ freudID, url, item }) {
 
   return (
     <div className="relative w-full pt-[95%] group  ">
-      {isLoading ? (
-        // Grey bg when not loaded
+      {/* {isLoading ? (
         <div className="animate-pulse absolute top-0 left-0 w-full h-full bg-gray-600"></div>
-      ) : null}
+      ) : null} */}
       <div className="group-hover:opacity-0 absolute inset-x-0 top-0 z-30 pl-2">
         <div className=" mt-2 flex max-w-fit whitespace-nowrap rounded-full px-2 py-1 text-xs font-semibold backdrop-blur-sm text-white bg-zinc-500/50 [text-shadow:_0_1px_0_rgb(0_0_0_/_20%)]">
           {convertDate(item.move_in) + " to " + convertDate(item.move_out)}
@@ -110,7 +109,6 @@ export default function SkellyImage({ freudID, url, item }) {
             url={url}
             freudID={freudID}
             className="z-20"
-            // className={`${isLoaded ? "" : "hidden"} relative`}
           />
         </div>
       ) : null}

@@ -5,8 +5,11 @@ export default function Description() {
 
   return (
     <>
-      <label htmlFor="description" className="mb-2 text-lg font-medium block "
-        id="description">
+      <label
+        htmlFor="description"
+        className=" block mb-2 text-lg font-medium"
+        id="description"
+      >
         Description
       </label>
       <textarea
@@ -15,13 +18,13 @@ export default function Description() {
         maxLength="500"
         rows="5"
         name="description"
-        className="w-full rounded-md border px-4 py-2 border-gray-400"
-        placeholder="What qualities does your place have? Are the roommates interesting? What do they study? Is it nice and clean? Is there a certain culture in the house? All the technical details are listed in this form, so this is your spot to clarify anything."
+        className="w-full px-4 py-2 border border-gray-400 rounded-md"
+        placeholder="What qualities does your place have? Are the roommates interesting? What do they study? Is it nice and clean? Is there a certain culture in the house? What floor are you on? All the technical details are listed in this form, so this is your spot to clarify anything."
         required
       ></textarea>
-      <p className="text-right text-sm text-gray-600">
+      <p className="text-sm text-right text-gray-600">
         {500 - description.length} characters remaining
-      </p >
+      </p>
     </>
   );
 }

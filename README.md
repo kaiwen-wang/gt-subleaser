@@ -1,4 +1,4 @@
-list of all neighborhoods:
+### List of all neighborhoods:
 
 - Inspire Atlanta
 - The Mark
@@ -27,137 +27,77 @@ list of all neighborhoods:
 - Ansley Park
 - Other
 
-- House Type
+### Major Appliances
 
-  - Detached House, Apartment, Multiplex, Dorm
+- Washing Machine
+- Clothes Dryer
+- Dishwasher
+- Drain Disposal
+- Fridge
+- Freezer
+- Stove
+- Stove Hood
+- Microwave
+- Air Conditioning
+- Heater
+- Television
 
-- Monthly Price
-- Utilities (mark this 0 if included in monthly price)
-- Fees (one-time fees for subleasing for example)
+### Amenities
 
-- Earliest Move-In
-- Earliest Move-Out
+- Parking
+- Furnished
+- Balcony
+- Connected Bathroom
 
-  - calculate semester based on this?
+### Allowed
 
-- Total Rooms (for example 4)
-  Gender of each existing roommate
-  How many rooms are Free
-  OOOO
-  FFF(F)
-  Preference for subleaser gender
-  (MALE, FEMALE, ANY)
+- Pets
+- Drinking
+- Smoking
+- Parties
 
-- Total Bathrooms
-  XYZABC
+### Safety
 
-[Check if subleaser has their own bathroom] (automatic if bathrooms >= rooms)
+- Smoke Alarm
+- Fire Extinguisher
+- First aid kit
+- Carbon monoxide alarm
 
-Major Appliances
-Washing Machine
-Clothes Dryer
-Dishwasher
-Drain Disposal
-Fridge
-Freezer
-Stove
-Stove Hood
-Microwave
-Air Conditioning
-Heater
-Television
+### Design Inspo
 
-Amenities
-Free Parking
-Paid Parking
-Furnished
-Balcony
-Connected Bathroom
+- Google Flights
+- Airbnb
+- Supabase
+- wg-gesucht
+- GT Scheduler
 
-Allowed
-Pets
-Drinking
-Smoking
-Parties
+### People who have tried this space before
 
-Safety
-Smoke Alarm
-Fire Extinguisher
-First aid kit
-Carbon monoxide alarm
+- LiveSomeWhere
+  - technology reasons, focus too broad
+- studentsublease.com
+  - technology reasons, focus too broad
+- https://rotatingroom.com/
+  - technology reasons, med students, focus too broad
+- kopa.com
+  - good tech, probably not focused on a specific college
+- Cribspot (YC 15, no longer running), Michigan
+  - somehow became a property management company/insurance policy
+  - https://www.michigandaily.com/news/business/local-housing-company-closing-sight/
+  - https://www.tcbusinessnews.com/the-rise-and-fall-of-cribspot/
+- Apartments.com berkeley
+- Uloop
+- Sublet
 
-Categories:
+It really seems like there's no critical mass of apartments anywhere.
 
-LOGO
+**Goal**: corner GT market completely.
 
----
-
-Photos
-Title
-Description
-Neighborhood
-House Type
-
----
-
-Monthly Price
-Utilities
-Fees
-
----
-
-Earliest Move-In
-Latest Move-Out
-Semester
-
----
-
-Total Rooms
-Gender Preference
-Total Bathrooms
-
----
-
-Major Appliances
-Amenities
-Allowed/Disallowed
-Safety
-
-Design tools: listed
-Design inspo: supabase, airbnb, gt scheduler, google flights
-Ai help: GPT4 (debugger and advice) and Midjourney (stock images)
-People help:
-
-People who have tried this space before
-
-LiveSomeWhere
--> technology reasons, focus too broad
-
-studentsublease.com
--> technology reasons, focus too broad
-
-https://rotatingroom.com/
--> technology reasons, med students, focus too broad
-
-kopa.com
--> good tech, probably not focused on a specific college
-
-Cribspot (YC 15, no longer running), Michigan
--> somehow became a property management company/insurance policy
-https://www.michigandaily.com/news/business/local-housing-company-closing-sight/
-https://www.tcbusinessnews.com/the-rise-and-fall-of-cribspot/
-
-Apartments.com berkeley
-Uloop
-Sublet
-
-etc.
-It really seems like there's no critical mass of apartments anywhere. Goal: corner GT market completely.
-Issue: Does too many subleases crowd out people's desire to post there?
+**Issue**: Does too many subleases crowd out people's desire to post there? nah, critical mass makes it more likely to be used
 
 "Compared to the broader housing market, college rentals are unique in that many units are booked a semester or more in advance. Furthermore, even when listings are available, they can typically only be found on campus bulletin boards or by walking around a college town and looking for “for rent” signs. All of that can make it difficult for students to find housing, especially on short notice."
 
-People don't care about subleasing to students. They only care about getting the money. So no need to limit things.
+People don't care about subleasing to other students. They only care about getting the money. So no need to limit things to student only, unless they want to piss off their roommates.
 
 "Cribspot hopes to change that, by creating the most comprehensive search engine for apartments on or near university campuses. It’s doing that by collecting rental information from thousands of different sources and working directly with landlords who don’t have websites or other ways to find out about their apartments"
 
@@ -169,7 +109,7 @@ How to make money:
 
 - Promote your own post (possible cause some students are desperate to get out of their lease)
 - Get notifications when new posts come out matching your criteria (searchers)
-- Let local landlords or apartment complexes advertise (idk because the demand probably outstrips demand)
+- Let local landlords or apartment complexes advertise (idk because the demand probably outstrips demand around campus)
 - Partner with companies in the Atlanta area that have major internship programs
 - Charge external people to be able to create an account and see listings (idk if you wanna introduce this variability of non-students, the thing is students want to sublease their place to no matter whom)
 
@@ -185,17 +125,14 @@ How to advertise:
 - List of all people interning in a semester
 
 Easiest default:
-Winter gradutes X Spring transfers
+
+- Winter gradutes X Spring transfers
+- Everyone X Summer interns
 
 Problems:
 
-- summer glut
-  fixed by ncr interns lol
 - leasing to off-campus people
 - If people can directly contact someone, do they know where the leasing is coming from?
-
-Fall Graduates -> Spring Transfers
-Spring Graduates -> Companies
 
 List of schools to target:
 
@@ -203,59 +140,39 @@ List of schools to target:
 
 0 -> 1 -> 2
 
+Zero to one is the hardest.
+
 TODO:
-Make the upload page look better
-done
-Make the upload page form logic get saved in the state properly
-Done I guess because usestate is not necessary, only client side
-Transmit the upload page form data to supabase
-Done I guess
-Edit supabase row level security and so on.
-done
-Make sure rows have proper data modeling and normalization.
-done
 
-Upload images, progress, delete images, multiple images in a flexbox, better looking
-sorta done
+- **DONE** Make the upload page look better
+- **DONE** Transmit the upload page form data to supabase
+- Edit supabase row level security and so on.
+- **DONE** Make sure rows have proper data modeling and normalization.
 
-Supabase integrate images with frontend.
-done
+- **SORTA DONE** Upload images, progress, delete images, multiple images in a flexbox, better looking. Need to make it "draggable." And form validation so that each sublease has an image.
+  sorta done
 
-Caching. User sublease progress?
-done?
+- **DONE** Supabase integrate images with frontend.
+
+- **DONE with SWR?** Caching.
 
 When all of the upload stuff is done, start pulling stuff from the database on the frontend.
-Skeleton loaders
-nope
-Then finally integrate sso, profile contact information, and design for the listing page
-Create a CSV to quickly generate data
-Get images uploaded properly
-Done, sorta.
-Basically whenever an image is uploaded to Airbnb it starts the process instantly. Maybe there's a websocket or something keeping track of stuff. Need to loop.
-Carousel on frontpage
 
-1 Bed 1 Bath
-2 Beds 1 Bath
+- **nope** Skeleton loaders
+  Then finally integrate sso, profile contact information, and design for the listing page
+  Create a CSV to quickly generate data
+  Get images uploaded properly
+  Done, sorta.
+  Basically whenever an image is uploaded to Airbnb it starts the process instantly. Maybe there's a websocket or something keeping track of stuff. Need to loop.
+  Carousel on frontpage
 
-1 Bed 1 Bath in a 4B/4B
-1 Bed Shared Bath in a 2B/2B
-2 Beds 1 Bath in a 4B/2B
+### Posted
 
-4 Beds 4 Baths in a 4B/4B
-
-posted moments ago
-posted 58 minutes ago
-posted 8 hours ago
-36 hours ago
-2+ days ago
-
-Honestly now that I constrained my scope like crazy I probably just need the following:
-
-Remove the anchor links
-done
-Fix sort menus and stuff
-on the right track
-done
+- posted moments ago
+- posted 58 minutes ago
+- posted 8 hours ago
+- 36 hours ago
+- 2+ days ago
 
 Carousel for front page
 -done
