@@ -54,7 +54,7 @@ export default function Home() {
   // This actually doesn't track maxPrice, it just knows that it renders twice.
   const maxPriceChanged = useRef(0);
   useEffect(() => {
-    if (maxPriceChanged.current > 2) {
+    if (maxPriceChanged.current > 1) {
       setItems([]);
       setPages(1);
       setTriggerReset(!triggerReset);
