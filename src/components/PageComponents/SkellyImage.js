@@ -108,7 +108,7 @@ export default function SkellyImage({ freudID, url, item }) {
             supabaseURL={data}
             url={url}
             freudID={freudID}
-            className="z-20 overflow-hidden rounded-full"
+            className="z-0 overflow-hidden rounded-full"
           />
         </div>
       ) : null}
