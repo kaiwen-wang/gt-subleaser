@@ -26,10 +26,9 @@
 
 
 
-
-/* .right-shadow { */
-    /* box-shadow: inset -6px 0 9px -10px rgba(0,0,0,0.8); */
-/* } */
+.bordergradient {
+  border-image: linear-gradient(180deg, #e5e7eb 65%, #ffffff) 1;
+}
 
 .embla {
     --slide-spacing: 0rem;

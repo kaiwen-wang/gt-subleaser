@@ -78,6 +78,9 @@ export default function Home() {
         title="Georgia Tech Subleaser | Midtown, Home Park, Atlantic Station, and more"
         desc="Subleases in Midtown Atlanta by GT students who are graduating, studying abroad, or interning. No spam, modern tech, easy to use."
       />
+      <div className=" fixed top-0 left-0 right-0 z-50 text-center">
+        SITE UNDER CONSTRUCTION
+      </div>
       <Header showFilters={true} />
       <FilteredGrid
         postsData={items}

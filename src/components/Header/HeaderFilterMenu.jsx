@@ -4,12 +4,10 @@ import MoveInMenu from "/src/components/Menus/Filters/MoveInMenu";
 import MoveOutMenu from "/src/components/Menus/Filters/MoveOutMenu";
 import PriceMenu from "/src/components/Menus/Filters/PriceMenu";
 
-
-
 import { AppContext } from "/src/components/AppState.js";
 import UserIcon from "/src/components/Header/Elements/UserIcon";
 import SortMenu from "/src/components/Menus/SortMenu";
-import { useContext } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import PopoverMenu from "src/components/Menus/PopoverMenu";
 
 export default function HeaderfilterMenu() {
@@ -70,11 +68,41 @@ export default function HeaderfilterMenu() {
     },
   ];
 
+  const firstChildRef = useRef(null);
+
+  function isOverflowing(element) {
+    return (
+      element.offsetWidth < element.scrollWidth ||
+      element.offsetHeight < element.scrollHeight
+    );
+  }
+
+  const [isOverflowingState, setIsOverflowingState] = useState(false);
+
+  useEffect(() => {
+    if (firstChildRef.current) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          console.log("Overflowing:", isOverflowing(firstChildRef.current));
+          setIsOverflowingState(isOverflowing(firstChildRef.current));
+        }
+      });
+      resizeObserver.observe(firstChildRef.current);
+
+      return () => resizeObserver.disconnect(); // Cleanup observer on component unmount
+    }
+  }, []);
+
   return (
     <div className=" border-t">
       <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 mx-auto">
-        <div className="flex items-center gap-4">
-          <div className="flex gap-3 overflow-auto whitespace-nowrap dark:bg-none bg-gradient-to-l from-gray-500/5 to-white py-3 pl-0.5 pr-2">
+        <div className="flex items-center gap-0">
+          <div
+            ref={firstChildRef}
+            className={`${
+              isOverflowingState ? "" : ""
+            } flex overflow-auto gap-3 whitespace-nowrap dark:bg-none  py-3 pl-0.5 pr-2`}
+          >
             {filterMenuOptions.map((option) => (
               <PopoverMenu
                 key={option.id}
@@ -86,6 +114,9 @@ export default function HeaderfilterMenu() {
               />
             ))}
           </div>
+          {isOverflowingState && (
+            <div className="bordergradient self-stretch mr-2.5 border-r"></div>
+          )}
           <SortMenu />
         </div>
         {/* <div className="grid items-center grid-cols-8 gap-4">

@@ -1,9 +1,5 @@
-import { AppContext } from "/src/components/AppState.js";
 import SkellyImage from "@/components/PageComponents/SkellyImage";
 import { timeAgo } from "@/utils/timeAgo";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import Link from "next/link";
 import { useContext, useEffect, useRef, useCallback } from "react";
 
 export default function FilteredGrid({
@@ -33,7 +29,6 @@ export default function FilteredGrid({
   return (
     <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 pb-12 mx-auto mt-2">
       <div className="xs:grid-cols-2 md:grid-cols-3 lg:gap-4 xl:gap-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 grid grid-cols-1 gap-3">
-        {/* if postsData is not undefined */}
         {postsData && postsData.length !== 0 ? (
           postsData.map((item, index) => {
             let meow = item.id;

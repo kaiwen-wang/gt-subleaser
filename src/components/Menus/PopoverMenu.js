@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 
@@ -17,6 +17,8 @@ export default function PopoverMenu({
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {});
 
+  let [isOpen, setIsOpen] = useState(true);
+
   return (
     <Popover>
       <Popover.Button
@@ -24,6 +26,9 @@ export default function PopoverMenu({
         className={`
           ui-open:text-opacity-20 ${isActive ? "bg-gray-200/80" : "bg-white "}
           bordershadow-scale-600 group inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium outline outline-0 outline-gray-200 text-gray-700 hover:bg-gray-100`}
+        // onClick={(e) => {
+        //   setIsOpen(true);
+        // }}
       >
         <span className="whitespace-nowrap">{name}</span>
         {isActive ? (
@@ -35,7 +40,7 @@ export default function PopoverMenu({
               onClick={(e) => {
                 e.preventDefault();
                 contextSetter(defaultValue);
-                // close popover menu
+                // setIsOpen(false);
               }}
             />
           </div>
@@ -48,11 +53,12 @@ export default function PopoverMenu({
         )}
       </Popover.Button>
 
+      {/* {isOpen && ( */}
       <Popover.Panel
         ref={setPopperElement}
-        style={{ ...styles.popper }}
+        style={styles.popper}
         {...attributes.popper}
-        className="absolute left-0 z-10 px-4 mt-2"
+        className="absolute left-0 z-10 mt-2"
       >
         <div className="ring-1 ring-black/5 overflow-hidden rounded-lg shadow-lg">
           <div className="bg-gray-50 p-4">
@@ -60,8 +66,17 @@ export default function PopoverMenu({
               {props}
             </div>
           </div>
+          {/* <XMarkIcon
+            as={XMarkIcon}
+            className={`
+        absolute right-0 top-0 w-7 rounded px-1 py-1 hover:bg-gray-300`}
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          /> */}
         </div>
       </Popover.Panel>
+      {/* )} */}
     </Popover>
   );
 }

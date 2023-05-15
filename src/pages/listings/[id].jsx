@@ -44,6 +44,11 @@ export default function Listing({ data }) {
     fetcher
   );
 
+  const { data: data2, error: error2 } = useSWR(
+    `/api/DownloadPostImagesApi?url=${data.id}`,
+    fetcher
+  );
+
   const OPTIONS = {};
 
   return (
@@ -59,7 +64,7 @@ export default function Listing({ data }) {
             data.created_at
           )}`}</p>
         </div>
-        <h1 className="pt-16 text-2xl font-medium text-center">{data.title}</h1>
+        <h1 className="mt-8 text-2xl font-medium text-center">{data.title}</h1>
         <div
           className="mt-2 mb-4 text-sm prose text-center text-gray-500 cursor-pointer"
           onClick={() => {
@@ -78,15 +83,25 @@ export default function Listing({ data }) {
               alert(`${copyText} copied to clipboard.`);
             });
           }}
-          className="hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 block px-4 py-2 mx-auto mb-16 text-sm font-medium text-white bg-gray-400 rounded-md shadow-sm"
+          className="hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 block px-4 py-2 mx-auto mb-6 text-sm font-medium text-white bg-gray-400 rounded-md shadow-sm"
         >
           Contact
         </button>
-
+        <div className="h-68 flex items-center justify-center w-full gap-2 p-2 mt-2 overflow-auto border border-black rounded-md">
+          {data2 &&
+            data2.map((image) => (
+              <div className="shrink-0 relative w-64 h-64">
+                <img
+                  src={image}
+                  alt=""
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            ))}
+        </div>{" "}
         <div className="max-w-2xl mx-auto mt-16 mb-16 prose">
           <p className="mt-2 text-gray-500">{data.description}</p>
         </div>
-
         <div className="max-w-2xl mx-auto mt-16 mb-16">
           Fees
           <br></br>
