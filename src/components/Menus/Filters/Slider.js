@@ -2,33 +2,18 @@ import React, { useContext, useState } from "react";
 import * as SliderPrimitive from "@radix-ui/react-slider";
 import { AppContext } from "/src/components/AppState.js";
 
-export function Slider({ className, ...props }) {
+export function Slider({ ...props }) {
   const { maxPrice, setMaxPrice } = useContext(AppContext);
   const { priceDisplayValue, setPriceDisplayValue } = useContext(AppContext);
   const { minPrice, setMinPrice } = useContext(AppContext);
   const [isActive, setIsActive] = useState(false);
 
-  function cn(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   return (
     <SliderPrimitive.Root
-      className={cn(
-        "relative flex w-full touch-none select-none items-center",
-        className
-      )}
+      className={
+        "relative flex w-full touch-none select-none items-center mt-3"
+      }
       {...props}
-      onValueChange={(value) => {
-        // ideally change the display value.
-        // setPriceDisplayValue(value);
-        setMaxPrice(value);
-      }}
-      onValueCommit={(value) => {
-        // setMaxPrice(value);
-        // setPriceDisplayValue(value);
-        // probably change something and reload it
-      }}
     >
       <SliderPrimitive.Track className="grow bg-slate-200 dark:bg-slate-800 relative w-full h-2 overflow-hidden rounded-full">
         <SliderPrimitive.Range className="bg-slate-900 dark:bg-slate-400 absolute h-full" />

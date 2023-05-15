@@ -17,11 +17,14 @@ export default function PriceMenu() {
       </span>
 
       <Slider
-        className="mt-4"
         defaultValue={[maxPrice]}
         max={[maxTopPrice]}
         min={0}
         step={100}
+        onValueChange={(value) => {
+          setMaxPrice(value);
+        }}
+        value={[maxPrice]}
       />
 
       {/* input for max price */}
