@@ -104,12 +104,7 @@ export default function SkellyImage({ freudID, url, item }) {
       </div>
       {data ? (
         <div className="absolute top-0 z-0 flex items-center justify-center w-full h-full">
-          <EmblaCarousel
-            supabaseURL={data}
-            url={url}
-            freudID={freudID}
-            className="will-change-transform isolate z-0 overflow-hidden rounded-full"
-          />
+          <EmblaCarousel supabaseURL={data} url={url} freudID={freudID} />
         </div>
       ) : null}
     </div>

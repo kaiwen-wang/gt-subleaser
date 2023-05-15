@@ -39,7 +39,7 @@ export default function FilteredGrid({
                 key={`${meow}-${index}`}
                 ref={index === postsData.length - 1 ? lastItemRef : null}
               >
-                <div className="group rounded-xl relative overflow-hidden border border-black shadow-md">
+                <div className="group rounded-xl will-change-transform relative overflow-hidden border border-black shadow-md">
                   <SkellyImage url={item.id} freudID={meow} item={item} />
                 </div>
                 <div className="mt-0.5 flex justify-between">
