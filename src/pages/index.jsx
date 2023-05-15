@@ -52,9 +52,10 @@ export default function Home() {
   // maxPriceChanged is here to prevent double rendering, as the max price is derived from the database
   // useRef because useState causes a re-render.
   // This actually doesn't track maxPrice, it just knows that it renders twice.
+
   const maxPriceChanged = useRef(0);
   useEffect(() => {
-    if (maxPriceChanged.current > 1) {
+    if (maxPriceChanged.current > 2) {
       setItems([]);
       setPages(1);
       setTriggerReset(!triggerReset);
