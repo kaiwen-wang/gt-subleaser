@@ -16,6 +16,7 @@ import { calculateTotalCost } from "@/utils/calculateTotalCost";
 import { createAnds } from "@/utils/createAnds";
 import { GenderedPeople } from "@/components/PageComponents/SkellyImage";
 import dateDiff from "@/utils/dateDiff";
+import FeedbackModal from "@/components/PageComponents/FeedbackModal";
 
 // Get data for a specific id
 export async function getServerSideProps({ params }) {

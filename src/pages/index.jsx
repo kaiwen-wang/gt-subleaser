@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import { useContext, useState, useEffect, useRef } from "react";
 import useSWR, { useSWRConfig, Fetcher } from "swr";
 import { fetcher } from "@/utils/fetcher";
+import FeedbackModal from "@/components/PageComponents/FeedbackModal";
 
 export default function Home() {
   let {
@@ -79,10 +80,12 @@ export default function Home() {
         title="Georgia Tech Subleaser | Midtown, Home Park, Atlantic Station, and more"
         desc="Subleases in Midtown Atlanta by GT students who are graduating, studying abroad, or interning. No spam, modern tech, easy to use."
       />
-      {/* <div className=" fixed top-0 left-0 right-0 z-50 text-center">
-        SITE UNDER CONSTRUCTION
+      {/* <div className=" drop-shadow rounded-xl fixed bottom-0 right-0 z-50 px-2.5 py-1.5 mb-4 mr-4 text-center bg-white border ">
+        <span className="text-sm font-medium">Feedback on this page?</span>
       </div> */}
       <Header showFilters={true} />
+      <FeedbackModal />
+
       <FilteredGrid
         postsData={items}
         error={JSON.stringify(error)}

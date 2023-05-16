@@ -217,3 +217,8 @@ FYI: 2.5k winter graduates on campus.
 filling images properly is probably the biggest pain of the ass
 
 Export icons as SVGEGE
+
+Useful features:
+MAP
+Labels for specific rooms
+What floor an apartment building is on

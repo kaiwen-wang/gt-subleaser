@@ -54,8 +54,9 @@ export default function Timing() {
             type="date"
             name="move_out"
             className="w-full p-2 border border-gray-400 rounded"
+            // minimum move out day is the day after move-in. not sure why anyone would sublease a single day though lol
             min={moveInDate}
-            // max date is moveInDate plus 1 year
+            // max date is moveInDate plus 2 year
             max={getOffsetDate(2, 0, 0, moveInDate)}
             required
           />

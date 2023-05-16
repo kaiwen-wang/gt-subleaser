@@ -350,7 +350,6 @@ export default function Upload({ idNum }) {
                       name="contact_email"
                       pattern=".+@gatech\.edu"
                       size="30"
-                      required
                       className="w-full px-4 py-2 border border-gray-400 rounded-md"
                     />
                   </div>

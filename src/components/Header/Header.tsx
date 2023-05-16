@@ -32,7 +32,7 @@ export default function Header({
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-white ${
+      className={`sticky top-0 z-20 bg-white  ${
         isPinned ? "border-b-0 shadow-md" : ""
       } ${showFilters ? "" : "border-b"}`}
     >
