@@ -1,3 +1,4 @@
+// self explanatory
 export function classifySemesters(data) {
   const moveIn = new Date(data.move_in);
   const moveOut = new Date(data.move_out);

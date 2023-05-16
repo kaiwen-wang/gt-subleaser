@@ -1,3 +1,4 @@
+// current date. self explanatory
 export function getCurrentDate() {
   const today = new Date();
   const year = today.getFullYear();
@@ -7,6 +8,7 @@ export function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
+// create a date with an offset
 export function getOffsetDate(
   offsetYears = 0,
   offsetMonths = 0,

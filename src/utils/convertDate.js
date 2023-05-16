@@ -1,3 +1,4 @@
+// converts date into a Month Dateth with the year if the year is not the same year
 export function convertDate(inputDate) {
   const date = new Date(inputDate);
   const currentYear = new Date().getFullYear();

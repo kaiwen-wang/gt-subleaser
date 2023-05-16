@@ -1,3 +1,4 @@
+// self explanatory
 export function calculateTotalCost(monthly, utilities, other, datein, dateout) {
   // Parse the input dates
   const inDate = new Date(datein);
