@@ -387,6 +387,12 @@ export default function Listing({ data }) {
                 </div>
                 <button
                   onClick={() => {
+                    // fetch(
+                    //   `/api/UpdateContactClicksApi?id=${
+                    //     data.id
+                    //   }&contactClicks=${data.contact_clicks + 1}`
+                    // );
+
                     let copyText = data.contact_email;
                     navigator.clipboard.writeText(copyText).then(() => {
                       alert(`${copyText} copied to clipboard.`);
