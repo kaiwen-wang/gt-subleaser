@@ -81,7 +81,9 @@ export default function Home() {
   const Map = React.useMemo(() => dynamic(
     () => import('@/components/MapThingy'), // replace '@components/map' with your component's location
     {
-      loading: () => <p>A map is loading</p>,
+      loading: () => (
+        <div className=" w-full h-full text-sm text-gray-500 bg-gray-200">
+        </div>),
       ssr: false // This line is important. It's what prevents server-side render
     }
   ), [/* list variables which should trigger a re-render here */])
@@ -97,18 +99,20 @@ export default function Home() {
         <span className="text-sm font-medium">Feedback on this page?</span>
       </div> */}
 
-      <FeedbackModal />
+      {/* <FeedbackModal /> */}
       <div className=" flex flex-col h-screen">
         <Header showFilters={true} />
 
         <div className="h-full">
-          {showMap ? <Map /> : <FilteredGrid
-            postsData={items}
-            error={JSON.stringify(error)}
-            loadMoreItems={loadMoreItems}
-            loading={loading}
-            dataIsLoading={isLoading}
-          />}
+          {showMap ?
+            <Map />
+            : <FilteredGrid
+              postsData={items}
+              error={JSON.stringify(error)}
+              loadMoreItems={loadMoreItems}
+              loading={loading}
+              dataIsLoading={isLoading}
+            />}
         </div>
       </div>
       <button className="w-fit bordershadow-scale-600 hover:bg-gray-200 fixed bottom-0 left-0 right-0 px-4 py-2 m-auto mb-6 text-sm text-gray-700 bg-white rounded-full"
