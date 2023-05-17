@@ -70,7 +70,7 @@ export default function FeedbackModal() {
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Anything you find confusing, annoying or that you wish this
+                    Anything you find confusing, annoying, or that you wish this
                     site had?
                   </p>
                 </div>

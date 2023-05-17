@@ -222,3 +222,6 @@ Useful features:
 MAP
 Labels for specific rooms
 What floor an apartment building is on
+Upload desc MORE CHARACTERS
+upload desc spacing?
+appliances pictures and state
