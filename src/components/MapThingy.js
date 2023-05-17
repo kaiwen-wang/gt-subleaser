@@ -1,13 +1,27 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
+const icon = new L.icon({
+  // iconUrl: "/images/icons8-building-100.png",
+  iconUrl:
+    "https://1000logos.net/wp-content/uploads/2021/06/Georgia-Tech-Yellow-Jackets-logo.png",
+  iconSize: [38.4 * 5, 21.6 * 5],
+  // iconAnchor: [20, 20],
+});
+
+const houseIcon = new L.icon({
+  iconUrl: "/images/icons8-building-100.png",
+  iconSize: [40, 40],
+});
+
 const MapThingy = () => {
   return (
     <MapContainer
       center={[33.7756, -84.3963]}
       zoom={15}
-      scrollWheelZoom={false}
-      style={{ height: "100vh", width: "100%" }}
+      scrollWheelZoom={true}
+      style={{ height: "100%", width: "100%" }}
+      className=" z-0"
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -16,11 +30,12 @@ const MapThingy = () => {
         "
         //   />
       />
-      <Marker position={[51.505, -0.09]}>
+      <Marker position={[33.777, -84.3975]} icon={icon}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
+      <Marker position={[33.7703, -84.3925]} icon={houseIcon}></Marker>
     </MapContainer>
   );
 };

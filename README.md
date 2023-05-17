@@ -198,6 +198,8 @@ Hard stuff I will do:
 
 - pagination
   works
+  FYI: 2.5k winter graduates on campus.
+  filling images properly is probably the biggest pain of the ass
 
 TODO:
 lighthouse alt tags
@@ -207,13 +209,10 @@ Make the "X" appear when the menu is selected
 A little bit of better data validation on the upload page
 Check supabase security rules so I don't get spammed
 Make it possible for people to disable listings. Maybe through email somehow.
-Do I run into race conditions in indexjs
-
+If disabled you can still guess the id
 apparently you can break the "number" input by adding in "e"
-
-FYI: 2.5k winter graduates on campus.
-
-filling images properly is probably the biggest pain of the ass
+Total unique views.
+Don't leak backend on upload page
 
 Useful features:
 MAP
