@@ -201,7 +201,6 @@ Hard stuff I will do:
 
 TODO:
 lighthouse alt tags
-Figure out what utils do
 change the bath upload so it stops doing "shared bath"
 add an X on the menus for mobile, and don't open the grid when the menu is open
 Make the "X" appear when the menu is selected
@@ -215,8 +214,6 @@ apparently you can break the "number" input by adding in "e"
 FYI: 2.5k winter graduates on campus.
 
 filling images properly is probably the biggest pain of the ass
-
-Export icons as SVGEGE
 
 Useful features:
 MAP
