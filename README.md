@@ -207,15 +207,17 @@ change the bath upload so it stops doing "shared bath"
 add an X on the menus for mobile, and don't open the grid when the menu is open
 Make the "X" appear when the menu is selected
 A little bit of better data validation on the upload page
-Check supabase security rules so I don't get spammed
-Make it possible for people to disable listings. Maybe through email somehow.
-If disabled you can still guess the id
+Check supabase security rules so I don't get spammed (X) probably fine beacuse backend api routes
 apparently you can break the "number" input by adding in "e"
-Total unique views.
+If disabled you can still guess the id X
+Total unique views. X
+MAP X
+
+Make it possible for people to disable listings. Maybe through email somehow.
 Don't leak backend on upload page
+Upload page IMAGES MOVABLE
 
 Useful features:
-MAP
 Labels for specific rooms
 What floor an apartment building is on
 Upload desc MORE CHARACTERS

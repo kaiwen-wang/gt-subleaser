@@ -51,6 +51,8 @@ export function AppProvider({ children }) {
 
   const [sortFormula, setSortFormula] = useState("newest");
 
+  const [mapCenter, setMapCenter] = useState([33.7756, -84.3963]);
+
   return (
     <AppContext.Provider
       value={{
@@ -60,6 +62,9 @@ export function AppProvider({ children }) {
         setMaxPrice,
         minPrice,
         setMinPrice,
+
+        mapCenter,
+        setMapCenter,
 
         genderPreference,
         setGenderPreference,

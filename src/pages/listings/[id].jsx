@@ -23,6 +23,7 @@ export async function getServerSideProps({ params }) {
   let { data, error } = await supabase
     .from("subleases")
     .select()
+    .eq("active_post", true)
     .eq("id", params.id);
 
   if (error || !data || data.length === 0) {
@@ -133,8 +134,8 @@ export default function Listing({ data }) {
               <div className="text-lg font-medium">Amenities</div>
               <span
                 className={`${data.amenities_list.length > 0
-                    ? "text-gray-500"
-                    : "text-gray-200"
+                  ? "text-gray-500"
+                  : "text-gray-200"
                   } text-sm `}
               >
                 {data.amenities_list.length} available
@@ -143,17 +144,17 @@ export default function Listing({ data }) {
             <div className=" grid grid-cols-4 gap-1 text-sm font-medium">
               <div
                 className={`${data.amenities_list && data.amenities_list.includes("Parking")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center`}
               >
                 Parking
               </div>
               <div
                 className={`${data.amenities_list &&
-                    data.amenities_list.includes("Furnished")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.amenities_list.includes("Furnished")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center`}
               >
                 {" "}
@@ -161,8 +162,8 @@ export default function Listing({ data }) {
               </div>
               <div
                 className={`${data.amenities_list && data.amenities_list.includes("Balcony")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 {" "}
@@ -170,9 +171,9 @@ export default function Listing({ data }) {
               </div>
               <div
                 className={`${data.amenities_list &&
-                    data.amenities_list.includes("Connected Bathroom")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.amenities_list.includes("Connected Bathroom")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border rounded-lg flex items-center justify-center text-center`}
               >
                 Connected Bathroom
@@ -182,8 +183,8 @@ export default function Listing({ data }) {
               <div className="text-lg font-medium">Allowed</div>
               <span
                 className={`${data.allowed_list.length > 0
-                    ? "text-gray-500"
-                    : "text-gray-200"
+                  ? "text-gray-500"
+                  : "text-gray-200"
                   } text-sm `}
               >
                 {data.allowed_list.length} available
@@ -192,16 +193,16 @@ export default function Listing({ data }) {
             <div className=" grid grid-cols-4 gap-1 text-sm font-medium">
               <div
                 className={`${data.allowed_list && data.allowed_list.includes("Pets")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center`}
               >
                 Pets
               </div>
               <div
                 className={`${data.allowed_list && data.allowed_list.includes("Smoking")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center`}
               >
                 {" "}
@@ -209,8 +210,8 @@ export default function Listing({ data }) {
               </div>
               <div
                 className={`${data.allowed_list && data.allowed_list.includes("Drinking")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center`}
               >
                 {" "}
@@ -218,8 +219,8 @@ export default function Listing({ data }) {
               </div>
               <div
                 className={`${data.allowed_list && data.allowed_list.includes("Parties")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center`}
               >
                 {" "}
@@ -230,8 +231,8 @@ export default function Listing({ data }) {
               <div className="text-lg font-medium">Appliances</div>
               <span
                 className={`${data.appliances_list.length > 0
-                    ? "text-gray-500"
-                    : "text-gray-200"
+                  ? "text-gray-500"
+                  : "text-gray-200"
                   } text-sm `}
               >
                 {data.appliances_list.length} available
@@ -240,107 +241,107 @@ export default function Listing({ data }) {
             <div className=" grid grid-cols-4 gap-1 text-sm font-medium">
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Washing Machine")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Washing Machine")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Washing Machine
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Clothes Dryer")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Clothes Dryer")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center`}
               >
                 Clothes Dryer
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Fridge")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Fridge")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Fridge
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Freezer")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Freezer")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Freezer
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Air Conditioner")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Air Conditioner")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Air Conditioner
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Heating")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Heating")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Heating
               </div>
               <div
                 className={`${data.appliances_list && data.appliances_list.includes("Stove")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Stove
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Stove Hood")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Stove Hood")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Stove Hood
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Microwave")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Microwave")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Microwave
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Dishwasher")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Dishwasher")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Dishwasher
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Drain Disposal")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Drain Disposal")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Drain Disposal
               </div>
               <div
                 className={`${data.appliances_list &&
-                    data.appliances_list.includes("Television")
-                    ? "border-black"
-                    : "border-gray-200 text-gray-200"
+                  data.appliances_list.includes("Television")
+                  ? "border-black"
+                  : "border-gray-200 text-gray-200"
                   } px-2 py-3 border  rounded-lg flex items-center justify-center text-center`}
               >
                 Television

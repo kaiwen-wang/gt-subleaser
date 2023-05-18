@@ -1,5 +1,7 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useEffect, useState, useCallback, useContext } from "react";
+import { AppContext } from "/src/components/AppState.js";
 
 const icon = new L.icon({
   // iconUrl: "/images/icons8-building-100.png",
@@ -14,10 +16,38 @@ const houseIcon = new L.icon({
   iconSize: [40, 40],
 });
 
-const MapThingy = () => {
+const defaultCenter = [33.7756, -84.3963];
+
+export default function MapThingy() {
+  let { mapCenter, setMapCenter } = useContext(AppContext);
+
+  const [map, setMap] = useState(null);
+  const [position, setPosition] = useState(defaultCenter);
+
+  // const onClick = useCallback(() => {
+  //   map.setView(center, zoom);
+  // }, [map]);
+
+  const onMove = useCallback(() => {
+    if (map) {
+      const center = map.getCenter();
+      setPosition([center.lat, center.lng]);
+    }
+  }, [map]);
+
+  useEffect(() => {
+    if (map) {
+      map.on("move", onMove);
+      return () => {
+        map.off("move", onMove);
+      };
+    }
+  }, [map, onMove]);
+
   return (
     <MapContainer
-      center={[33.7756, -84.3963]}
+      center={position}
+      ref={setMap}
       zoom={15}
       scrollWheelZoom={true}
       style={{ height: "100%", width: "100%" }}
@@ -35,9 +65,7 @@ const MapThingy = () => {
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
-      <Marker position={[33.7703, -84.3925]} icon={houseIcon}></Marker>
+      {/* <Marker position={[33.7703, -84.3925]} icon={houseIcon}></Marker> */}
     </MapContainer>
   );
-};
-
-export default MapThingy;
+}
