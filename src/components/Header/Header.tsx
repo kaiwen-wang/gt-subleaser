@@ -6,11 +6,13 @@ import React, { useState, useEffect, useRef } from "react";
 interface HeaderProps {
   showFilters?: boolean;
   smallContainer?: boolean;
+  showMap?: boolean;
 }
 
 export default function Header({
   showFilters = false,
   smallContainer = false,
+  showMap = false,
 }: HeaderProps) {
   const [isPinned, setIsPinned] = useState(false);
 
@@ -32,9 +34,11 @@ export default function Header({
 
   return (
     <header
-      className={`sticky top-0 z-20 bg-white  ${
-        isPinned ? "border-b-0 shadow-md" : ""
-      } ${showFilters ? "" : "border-b"}`}
+      className={`${
+        showMap ? "border-b border-gray-200" : ""
+      } sticky top-0 z-20 bg-white  ${isPinned ? "border-b-0 shadow-md" : ""} ${
+        showFilters ? "" : "border-b"
+      }`}
     >
       <div
         className={`relative mx-auto ${
