@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from "@/utils/supabase";
 
-export default async function UpdateTotalViewsApi(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {

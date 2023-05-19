@@ -23,7 +23,7 @@ export async function getServerSideProps({ params }) {
   let { data, error } = await supabase
     .from("subleases")
     .select()
-    .eq("active_post", true)
+    // .eq("active_post", true)
     .eq("id", params.id);
 
   if (error || !data || data.length === 0) {

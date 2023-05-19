@@ -14,16 +14,16 @@ export default function Description() {
       </label>
       <textarea
         value={description}
-        onChange={(e) => setDescription(e.target.value.slice(0, 500))}
-        maxLength="500"
-        rows="5"
+        onChange={(e) => setDescription(e.target.value.slice(0, 1000))}
+        maxLength="1000"
+        rows="7"
         name="description"
         className="w-full px-4 py-2 border border-gray-400 rounded-md"
-        placeholder="What qualities does your place have? Are the roommates interesting? What do they study? Is it nice and clean? Is there a certain culture in the house? What floor are you on? All the technical details are listed in this form, so this is your spot to clarify anything."
+        placeholder="What qualities does your place have? What are your roommates like? Is there a certain culture in the house? What floor are you on? All the technical details are listed in this form, so this is your spot to clarify anything."
         required
       ></textarea>
       <p className="text-sm text-right text-gray-600">
-        {500 - description.length} characters remaining
+        {1000 - description.length} characters remaining
       </p>
     </>
   );

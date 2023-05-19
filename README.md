@@ -214,12 +214,14 @@ Total unique views. X
 MAP X
 
 Make it possible for people to disable listings. Maybe through email somehow.
-Don't leak backend on upload page
+Don't leak backend on upload page X DONE
 Upload page IMAGES MOVABLE
 
 Useful features:
 Labels for specific rooms
 What floor an apartment building is on
-Upload desc MORE CHARACTERS
+Upload desc MORE CHARACTERS X
 upload desc spacing?
-appliances pictures and state
+appliances pictures and state X DONE
+DISTANCE TO CAMPUS
+Person data

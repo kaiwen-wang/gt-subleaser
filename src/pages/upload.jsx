@@ -58,7 +58,6 @@ export default function Upload({ idNum }) {
 
   const [uploadimgs, setuploadimgs] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const [loadingIndices, setLoadingIndices] = useState([]);
 
   function deleteImage(index) {
@@ -67,49 +66,32 @@ export default function Upload({ idNum }) {
     setuploadimgs(newImages);
   }
 
-  const [appliancesList, setAppliancesList] = useState(["Washing Machine"]);
+  const [appliancesList, setAppliancesList] = useState(["Washing Machine", "Clothes Dryer", "Fridge", "Freezer", "Air Conditioner", "Heating", "Stove"]);
   const [allowedList, setAllowedList] = useState([]);
   const [amenitiesList, setAmenitiesList] = useState([]);
+  const applianceListFunction = (data) => {
+    setAppliancesList(data);
+  };
+  const allowedListFunction = (data) => {
+    setAllowedList(data);
+  };
+  const amenitiesListFunction = (data) => {
+    setAmenitiesList(data);
+  };
 
   const [circleColors, setCircleColors] = useState([]);
   const setCircleColorsFunction = (data) => {
     setCircleColors(data);
   };
 
-  const callBackFunction = (data) => {
-    setAppliancesList(data);
-  };
-  const allowedListFunction = (data) => {
-    setAllowedList(data);
-  };
-  const amenitiesListFunciton = (data) => {
-    setAmenitiesList(data);
-  };
-
-  const handleImageSubmit = async (event, img) => {
-    event.preventDefault();
-    setLoading(true);
-
-    // const imageName = `${Date.now()}-${coverImage.name}`;
-    // const filePath = `randomidname/${imageName}`;
-
-    const { imageError } = await supabase.storage
-      .from("sublease-images")
-      .upload(`${idNum}/${img.name}`, img);
-
-    if (imageError) {
-      console.error("Error uploading image:", imageError);
-      return;
-    } else {
-      console.log("New record added");
-    }
-    setLoading(false);
-  };
-
   const handleImageUpload = (e) => {
     console.log("Uploading image", e.target.files);
     setuploadimgs([e.target.files[0], ...uploadimgs]);
-    handleImageSubmit(e, e.target.files[0]);
+
+    let formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    fetch(`/api/UploadImagesApi?id=${idNum}`, { method: "PUT", body: formData })
+      .then(console.log).catch(console.log);
   };
 
   const handleSubmit = async (event) => {
@@ -117,27 +99,35 @@ export default function Upload({ idNum }) {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-
     data.id = idNum;
-
-    let semesterData = classifySemesters(data);
-    data.semester = semesterData;
-
+    data.semester = classifySemesters(data);;
     data.roommate_demographics = circleColors;
     data.appliances_list = appliancesList;
     data.allowed_list = allowedList;
     data.amenities_list = amenitiesList;
 
-    const { error } = await supabase.from("subleases").insert(data);
-
-    if (error) {
-      console.error(error);
-      alert("Server Error: " + error.message + ". Please change your input.");
-    } else {
-      console.log("New record added:", data);
-      // redirect to /success
-      router.push(`/success?id=${idNum}`);
-    }
+    fetch(`/api/UploadPostsApi?idNum=${idNum}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        // If the fetch is successful, redirect to the success page
+        router.push(`/success?id=${idNum}`);
+      })
+      .catch(error => {
+        console.log(error);
+        alert("Server Error: " + error.message + ". Please change your input.");
+      });
   };
 
   return (
@@ -430,47 +420,53 @@ export default function Upload({ idNum }) {
               <div className="mt-16 mb-16 border-t border-gray-300"></div>
 
               <div className="">
-                <label
-                  className="block mb-2 text-lg font-medium"
-                  htmlFor="appliances"
-                >
-                  Appliances
-                </label>
+                <div className="flex justify-between">
+
+                  <label
+                    className="block mb-2 text-lg font-medium"
+                    htmlFor="appliances"
+                  >
+                    Appliances
+                  </label>
+                  <span className="text-sm text-gray-500">
+                    {appliancesList.length} selected
+                  </span>
+                </div>
                 We've selected some common defaults for you, but please modify
                 this if there are things you have or don't have.
                 <div className="mt-2 grid grid-cols-2 gap-3 text-sm font-medium [&>*]:rounded-md ">
                   <ApplianceSelect
                     imgsrc="/washing-machine.png"
                     name="Washing Machine"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                     selectedDefault={true}
                   />
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Clothes Dryer"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                     selectedDefault={true}
                   />
                   <ApplianceSelect
                     imgsrc="/fridge.png"
                     name="Fridge"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                     selectedDefault={true}
                   />
                   <ApplianceSelect
                     imgsrc="/freezer.png"
                     name="Freezer"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                     selectedDefault={true}
                   />
                   <ApplianceSelect
                     imgsrc="/freezer.png"
                     name="Air Conditioner"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                     selectedDefault={true}
                   />
@@ -478,46 +474,46 @@ export default function Upload({ idNum }) {
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Heating"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                     selectedDefault={true}
                   />
                   <ApplianceSelect
                     imgsrc="/oven.png"
                     name="Stove"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                     selectedDefault={true}
                   />
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Stove Hood"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                   />
                   <ApplianceSelect
                     imgsrc="/microwave.png"
                     name="Microwave"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                   />
                   <ApplianceSelect
                     imgsrc="/sink.png"
                     name="Dishwasher"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                   />
                   <ApplianceSelect
                     imgsrc="/disposal.png"
                     name="Drain Disposal"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                   />
 
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Television"
-                    setList={callBackFunction}
+                    setList={applianceListFunction}
                     list={appliancesList}
                   />
                 </div>
@@ -572,25 +568,25 @@ export default function Upload({ idNum }) {
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Parking"
-                    setList={amenitiesListFunciton}
+                    setList={amenitiesListFunction}
                     list={amenitiesList}
                   />
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Furnished"
-                    setList={amenitiesListFunciton}
+                    setList={amenitiesListFunction}
                     list={amenitiesList}
                   />
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Balcony"
-                    setList={amenitiesListFunciton}
+                    setList={amenitiesListFunction}
                     list={amenitiesList}
                   />
                   <ApplianceSelect
                     imgsrc="/dryer.png"
                     name="Connected Bathroom"
-                    setList={amenitiesListFunciton}
+                    setList={amenitiesListFunction}
                     list={amenitiesList}
                   />
                 </div>
