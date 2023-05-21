@@ -80,7 +80,7 @@ export default function Listing({ data }) {
               <div className="shrink-0 relative w-64 h-64">
                 <img
                   src={image}
-                  alt=""
+                  alt="Image of the lease"
                   className="object-cover w-full h-full"
                 />
               </div>

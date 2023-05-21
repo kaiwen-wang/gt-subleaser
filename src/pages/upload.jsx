@@ -135,7 +135,7 @@ export default function Upload({ idNum }) {
       <HeadElement />
 
       <div className="flex flex-row h-screen">
-        <div className="!lg:left-0 absolute -left-[280px] top-0 ml-0 flex h-screen w-0 flex-col transition-all lg:relative lg:left-0 lg:w-[420px]">
+        <div className="!lg:left-0 absolute -left-[280px] top-0 ml-0 flex h-screen w-0 flex-col  lg:relative lg:left-0 lg:w-[420px]">
           <div className=" relative top-0 flex flex-col w-auto h-screen overflow-auto bg-white border-r">
             <div className="sticky top-0 z-20 bg-white border-b">
               <div className="lg:height-auto bg-scale-200 lg:flex flex-col hidden gap-8 pt-8 pb-8">
@@ -146,7 +146,7 @@ export default function Upload({ idNum }) {
                 </a>
               </div>
             </div>
-            <div className=" absolute left-0 right-0 top-[0px] h-screen px-5 py-16 pl-5 transition-all duration-200 ease-out lg:visible lg:relative lg:left-0 lg:top-0 lg:flex lg:px-10 lg:pb-10 lg:pt-0 lg:opacity-100">
+            <div className=" absolute left-0 right-0 top-[0px] h-screen px-5 py-16 pl-5   lg:visible lg:relative lg:left-0 lg:top-0 lg:flex lg:px-10 lg:pb-10 lg:pt-0 lg:opacity-100">
               <div className="lg:justify-start relative flex justify-center">
                 <ul className="relative flex flex-col w-full gap-4">
                   <div className="flex flex-col gap-3 pt-8">
@@ -305,11 +305,14 @@ export default function Upload({ idNum }) {
             </div>
           </div>
         </div>
-        <div className="lg:relative lg:ml-0 absolute w-full h-screen overflow-auto transition-all ease-out">
+        <div className="lg:relative lg:ml-0 absolute w-full h-screen overflow-auto">
           <div className="relative flex flex-col">
             <div className={`top-0 z-10 lg:sticky`} id="header">
               <nav className="flex h-[65px] items-center justify-end border-b bg-white">
-                <div className="flex items-center justify-end w-full gap-2 pr-4 mx-auto">
+                <div className="flex items-center justify-between w-full gap-2 pr-4 mx-auto">
+                <a className="lg:invisible visible ml-4 text-xl font-semibold" href="/">
+                    🐝 GT Subleaser
+                  </a>
                   <Toggle />
                   {/* <UserIcon /> */}
                 </div>

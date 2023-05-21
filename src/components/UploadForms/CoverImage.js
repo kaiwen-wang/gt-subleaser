@@ -13,7 +13,7 @@ export default function CoverImage({ id, index, img, deleteImage, loading }) {
     <div className="shrink-0 h-60 w-60 outline outline-black relative rounded-md">
       <Image
         src={URL.createObjectURL(img)}
-        alt="Cover"
+        alt="Image you're uploading"
         width={64} // Added required width property
         height={64} // Added required height property
         className={`${loading ? "opacity-50" : ""} h-full w-full`} // Added w-full and h-full

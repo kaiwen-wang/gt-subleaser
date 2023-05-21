@@ -2,6 +2,7 @@ import HeaderfilterMenu from "./HeaderFilterMenu";
 import Toggle from "@/components/Header/Elements/Toggle";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
+import UserIcon from "@/components/Header/Elements/UserIcon";
 
 interface HeaderProps {
   showFilters?: boolean;
@@ -52,7 +53,7 @@ export default function Header({
             <Link href="/">🐝 GT Subleaser</Link>
           </h1>
           <div className="flex w-full items-center gap-2.5 sm:max-w-fit sm:justify-between">
-            <Link href="/upload">
+            <Link href="/listings/upload">
               <div className="bordershadow-scale-600 rounded-full px-3.5 py-2.5 text-sm font-medium  hover:bg-gray-100">
                 <span>Sublease your place</span>
               </div>
@@ -60,9 +61,9 @@ export default function Header({
             <div className="sm:ml-0 flex items-center ml-auto">
               <Toggle />
             </div>
-            {/* <div>
+            <div>
               <UserIcon />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

@@ -185,6 +185,16 @@ gender menu page stuff - done - make the menu clickable on first click - not wor
 
 Hard stuff that I haven't done yet:
 
+
+
+gatech@edu auth (single email sign-in?) DONE
+Rework forms page
+Create draft listings page
+Admin listings page
+'use server'
+
+
+
 - generating individual pages on database change
   - done ez pz
 - getting maxPrice properly done
@@ -202,7 +212,7 @@ Hard stuff I will do:
   filling images properly is probably the biggest pain of the ass
 
 TODO:
-lighthouse alt tags
+lighthouse alt tags X
 change the bath upload so it stops doing "shared bath"
 add an X on the menus for mobile, and don't open the grid when the menu is open
 Make the "X" appear when the menu is selected
