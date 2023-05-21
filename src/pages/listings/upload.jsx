@@ -3,6 +3,11 @@ import { useState, useEffect } from "react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Dialog } from "@headlessui/react";
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import Description from "@/components/UploadForms/Description";
+import BigPicture from "@/components/UploadForms/BigPicture";
+import Timing from "@/components/UploadForms/Timing";
+import Pricing from "@/components/UploadForms/Pricing";
+import HouseDetails from "@/components/UploadForms/HouseDetails";
 
 import {
     PhotoIcon,
@@ -27,10 +32,13 @@ import {
     CloudArrowUpIcon,
     TrashIcon,
 } from "@heroicons/react/24/outline";
+import LoginPage from "../../components/LoginPage";
 
 export default function hi() {
-    const [modalSubmit, setModalSubmit] = useState(false);
-
+    const [circleColors, setCircleColors] = useState([]);
+    const setCircleColorsFunction = (data) => {
+        setCircleColors(data);
+    };
 
     const handleKeyDown = (event) => {
         switch (event.keyCode) {
@@ -51,32 +59,8 @@ export default function hi() {
         }
     }
 
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setModalSubmit(true);
-        const { data, error } = await supabase.auth.signInWithOtp({
-            email: document.getElementById("email").value,
-            // options: {
-            //   emailRedirectTo: "https://example.com/welcome",
-            // },
-        });
-        if (error) {
-            alert(error);
-        } else {
-            closeModal();
-
-            setTimeout(() => {
-                setModalSubmit(false);
-                alert("You have been sent a magic link! It expires in 1 hour.");
-            }, 100);
-        }
-    };
-
-
     const [session, setSession] = useState(null);
     const supabase = useSupabaseClient();
-
 
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
@@ -105,6 +89,33 @@ export default function hi() {
                 </div>
             </>
         )
+    },
+    {
+        page: 1,
+        content: (
+            <BigPicture />
+        )
+    },
+    {
+        page: 2,
+        content: (
+            <Timing />
+        )
+    },
+    {
+        page: 3,
+        content: (
+            <Pricing />
+        )
+    },
+    {
+        page: 4,
+        content: (
+            <HouseDetails
+                circleColors={circleColors}
+                setCircleColorsFunction={setCircleColorsFunction}
+            />
+        )
     }]
 
 
@@ -120,77 +131,22 @@ export default function hi() {
 
     return (
         <div onKeyDown={handleKeyDown} tabIndex="0">
-
             {!session ? (
-                <>
-
-                    <div className="isolate fixed inset-0 bg-black bg-opacity-25" />
-
-
-                    <div className="z-5 fixed inset-0 overflow-y-auto">
-                        <div className="flex items-center justify-center min-h-full p-4 text-center">
-                            <div className="rounded-2xl w-full max-w-sm p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl">
-                                <div
-                                    as="h3"
-                                    className="text-lg font-medium leading-6 text-gray-900"
-                                >
-                                    Log In
-                                </div>
-                                <div className="mt-2">
-                                    <p className="text-sm text-gray-500">
-                                        You will be emailed a magic link to log in.
-                                    </p>
-                                </div>
-
-                                <form id="loginForm" className="mt-4" onSubmit={handleLogin}>
-                                    <div className="flex flex-col">
-                                        <label
-                                            htmlFor="message"
-                                            className="block text-sm font-medium text-gray-700"
-                                        >
-                                            Email
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                id="email"
-                                                placeholder="@gatech.edu emails only"
-                                                pattern=".+@gatech\.edu"
-                                                required
-                                                size="75"
-                                                className=" w-full border border-black rounded-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-8 mb-2 text-center">
-                                        <button
-                                            type="submit"
-                                            className="hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md"
-                                        >
-                                            {modalSubmit ? "Loading..." : "Send Magic Link"}
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </>
+                <LoginPage />
             ) : (
                 <div className="flex">
-
-
                     <div className="z-5 relative flex flex-col items-center justify-center w-9/12 h-screen select-none">
-                        <div className="absolute bottom-0 right-0 flex m-2">
-                            {page}
-                            <div className="hover:bg-gray-200 p-2 bg-gray-100 border">
+                        <div className="absolute bottom-0 right-0 flex items-center m-2">
+                            <div className="mr-2 font-medium text-gray-900">
+                                Page {page + 1}/{pages.length}
+                            </div>
+                            <div className="hover:bg-gray-200 px-3 py-2 bg-gray-100 border-t border-b border-l">
                                 <ArrowUpIcon className="w-5 h-5 text-gray-900"
                                     onClick={() => { changePage(-1) }}
 
                                 />
                             </div>
-                            <div className="hover:bg-gray-200 p-2 bg-gray-100 border">
+                            <div className="hover:bg-gray-200 px-3 py-2 bg-gray-100 border">
                                 <ArrowDownIcon className="w-5 h-5 text-gray-900"
                                     onClick={() => { changePage(1) }}
                                 />
@@ -201,8 +157,8 @@ export default function hi() {
 
 
                     </div>
-                    <div className="w-3/12 bg-gray-100">
-                        <div className=" absolute left-0 right-0 top-[0px] h-screen px-5 py-16 pl-5   lg:visible lg:relative lg:left-0 lg:top-0 lg:flex lg:px-10 lg:pb-10 lg:pt-0 lg:opacity-100">
+                    <div className="w-3/12 overflow-auto bg-gray-100">
+                        <div className=" lg:visible lg:relative lg:left-0 lg:top-0 lg:flex lg:px-10 lg:pb-10 lg:pt-0 lg:opacity-100 absolute top-0 right-0 h-screen px-5 py-16 pl-5">
                             <div className="lg:justify-start relative flex justify-center">
                                 <ul className="relative flex flex-col w-full gap-4">
                                     <div className="flex flex-col gap-3 pt-8">

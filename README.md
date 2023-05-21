@@ -212,6 +212,10 @@ Hard stuff I will do:
   filling images properly is probably the biggest pain of the ass
 
 TODO:
+
+Maybe session needs to be wrapped into a global state
+
+
 lighthouse alt tags X
 change the bath upload so it stops doing "shared bath"
 add an X on the menus for mobile, and don't open the grid when the menu is open

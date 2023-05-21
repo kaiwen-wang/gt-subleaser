@@ -16,7 +16,7 @@ export default async function FilteredPostsApi(
   let query = supabase
     .from("subleases")
     .select()
-    .eq("active_post", true)
+    // .eq("active_post", true)
     .range(6 * (parseInt(pages) - 1), 6 * (parseInt(pages) - 1) + 5);
 
   if (maxPrice !== "") {

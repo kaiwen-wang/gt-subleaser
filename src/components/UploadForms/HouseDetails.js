@@ -38,7 +38,7 @@ export default function HouseDetails({
         <div>
           <label
             htmlFor="total_bedrooms"
-            className="mb-2 block text-lg font-medium"
+            className="block mb-2 text-lg font-medium"
           >
             Total Bedrooms
           </label>
@@ -46,7 +46,7 @@ export default function HouseDetails({
             type="number"
             id="total_bedrooms"
             name="total_bedrooms"
-            className="w-full rounded border p-2 border-gray-400"
+            className="w-full p-2 border border-gray-400 rounded"
             min="0"
             max="20"
             required
@@ -77,7 +77,7 @@ export default function HouseDetails({
         <div>
           <label
             htmlFor="total_bedrooms"
-            className="mb-2 block text-lg font-medium"
+            className="block mb-2 text-lg font-medium"
           >
             Free Rooms
           </label>
@@ -85,7 +85,7 @@ export default function HouseDetails({
             type="number"
             id="free_rooms"
             name="free_rooms"
-            className="w-full rounded border p-2 border-gray-400"
+            className="w-full p-2 border border-gray-400 rounded"
             min={1}
             max={totalBedrooms}
             required
@@ -111,7 +111,7 @@ export default function HouseDetails({
 
       <label
         htmlFor="total_bedrooms"
-        className="mt-4 block text-lg font-medium"
+        className="block mt-4 text-lg font-medium"
       >
         Roommate Demographics
       </label>
@@ -120,7 +120,7 @@ export default function HouseDetails({
         means free room.
       </span>
       <div className="mt-2">
-        <div className="flex  overflow-x-auto  space-x-2 overflow-hidden py-2 h-12 box-border rounded border p-2 border-gray-400">
+        <div className="box-border flex h-12 p-2 py-2 space-x-2 overflow-hidden overflow-x-auto border border-gray-400 rounded">
           {circleColors.map((color, index) => (
             <div
               key={index}
@@ -141,7 +141,7 @@ export default function HouseDetails({
       <div className="">
         <div>
           <label
-            className="mb-2 mt-4 block text-lg font-medium"
+            className="block mt-4 mb-2 text-lg font-medium"
             id="total_bathrooms"
           >
             Total Bathrooms
@@ -150,7 +150,7 @@ export default function HouseDetails({
             type="number"
             id="total_bathrooms"
             name="total_bathrooms"
-            className="w-full rounded border p-2 border-gray-400"
+            className="w-full p-2 border border-gray-400 rounded"
             min="1"
             // step="0.5"
             max="20"
@@ -187,7 +187,7 @@ export default function HouseDetails({
         <select
           id="gender_preference"
           name="gender_preference"
-          className="w-full rounded border p-2 mt-1 border-gray-400"
+          className="w-full p-2 mt-1 border border-gray-400 rounded"
         >
           <option value="not-important">Not Important</option>
           <option value="female">Female</option>

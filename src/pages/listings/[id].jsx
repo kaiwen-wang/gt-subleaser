@@ -349,6 +349,16 @@ export default function Listing({ data }) {
             </div>
           </div>
           <div className="lg:w-5/12 w-full">
+            {!data.created_by ? (
+              <div className="flex flex-col p-4 mb-4 border rounded-lg">
+                <p className="font-medium text-gray-800">Post created by</p>
+                <span>name</span>
+              </div>
+            ) : (
+              null
+            )}
+
+
             <div className="flex flex-col p-4 border rounded-lg">
               <div className="flex">
                 <div className="">
