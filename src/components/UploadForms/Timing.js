@@ -21,8 +21,8 @@ export default function Timing() {
   };
 
   return (
-    <>
-      <div className="grid grid-cols-2 gap-4">
+    <div className="max-w-2xl mx-auto">
+      <div className=" sm:grid-cols-2 grid grid-cols-1 gap-4">
         <div>
           <label
             htmlFor="move_in"
@@ -62,25 +62,6 @@ export default function Timing() {
           />
         </div>
       </div>
-
-      {/* <div className="mt-2">
-                <label
-                    className="block mb-2 text-lg font-medium"
-                    id="semester"
-                    htmlFor="semester"
-                >
-                    Semester
-                </label>
-                <select
-                    multiple
-                    name="semester"
-                    className="w-full p-2 border border-gray-400 rounded"
-                >
-                    <option value="fall">Fall</option>
-                    <option value="spring">Spring</option>
-                    <option value="summer">Summer</option>
-                </select>
-            </div> */}
-    </>
+    </div>
   );
 }

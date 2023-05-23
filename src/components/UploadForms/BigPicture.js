@@ -4,7 +4,7 @@ import Title from "@/components/UploadForms/Title";
 
 export default function BigPicture() {
   return (
-    <>
+    <div className=" max-w-xl mx-auto">
       <div className="">
         <Title />
       </div>
@@ -15,14 +15,14 @@ export default function BigPicture() {
         <label
           htmlFor="Neighborhood"
           id="neighborhood"
-          className="mb-2 text-lg font-medium  block "
+          className=" block mb-2 text-lg font-medium"
         >
           Neighborhood
         </label>
 
         <select
           name="neighborhood"
-          className="w-full rounded border p-2 mt-2 border-gray-400"
+          className="w-full p-2 mt-2 border border-gray-400 rounded"
           required
         >
           <option value="">Please choose an option</option>
@@ -36,6 +36,6 @@ export default function BigPicture() {
           <option value="Metro Atlanta (OTP)">Metro Atlanta (OTP)</option>
         </select>
       </div>
-    </>
+    </div>
   );
 }

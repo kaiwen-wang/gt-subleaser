@@ -33,7 +33,7 @@ export default function HouseDetails({
   };
 
   return (
-    <>
+    <div className="max-w-2xl mx-auto">
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label
@@ -194,6 +194,6 @@ export default function HouseDetails({
           <option value="male">Male</option>
         </select>
       </div>
-    </>
+    </div>
   );
 }
