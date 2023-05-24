@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Dialog } from "@headlessui/react";
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
-import Description from "@/components/UploadForms/Description";
+import Description from "@/components/UploadForms/Subsections/Description";
 import BigPicture from "@/components/UploadForms/BigPicture";
 import Timing from "@/components/UploadForms/Timing";
 import Pricing from "@/components/UploadForms/Pricing";
 import HouseDetails from "@/components/UploadForms/HouseDetails";
 import Toggle from "@/components/Header/Elements/Toggle";
 import UserIcon from "@/components/Header/Elements/UserIcon";
-import ApplianceSelect from "@/components/UploadForms/ApplianceSelect";
+import ApplianceSelect from "@/components/UploadForms/Subsections/ApplianceSelect";
 
 
 import {
@@ -105,13 +105,13 @@ export default function hi() {
     const pages = [{
         page: 0,
         content: (
-            <>
+            <div className="max-w-2xl mx-auto">
                 <h1 className="text-4xl font-bold">Ready to sublease?</h1>
 
                 <div className="mt-4 text-lg text-gray-500">
                     We just have a few things you need to fill out.
                 </div>
-            </>
+            </div>
         )
     },
     {
@@ -157,6 +157,14 @@ export default function hi() {
         content: (
             <Amenities />
         )
+    },
+    {
+        page: 8,
+        content: (
+            <div>
+                Thanks for completing the form. You can submit it to complete.
+            </div>
+        )
     }]
 
 
@@ -195,7 +203,7 @@ export default function hi() {
                                 <div className="lg:justify-start relative flex justify-center">
                                     <ul className="relative flex flex-col w-full gap-4">
                                         <div className="flex flex-col gap-3 pt-8">
-                                            <span className="font-mono text-sm text-gray-500">
+                                            <span className={`font-mono text-sm ${page === 1 ? "text-green-500" : "text-gray-500"}`}>
                                                 BIG PICTURE
                                             </span>
                                             {/* <a href="#cover-image-label"> */}
@@ -233,7 +241,7 @@ export default function hi() {
                                         <div className="w-full border-b"></div>
 
                                         <div className="flex flex-col gap-3">
-                                            <span className="font-mono text-sm text-gray-500">
+                                            <span className={`font-mono text-sm ${page === 2 ? "text-green-500" : "text-gray-500"}`}>
                                                 TIMING
                                             </span>
 
@@ -260,7 +268,7 @@ export default function hi() {
                                         <div className="w-full border-b"></div>
 
                                         <div className="flex flex-col gap-3">
-                                            <span className="font-mono text-sm text-gray-500">
+                                            <span className={`font-mono text-sm ${page === 3 ? "text-green-500" : "text-gray-500"}`}>
                                                 PRICING
                                             </span>
                                             {/* <a href="#monthly_price"> */}
@@ -284,7 +292,7 @@ export default function hi() {
                                         </div>
                                         <div className="w-full border-b"></div>
                                         <div className="flex flex-col gap-3">
-                                            <span className="font-mono text-sm text-gray-500">
+                                            <span className={`font-mono text-sm ${page === 4 ? "text-green-500" : "text-gray-500"}`}>
                                                 HOUSE DETAILS
                                             </span>
                                             {/* <a href="#total_bedrooms"> */}
@@ -316,7 +324,7 @@ export default function hi() {
                                         <div className="w-full border-b"></div>
 
                                         <div className="flex flex-col gap-3 pb-8">
-                                            <span className="font-mono text-sm text-gray-500">
+                                            <span className={`font-mono text-sm ${page > 4 && page < 8 ? "text-green-500" : "text-gray-500"}`}>
                                                 EXTRA
                                             </span>
                                             {/* <a href="#major_appliances"> */}

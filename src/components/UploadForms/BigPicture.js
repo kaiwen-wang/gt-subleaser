@@ -1,6 +1,5 @@
-import Neighborhood from "./Neighborhood";
-import Description from "@/components/UploadForms/Description";
-import Title from "@/components/UploadForms/Title";
+import Description from "@/components/UploadForms/Subsections/Description";
+import Title from "@/components/UploadForms/Subsections/Title";
 
 export default function BigPicture() {
   return (

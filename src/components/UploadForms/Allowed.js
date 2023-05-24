@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ApplianceSelect from "@/components/UploadForms/ApplianceSelect";
+import ApplianceSelect from "@/components/UploadForms/Subsections/ApplianceSelect";
 
 export default function Allowed() {
   const [allowedList, setAllowedList] = useState([]);
