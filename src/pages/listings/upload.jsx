@@ -11,6 +11,8 @@ import HouseDetails from "@/components/UploadForms/HouseDetails";
 import Toggle from "@/components/Header/Elements/Toggle";
 import UserIcon from "@/components/Header/Elements/UserIcon";
 import ApplianceSelect from "@/components/UploadForms/Subsections/ApplianceSelect";
+import { AppContext } from "/src/components/AppState";
+import { useContext } from "react";
 
 
 import {
@@ -82,7 +84,6 @@ export default function hi() {
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, []);
-
 
 
 
@@ -172,12 +173,24 @@ export default function hi() {
 
     function changePage(number) {
         console.log(number, page, page + number)
+        var form = document.getElementById('myform');
 
-        setPage((prevPage) => {
-            if (prevPage + number < 0) {
-                return prevPage;
+
+        setPage((currPage) => {
+            if (currPage + number < 0) {
+                return currPage;
             } else {
-                return prevPage + number;
+                if (number > 0) {
+                    if (form.checkValidity()) {
+                        return currPage + number;
+                    } else {
+                        form.reportValidity();
+                        return currPage
+                    }
+                } else {
+                    return currPage + number;
+                }
+
             }
         });
     }
@@ -199,7 +212,7 @@ export default function hi() {
                                     </a>
                                 </div>
                             </div>
-                            <Sidebar />
+                            <Sidebar page={page} />
                         </div>
                     </div>
                     <div className="lg:relative lg:ml-0 absolute w-full h-screen overflow-auto">
@@ -226,9 +239,9 @@ export default function hi() {
                                     }}
                                 />
 
-                                <div className=" w-full">
+                                <form id="myform" className=" w-full">
                                     {pages[page] && pages[page].content}
-                                </div>
+                                </form>
 
                                 <div className="absolute bottom-0 right-0 flex items-center m-2">
                                     <div className="mr-2 font-medium text-gray-900">
@@ -274,13 +287,13 @@ export default function hi() {
 //                         />
 
 
-function Sidebar() {
+function Sidebar({ page }) {
     return (
         <div className=" absolute left-0 right-0 top-[0px] h-screen px-5 py-16 pl-5   lg:visible lg:relative lg:left-0 lg:top-0 lg:flex lg:px-10 lg:pb-10 lg:pt-0 lg:opacity-100">
             <div className="lg:justify-start relative flex justify-center">
                 <ul className="relative flex flex-col w-full gap-4">
                     <div className="flex flex-col gap-3 pt-8">
-                        <span className="font-mono text-sm text-gray-500">
+                        <span className={`font-mono text-sm ${page === 1 ? "text-green-500" : "text-gray-500"}`}>
                             BIG PICTURE
                         </span>
                         {/* <a href="#cover-image-label"> */}

@@ -1,6 +1,6 @@
 import { AppContext } from "/src/components/AppState";
-import { Slider } from "/src/components/Menus/Filters/Slider";
 import { useContext } from "react";
+import { Slider } from "/src/components/Menus/Filters/Slider";
 
 export default function PriceMenu() {
   let { maxPrice, setMaxPrice } = useContext(AppContext);

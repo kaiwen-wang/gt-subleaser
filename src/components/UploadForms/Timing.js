@@ -1,8 +1,13 @@
 import { getCurrentDate, getOffsetDate } from "@/utils/date.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AppContext } from "/src/components/AppState";
+import { useContext } from "react";
 
 export default function Timing() {
-  const [moveInDate, setMoveInDate] = useState(getCurrentDate());
+  const { formMoveIn: moveInDate, setFormMoveIn: setMoveInDate } =
+    useContext(AppContext);
+  const { formMoveOut: moveOutDate, setFormMoveOut: setMoveOutDate } =
+    useContext(AppContext);
 
   let minMoveInDate = getOffsetDate();
   let maxMoveInDate = getOffsetDate(1);
@@ -19,6 +24,10 @@ export default function Timing() {
 
     setMoveInDate(inputValue);
   };
+
+  useEffect(() => {
+    console.log(moveInDate);
+  }, [moveInDate]);
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -38,6 +47,7 @@ export default function Timing() {
             min={minMoveInDate}
             // max is currentDate plus one year
             max={maxMoveInDate}
+            value={moveInDate}
             onChange={handleMoveInChange}
             required
           />
@@ -56,6 +66,8 @@ export default function Timing() {
             className="w-full p-2 border border-gray-400 rounded"
             // minimum move out day is the day after move-in. not sure why anyone would sublease a single day though lol
             min={moveInDate}
+            value={moveOutDate}
+            onChange={(e) => setMoveOutDate(e.target.value)}
             // max date is moveInDate plus 2 year
             max={getOffsetDate(2, 0, 0, moveInDate)}
             required

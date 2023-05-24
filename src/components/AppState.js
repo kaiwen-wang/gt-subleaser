@@ -1,6 +1,7 @@
 import { supabase } from "/src/utils/supabase";
 import React, { createContext, useState } from "react";
 import { useEffect } from "react";
+import { getCurrentDate, getOffsetDate } from "@/utils/date.js";
 
 export const AppContext = createContext();
 
@@ -53,9 +54,66 @@ export function AppProvider({ children }) {
 
   const [mapCenter, setMapCenter] = useState([33.7756, -84.3963]);
 
+  const [formTitle, setFormTitle] = useState("");
+  const [formDescription, setFormDescription] = useState("");
+  const [formNeighborhood, setFormNeighborhood] = useState("");
+
+  const [formMoveIn, setFormMoveIn] = useState();
+  const [formMoveOut, setFormMoveOut] = useState("");
+
+  const [formMonthlyPrice, setFormMonthlyPrice] = useState("");
+  const [formUtilities, setFormUtilities] = useState("");
+  const [formFees, setFormFees] = useState("");
+
+  const [formTotalBedrooms, setFormTotalBedrooms] = useState("");
+  const [formFreeBedrooms, setFormFreeBedrooms] = useState("");
+  const [formRoommateInfo, setFormRoommateInfo] = useState("");
+  const [formTotalBathrooms, setFormTotalBathrooms] = useState("");
+  const [formFreeBathrooms, setFormFreeBathrooms] = useState("");
+  const [formGenderPreference, setFormGenderPreference] = useState("");
+
+  const [formMajorAppliances, setFormMajorAppliances] = useState("");
+  const [formAllowed, setFormAllowed] = useState("");
+  const [formAmenities, setFormAmenities] = useState("");
+
   return (
     <AppContext.Provider
       value={{
+        formTitle,
+        formDescription,
+        formNeighborhood,
+        formMoveIn,
+        formMoveOut,
+        formMonthlyPrice,
+        formUtilities,
+        formFees,
+        formTotalBedrooms,
+        formFreeBedrooms,
+        formRoommateInfo,
+        formTotalBathrooms,
+        formFreeBathrooms,
+        formGenderPreference,
+        formMajorAppliances,
+        formAllowed,
+        formAmenities,
+        setFormTitle,
+        setFormDescription,
+        setFormNeighborhood,
+        setFormMoveIn,
+        setFormMoveOut,
+        setFormMonthlyPrice,
+        setFormUtilities,
+        setFormFees,
+        setFormTotalBedrooms,
+        setFormFreeBedrooms,
+        setFormRoommateInfo,
+        setFormTotalBathrooms,
+        setFormFreeBathrooms,
+        setFormGenderPreference,
+        setFormMajorAppliances,
+        setFormAllowed,
+        setFormAmenities,
+
         // semesterPreference,
         // setSemesterPreference,
         maxPrice,

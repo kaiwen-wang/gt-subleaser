@@ -1,7 +1,12 @@
 import Description from "@/components/UploadForms/Subsections/Description";
 import Title from "@/components/UploadForms/Subsections/Title";
+import { AppContext } from "/src/components/AppState";
+import { useContext } from "react";
 
 export default function BigPicture() {
+  let { formNeighborhood: neighborhood, setFormNeighborhood: setNeighborhood } =
+    useContext(AppContext);
+
   return (
     <div className=" max-w-xl mx-auto">
       <div className="">
@@ -23,6 +28,10 @@ export default function BigPicture() {
           name="neighborhood"
           className="w-full p-2 mt-2 border border-gray-400 rounded"
           required
+          value={neighborhood}
+          onChange={(e) => {
+            setNeighborhood(e.target.value);
+          }}
         >
           <option value="">Please choose an option</option>
           <option value="Midtown">Midtown</option>

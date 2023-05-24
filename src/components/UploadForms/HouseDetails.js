@@ -185,15 +185,26 @@ export default function HouseDetails({
         </label>
         For example, some apartments are women only and some are men only.
         <div className="grid grid-cols-3 gap-3 mt-2">
-          <div className="border-zinc-800 flex items-center h-10 p-2 border rounded-md">
-            <div className="flex items-center justify-center w-6 h-6 font-mono text-sm font-medium border">
+          <div className=" flex items-center h-10 gap-2 p-2 border border-gray-400 rounded">
+            <div className="bordershadow-scale-600 text-fuchsia-800 flex items-center justify-center w-6 h-6 font-mono text-xs font-medium rounded-sm">
               A
             </div>
+            Not Important
           </div>
-          <div className="border rounded-md"></div>
-          <div className="border rounded-md"></div>
+          <div className=" flex items-center h-10 gap-2 p-2 border border-gray-400 rounded">
+            <div className="bordershadow-scale-600 text-fuchsia-800 flex items-center justify-center w-6 h-6 font-mono text-xs font-medium rounded-sm">
+              B
+            </div>
+            Female
+          </div>
+          <div className=" flex items-center h-10 gap-2 p-2 border border-gray-400 rounded">
+            <div className="bordershadow-scale-600 text-fuchsia-800 flex items-center justify-center w-6 h-6 font-mono text-xs font-medium rounded-sm">
+              C
+            </div>
+            Male
+          </div>
         </div>
-        <select
+        {/* <select
           id="gender_preference"
           name="gender_preference"
           className="w-full p-2 mt-1 border border-gray-400 rounded"
@@ -201,7 +212,7 @@ export default function HouseDetails({
           <option value="not-important">Not Important</option>
           <option value="female">Female</option>
           <option value="male">Male</option>
-        </select>
+        </select> */}
       </div>
     </div>
   );

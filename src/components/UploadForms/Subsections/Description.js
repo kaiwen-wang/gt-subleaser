@@ -1,7 +1,9 @@
 import { useState } from "react";
-
+import { AppContext } from "/src/components/AppState";
+import { useContext } from "react";
 export default function Description() {
-  const [description, setDescription] = useState("");
+  let { formDescription: description, setFormDescription: setDescription } =
+    useContext(AppContext);
 
   return (
     <>
