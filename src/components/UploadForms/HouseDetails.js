@@ -184,6 +184,15 @@ export default function HouseDetails({
           Gender Preference
         </label>
         For example, some apartments are women only and some are men only.
+        <div className="grid grid-cols-3 gap-3 mt-2">
+          <div className="border-zinc-800 flex items-center h-10 p-2 border rounded-md">
+            <div className="flex items-center justify-center w-6 h-6 font-mono text-sm font-medium border">
+              A
+            </div>
+          </div>
+          <div className="border rounded-md"></div>
+          <div className="border rounded-md"></div>
+        </div>
         <select
           id="gender_preference"
           name="gender_preference"
