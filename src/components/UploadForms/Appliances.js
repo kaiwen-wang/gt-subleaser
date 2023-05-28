@@ -1,24 +1,22 @@
 import { useState } from "react";
 import ApplianceSelect from "@/components/UploadForms/Subsections/ApplianceSelect";
+import { FormContext } from "/src/components/FormState";
+import { useContext } from "react";
 
 export default function Appliances() {
-  const [appliancesList, setAppliancesList] = useState([
-    "Washing Machine",
-    "Clothes Dryer",
-    "Fridge",
-    "Freezer",
-    "Air Conditioner",
-    "Heating",
-    "Stove",
-  ]);
+  const {
+    formMajorAppliances: appliancesList,
+    setFormMajorAppliances: setAppliancesList,
+  } = useContext(FormContext);
+
   const applianceListFunction = (data) => {
     setAppliancesList(data);
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="flex justify-between">
-        <label className="block mb-2 text-lg font-medium" htmlFor="appliances">
+    <div className="">
+      <div className="flex items-center justify-between">
+        <label className="mb-1 text-lg font-medium" htmlFor="appliances">
           Appliances
         </label>
         <span className="text-sm text-gray-500">

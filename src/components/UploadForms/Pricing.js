@@ -1,13 +1,13 @@
-import { AppContext } from "/src/components/AppState";
+import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function Pricing() {
-  const { formMonthlyPrice, setFormMonthlyPrice } = useContext(AppContext);
-  const { formUtilities, setFormUtilities } = useContext(AppContext);
-  const { formFees, setFormFees } = useContext(AppContext);
+export default function Pricing({ daReffy }) {
+  const { formMonthlyPrice, setFormMonthlyPrice } = useContext(FormContext);
+  const { formUtilities, setFormUtilities } = useContext(FormContext);
+  const { formFees, setFormFees } = useContext(FormContext);
 
   return (
-    <div className="sm:grid-cols-3 grid max-w-3xl grid-cols-1 gap-4 mx-auto">
+    <div className="sm:grid-cols-3 grid grid-cols-1 gap-4">
       <div>
         <label
           htmlFor="monthly_price"
@@ -16,6 +16,7 @@ export default function Pricing() {
           Monthly Price
         </label>
         <input
+          ref={daReffy}
           type="number"
           id="monthly_price"
           name="monthly_price"

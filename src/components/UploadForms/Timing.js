@@ -1,13 +1,13 @@
 import { getCurrentDate, getOffsetDate } from "@/utils/date.js";
 import { useEffect, useState } from "react";
-import { AppContext } from "/src/components/AppState";
+import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function Timing() {
+export default function Timing({ daReffy }) {
   const { formMoveIn: moveInDate, setFormMoveIn: setMoveInDate } =
-    useContext(AppContext);
+    useContext(FormContext);
   const { formMoveOut: moveOutDate, setFormMoveOut: setMoveOutDate } =
-    useContext(AppContext);
+    useContext(FormContext);
 
   let minMoveInDate = getOffsetDate();
   let maxMoveInDate = getOffsetDate(1);
@@ -30,7 +30,7 @@ export default function Timing() {
   }, [moveInDate]);
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="">
       <div className=" sm:grid-cols-2 grid grid-cols-1 gap-4">
         <div>
           <label
@@ -41,6 +41,7 @@ export default function Timing() {
             Earliest Move-in
           </label>
           <input
+            ref={daReffy}
             type="date"
             name="move_in"
             className="w-full p-2 border border-gray-400 rounded"

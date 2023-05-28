@@ -1,20 +1,16 @@
 import Description from "@/components/UploadForms/Subsections/Description";
 import Title from "@/components/UploadForms/Subsections/Title";
-import { AppContext } from "/src/components/AppState";
+import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function BigPicture() {
+export default function BigPicture({ daReffy }) {
   let { formNeighborhood: neighborhood, setFormNeighborhood: setNeighborhood } =
-    useContext(AppContext);
+    useContext(FormContext);
 
   return (
-    <div className=" max-w-xl mx-auto">
-      <div className="">
-        <Title />
-      </div>
-      <div className="">
-        <Description />
-      </div>
+    <div className="">
+      <Title daReffy={daReffy} />
+      <Description daReffy={daReffy} />
       <div className="">
         <label
           htmlFor="Neighborhood"

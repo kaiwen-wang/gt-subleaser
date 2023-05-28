@@ -3,6 +3,7 @@ import MaxRoommatesMenu from "/src/components/Menus/Filters/MaxRoommatesMenu";
 import MoveInMenu from "/src/components/Menus/Filters/MoveInMenu";
 import MoveOutMenu from "/src/components/Menus/Filters/MoveOutMenu";
 import PriceMenu from "/src/components/Menus/Filters/PriceMenu";
+import SemesterMenu from "/src/components/Menus/Filters/SemesterMenu";
 
 import { AppContext } from "/src/components/AppState.js";
 import UserIcon from "/src/components/Header/Elements/UserIcon";
@@ -18,6 +19,7 @@ export default function HeaderfilterMenu() {
   let { maxRoommates, setMaxRoommates } = useContext(AppContext);
   let { moveIn, setMoveIn } = useContext(AppContext);
   let { moveOut, setMoveOut } = useContext(AppContext);
+  let { semesterPreference, setSemesterPreference } = useContext(AppContext);
 
   const filterMenuOptions = [
     {
@@ -26,8 +28,8 @@ export default function HeaderfilterMenu() {
       displayName:
         genderPreference !== ""
           ? genderPreference
-              .replaceAll("-", " ")
-              .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+            .replaceAll("-", " ")
+            .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
           : "Your Gender",
       contextSetter: setGenderPreference,
       defaultValue: "",
@@ -66,6 +68,14 @@ export default function HeaderfilterMenu() {
       defaultValue: "",
       component: <MoveOutMenu />,
     },
+    {
+      id: "semester",
+      isActive: semesterPreference !== "",
+      displayName: semesterPreference !== "" ? `Semester: ${semesterPreference.slice(0, 1).toUpperCase() + semesterPreference.slice(1)}` : "Semester",
+      contextSetter: setSemesterPreference,
+      defaultValue: "",
+      component: <SemesterMenu />,
+    },
   ];
 
   const firstChildRef = useRef(null);
@@ -81,11 +91,8 @@ export default function HeaderfilterMenu() {
 
   useEffect(() => {
     if (firstChildRef.current) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        for (let entry of entries) {
-          console.log("Overflowing:", isOverflowing(firstChildRef.current));
-          setIsOverflowingState(isOverflowing(firstChildRef.current));
-        }
+      const resizeObserver = new ResizeObserver(() => {
+        setIsOverflowingState(isOverflowing(firstChildRef.current));
       });
       resizeObserver.observe(firstChildRef.current);
 
@@ -99,9 +106,8 @@ export default function HeaderfilterMenu() {
         <div className="flex items-center gap-0">
           <div
             ref={firstChildRef}
-            className={`${
-              isOverflowingState ? "" : ""
-            } flex overflow-auto gap-3 whitespace-nowrap dark:bg-none  py-3 pl-0.5 pr-2`}
+            className={`${isOverflowingState ? "" : ""
+              } flex overflow-auto gap-3 whitespace-nowrap dark:bg-none  py-3 pl-0.5 pr-2`}
           >
             {filterMenuOptions.map((option) => (
               <PopoverMenu

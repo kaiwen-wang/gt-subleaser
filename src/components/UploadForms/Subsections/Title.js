@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { AppContext } from "/src/components/AppState";
+import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function Title() {
-  let { formTitle: title, setFormTitle: setTitle } = useContext(AppContext);
+export default function Title({ daReffy }) {
+  let { formTitle: title, setFormTitle: setTitle } = useContext(FormContext);
 
   return (
     <>
@@ -15,6 +15,7 @@ export default function Title() {
         Title
       </label>
       <input
+        ref={daReffy}
         type="text"
         value={title}
         name="title"

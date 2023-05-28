@@ -1,21 +1,30 @@
 import { useState } from "react";
 import ApplianceSelect from "@/components/UploadForms/Subsections/ApplianceSelect";
+import { FormContext } from "/src/components/FormState";
+import { useContext } from "react";
 
 export default function Allowed() {
-  const [allowedList, setAllowedList] = useState([]);
+  const { formAllowed: allowedList, setFormAllowed: setAllowedList } =
+    useContext(FormContext);
+
   const allowedListFunction = (data) => {
     setAllowedList(data);
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <label
-        className="block mb-2 text-lg font-medium"
-        htmlFor="allowed"
-        id="allowed"
-      >
-        Allowed
-      </label>
+    <div className="relative mx-auto">
+      <div className="flex items-center justify-between">
+        <label
+          className="mb-1 text-lg font-medium"
+          htmlFor="allowed"
+          id="allowed"
+        >
+          Allowed
+        </label>
+        <span className="text-sm text-gray-500">
+          {allowedList.length} selected
+        </span>
+      </div>
 
       <div className="grid grid-cols-4 gap-3 text-sm font-medium">
         <ApplianceSelect
