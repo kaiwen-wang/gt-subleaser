@@ -11,21 +11,21 @@ export const content = [
 ];
 export const darkMode = "class";
 export const theme = {
-  keyframes: {
-    slideUp: {
-      "0%": {
-        //  transform: "translateY(35%)",
-        opacity: 0,
-      },
-      "100%": {
-        // transform: "translateY(0)",
-        opacity: 1,
-      },
-    },
-  },
-  animation: {
-    slideUp: "slideUp 0.5s ease-out",
-  },
+  // keyframes: {
+  //   slideUp: {
+  //     "0%": {
+  //       //  transform: "translateY(35%)",
+  //       opacity: 0,
+  //     },
+  //     "100%": {
+  //       // transform: "translateY(0)",
+  //       opacity: 1,
+  //     },
+  //   },
+  // },
+  // animation: {
+  //   slideUp: "slideUp 0.5s ease-out",
+  // },
   container: {
     center: true,
   },
