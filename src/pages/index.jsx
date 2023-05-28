@@ -39,7 +39,7 @@ export default function Home() {
 
   // Apparently data changes when the context changes. Is this normal? Secret benefit of SWR?
   const { data, error, isLoading } = useSWR(
-    `/api/FilteredPostsApi?&price=${maxPrice}&gender=${genderPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&sort=${sortFormula}&pages=${pages}`,
+    `/api/FilteredPostsApi?&price=${maxPrice}&gender=${genderPreference}&roommates=${maxRoommates}&movein=${moveIn}&moveout=${moveOut}&semester=${semesterPreference}&sort=${sortFormula}&pages=${pages}`,
     fetcher
   );
 
@@ -65,7 +65,8 @@ export default function Home() {
 
   const maxPriceChanged = useRef(0);
   useEffect(() => {
-    if (maxPriceChanged.current > 1) {
+    let renders = process.env.NODE_ENV === 'development' ? 2 : 1;
+    if (maxPriceChanged.current > renders) {
       setItems([]);
       setPages(1);
       setTriggerReset(!triggerReset);
