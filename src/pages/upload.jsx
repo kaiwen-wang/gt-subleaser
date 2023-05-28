@@ -100,7 +100,7 @@ export default function Upload({ idNum }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     data.id = idNum;
-    data.semester = classifySemesters(data);;
+    data.semester = classifySemesters(data);
     data.roommate_demographics = circleColors;
     data.appliances_list = appliancesList;
     data.allowed_list = allowedList;
@@ -310,7 +310,7 @@ export default function Upload({ idNum }) {
             <div className={`top-0 z-10 lg:sticky`} id="header">
               <nav className="flex h-[65px] items-center justify-end border-b bg-white">
                 <div className="flex items-center justify-between w-full gap-2 pr-4 mx-auto">
-                <a className="lg:invisible visible ml-4 text-xl font-semibold" href="/">
+                  <a className="lg:invisible visible ml-4 text-xl font-semibold" href="/">
                     🐝 GT Subleaser
                   </a>
                   <Toggle />
