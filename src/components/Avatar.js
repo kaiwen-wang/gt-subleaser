@@ -66,7 +66,7 @@ export default function Avatar({ uid, url, size, onUpload }) {
         />
       ) : (
         <div
-          className="avatar no-image"
+          className="border border-black rounded-full"
           style={{ height: size, width: size }}
         />
       )}

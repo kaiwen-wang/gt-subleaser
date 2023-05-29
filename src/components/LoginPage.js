@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/utils/supabase";
 
 export default function LoginPage({ props }) {
   const [modalSubmit, setModalSubmit] = useState(false);
@@ -16,10 +17,8 @@ export default function LoginPage({ props }) {
       alert(error);
       setModalSubmit(false);
     } else {
-      setTimeout(() => {
-        setModalSubmit(false);
-        alert("You have been sent a magic link! It expires in 1 hour.");
-      }, 100);
+      alert("You have been sent a magic link! It expires in 1 hour.");
+      setModalSubmit(false);
     }
   };
 

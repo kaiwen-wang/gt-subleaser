@@ -76,17 +76,11 @@ export default function Account({ session }) {
         }}
       />
 
-      <div className=" flex justify-between mt-1">
-        <label htmlFor="email" className=" font-medium text-gray-800">
+      <div className=" flex mt-1">
+        <div className="font-medium text-gray-800 cursor-not-allowed">
           {"Email"}
-        </label>
-        <input
-          className="bg-white cursor-not-allowed"
-          id="email"
-          type="text"
-          value={session.user.email}
-          disabled
-        />
+        </div>
+        <div className="ml-auto cursor-not-allowed">{session.user.email}</div>
       </div>
       <div className="flex justify-between">
         <label htmlFor="first_name" className="font-medium">

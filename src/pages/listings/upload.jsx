@@ -224,7 +224,7 @@ export default function hi() {
                                 e.preventDefault();
 
                                 if (existingFormData) {
-                                    changePage(1)
+                                    changePage(2)
                                 } else {
                                     createListingId();
                                 }
@@ -487,12 +487,15 @@ export default function hi() {
                                 </div>
                             </nav>
 
+
                             <div className=" relative flex items-center justify-center flex-grow">
-                                <div className="absolute top-0 left-0 h-1 bg-green-500"
+                                <div className="hover:opacity-50 absolute top-0 left-0 h-1 transition-all duration-300 ease-out"
                                     style={{
                                         width: `${(page / (pages.length - 1)) * 100}%`,
                                     }}
-                                />
+                                >
+                                    <div className="w-full h-full bg-green-500" />
+                                </div>
 
                                 <form
                                     id="myform"

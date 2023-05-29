@@ -43,7 +43,7 @@
     flex: 0 0 var(--slide-size);
     padding-left: var(--slide-spacing);
   }
-  
+/*   
   @keyframes fadeIn {
     0% {
       translate: 50px;
@@ -60,4 +60,4 @@
     100% {
       translate: 50px;
     }
-  }
+  } */

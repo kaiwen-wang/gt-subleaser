@@ -38,5 +38,10 @@ export const theme = {
   nightwind: {
     transitionDuration: "0ms", // default '300ms'
   },
+  extend: {
+    transitionProperty: {
+      width: "width",
+    },
+  },
 };
 export const plugins = [require("nightwind")];
