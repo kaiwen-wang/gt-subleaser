@@ -22,19 +22,28 @@ export function AppProvider({ children }) {
   }
 
   async function getSupabasePrices() {
-    let { data, error, status } = await supabase
-      .from("subleases")
-      .select(`monthly_price`);
+    try {
+      let { data, error } = await supabase
+        .from("subleases")
+        .select(`monthly_price`);
 
-    // convert data from object array to array of just prices
-    data = data.map((item) => item.monthly_price);
-    let max = Math.max(...data);
-    let min = Math.min(...data);
-    let rounded = Math.ceil(max / 100) * 100;
+      if (error) throw error;
 
-    rounded += 100;
-    // console.log(rounded);
-    return [rounded, min];
+      if (data.length > 0) {
+        data = data.map((item) => item.monthly_price);
+        let max = Math.max(...data);
+        let min = Math.min(...data);
+        let rounded = Math.ceil(max / 100) * 100;
+
+        rounded += 100;
+
+        return [rounded, min];
+      } else {
+        return [1000, 100];
+      }
+    } catch (error) {
+      return [1000, 100];
+    }
   }
 
   const [semesterPreference, setSemesterPreference] = useState("");
