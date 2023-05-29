@@ -227,8 +227,10 @@ function AuthModal(props) {
       //   emailRedirectTo: "https://example.com/welcome",
       // },
     });
+
     if (error) {
       alert(error);
+      setModalSubmit(false);
     } else {
       closeModal();
 

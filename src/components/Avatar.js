@@ -10,10 +10,6 @@ export default function Avatar({ uid, url, size, onUpload }) {
     if (url) downloadImage(url);
   }, [url]);
 
-  useEffect(() => {
-    console.log(avatarUrl);
-  }, [avatarUrl]);
-
   async function downloadImage(path) {
     try {
       const { data, error } = await supabase.storage
@@ -46,8 +42,6 @@ export default function Avatar({ uid, url, size, onUpload }) {
         .from("avatars")
         .upload(filePath, file, { upsert: true });
 
-      console.log(filePath, file, uploadError);
-
       if (uploadError) {
         throw uploadError;
       }
@@ -62,12 +56,12 @@ export default function Avatar({ uid, url, size, onUpload }) {
   };
 
   return (
-    <div>
+    <div className="flex items-center justify-start gap-4 p-2 bg-gray-100 border rounded">
       {avatarUrl ? (
         <img
           src={avatarUrl}
           alt="Avatar"
-          className="border rounded-full"
+          className="border border-black rounded-full"
           style={{ height: size, width: size }}
         />
       ) : (
@@ -76,9 +70,15 @@ export default function Avatar({ uid, url, size, onUpload }) {
           style={{ height: size, width: size }}
         />
       )}
-      <div style={{ width: size }}>
-        <label className="button primary block" htmlFor="single">
-          {uploading ? "Uploading ..." : "Upload"}
+      <div className="">
+        <div className="whitespace-nowrap mb-0.5 font-medium text-gray-800 -mt-1">
+          Profile Picture
+        </div>
+        <label
+          className="hover:bg-gray-200 px-2 py-1 text-center bg-gray-100 border border-gray-500 rounded cursor-pointer"
+          htmlFor="single"
+        >
+          {uploading ? "Uploading..." : "Upload"}
         </label>
         <input
           style={{
