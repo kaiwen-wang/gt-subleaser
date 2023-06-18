@@ -102,7 +102,7 @@ export default function HeaderfilterMenu() {
 
   return (
     <div className=" border-t">
-      <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-6 mx-auto">
+      <div className="sm:px-8 xl:px-12 3xl:max-w-screen-3xl px-3 mx-auto">
         <div className="flex items-center gap-0">
           <div
             ref={firstChildRef}

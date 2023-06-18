@@ -3,6 +3,7 @@ import Toggle from "@/components/Header/Elements/Toggle";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import UserIcon from "@/components/Header/Elements/UserIcon";
+import { ContainerLayout } from "@/components/ContainerLayout";
 
 interface HeaderProps {
   showFilters?: boolean;
@@ -41,13 +42,7 @@ export default function Header({
         showFilters ? "" : "border-b"
       }`}
     >
-      <div
-        className={`relative mx-auto ${
-          smallContainer
-            ? "md:max-w-4xl lg:max-w-5xl xl:max-w-6xl px-4"
-            : "px-6 sm:px-8 xl:px-12 3xl:max-w-screen-3xl "
-        }`}
-      >
+      <ContainerLayout smallContainer={smallContainer}>
         <div className="flex items-center justify-between py-2.5 ">
           <h1 className="sm:flex items-center hidden text-2xl font-semibold text-gray-800">
             <Link href="/">🐝 GT Subleaser</Link>
@@ -61,12 +56,12 @@ export default function Header({
             <div className="sm:ml-0 flex items-center ml-auto">
               <Toggle />
             </div>
-            <div>
+            <div className="flex items-center justify-center">
               <UserIcon />
             </div>
           </div>
         </div>
-      </div>
+      </ContainerLayout>
 
       {showFilters === true ? <HeaderfilterMenu /> : null}
     </header>
