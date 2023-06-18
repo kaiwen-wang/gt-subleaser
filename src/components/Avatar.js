@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-
+import { useUser } from "@supabase/auth-helpers-react";
 export default function Avatar({ uid, url, size, onUpload }) {
   const supabase = useSupabaseClient();
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const user = useUser();
 
   useEffect(() => {
     if (url) downloadImage(url);
@@ -16,6 +18,7 @@ export default function Avatar({ uid, url, size, onUpload }) {
         .from("avatars")
         .download(path);
       if (error) {
+        console.log("ERR DOWNLOADING AA A A A  AA  A");
         throw error;
       }
       const url = URL.createObjectURL(data);
@@ -24,6 +27,42 @@ export default function Avatar({ uid, url, size, onUpload }) {
       console.log("Error downloading image: ", error);
     }
   }
+
+  const deleteAvatar = async () => {
+    try {
+      setDeleting(true);
+
+      console.log("DELETING THIS URL", url);
+
+      let { error: deleteError } = await supabase.storage
+        .from("avatars")
+        .remove([url]);
+
+      let { error: deleteError2 } = await supabase
+        .from("profiles")
+        .update({ avatar_url: null })
+        .eq("id", user.id);
+
+      console.log("did it delete properlY", deleteError);
+
+      if (deleteError) {
+        throw deleteError;
+      }
+
+      if (deleteError2) {
+        console.log("hi");
+        console.log(deleteError2, "delet 2 err");
+        throw deleteError2;
+      }
+
+      setAvatarUrl(null);
+    } catch (error) {
+      alert("Error deleting avatar!");
+      console.log(error);
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const uploadAvatar = async (event) => {
     try {
@@ -74,12 +113,23 @@ export default function Avatar({ uid, url, size, onUpload }) {
         <div className="whitespace-nowrap mb-0.5 font-medium text-gray-800 -mt-1">
           Profile Picture
         </div>
-        <label
-          className="hover:bg-gray-200 px-2 py-1 text-center bg-gray-100 border border-gray-500 rounded cursor-pointer"
-          htmlFor="single"
-        >
-          {uploading ? "Uploading..." : "Upload"}
-        </label>
+        <div className="flex items-center gap-2">
+          <label
+            className="hover:bg-gray-200 px-2 py-1 text-center bg-gray-100 border border-gray-500 rounded cursor-pointer"
+            htmlFor="single"
+          >
+            {uploading ? "Uploading..." : "Upload"}
+          </label>
+          <div
+            className="cursor-pointer"
+            onClick={async () => {
+              deleteAvatar();
+              alert("Avatar Deleted");
+            }}
+          >
+            Delete
+          </div>
+        </div>
         <input
           style={{
             visibility: "hidden",

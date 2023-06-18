@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function Title({ daReffy }) {
+export default function Title({ pageFocusRef }) {
   let { formTitle: title, setFormTitle: setTitle } = useContext(FormContext);
 
   return (
@@ -15,7 +15,7 @@ export default function Title({ daReffy }) {
         Title
       </label>
       <input
-        ref={daReffy}
+        ref={pageFocusRef}
         type="text"
         value={title}
         name="title"

@@ -118,12 +118,12 @@ export default function Home() {
             />}
         </div>
       </div>
-      <button className="w-fit bordershadow-scale-600 hover:bg-gray-200 fixed bottom-0 left-0 right-0 px-4 py-2 m-auto mb-6 text-sm text-gray-700 bg-white rounded-full"
+      {/* <button className="w-fit bordershadow-scale-600 hover:bg-gray-200 fixed bottom-0 left-0 right-0 px-4 py-2 m-auto mb-6 text-sm text-gray-700 bg-white rounded-full"
         onClick={() => { setShowMap(!showMap) }}
 
       >
         {showMap ? "Show Listings" : "Show Map"}
-      </button >
+      </button > */}
     </>
   );
 }

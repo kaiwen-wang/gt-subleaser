@@ -1,23 +1,17 @@
 
 import { useState, useEffect } from "react";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Dialog } from "@headlessui/react";
-import { ArrowDownIcon, ArrowUpIcon, ArrowUturnLeftIcon } from "@heroicons/react/20/solid";
-import Description from "@/components/UploadForms/Subsections/Description";
+import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
 import BigPicture from "@/components/UploadForms/BigPicture";
 import Timing from "@/components/UploadForms/Timing";
 import Pricing from "@/components/UploadForms/Pricing";
 import HouseDetails from "@/components/UploadForms/HouseDetails";
 import Toggle from "@/components/Header/Elements/Toggle";
 import UserIcon from "@/components/Header/Elements/UserIcon";
-import ApplianceSelect from "@/components/UploadForms/Subsections/ApplianceSelect";
-import { AppContext } from "/src/components/AppState";
 import { useContext, useRef, useCallback } from "react";
 import { classifySemesters } from "@/utils/classifySemesters";
 import HeadElement from "@/components/Header/HeadElement";
-
-import Fade from "@/components/Fade";
-
+import { useRouter } from "next/router";
 
 import {
     PhotoIcon,
@@ -47,40 +41,42 @@ import Appliances from "../../components/UploadForms/Appliances";
 import Allowed from "../../components/UploadForms/Allowed";
 import Amenities from "../../components/UploadForms/Amenities";
 import { FormContext } from "/src/components/FormState";
+import { WelcomePage } from "../../components/UploadForms/WelcomePage";
+import { ImageUpload } from "../../components/UploadForms/ImageUpload";
 
 export default function hi() {
     const pageFocus = useRef(null)
-    const inputFileRef = useRef(null);
-    const [uploadimgs, setuploadimgs] = useState([]);
+    const submitFormRef = useRef(null);
+    const downButtonRef = useRef(null);
+    const upButtonRef = useRef(null);
 
-    function deleteImage(index) {
-        const newImages = [...uploadimgs];
-        newImages.splice(index, 1);
-        setuploadimgs(newImages);
-    }
+    const { formMajorAppliances, formAllowed, formAmenities, formCircleColors } = useContext(FormContext);
+    const { resetEverything } = useContext(FormContext);
 
-    const [circleColors, setCircleColors] = useState([]);
-    const setCircleColorsFunction = (data) => {
-        setCircleColors(data);
-    };
-
+    // auth
     const [session, setSession] = useState(null);
     const supabase = useSupabaseClient();
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session);
+        });
 
-    const handleImageUpload = (e) => {
-        console.log("Uploading image", e.target.files);
-        setuploadimgs([e.target.files[0], ...uploadimgs]);
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session);
+        });
 
-        let formData = new FormData();
-        formData.append("file", e.target.files[0]);
-        fetch(`/api/UploadImagesApi?id=${idNum}`, { method: "PUT", body: formData })
-            .then(console.log).catch(console.log);
-    };
+        return () => subscription.unsubscribe();
+    }, []);
+
+
+
+
 
 
     const [idNum, setIdNum] = useState(null);
 
-    const { formMajorAppliances, formAllowed, formAmenities } = useContext(FormContext);
 
     const [formSubmitting, setFormSubmitting] = useState(false);
     const handleFormSubmit = async (event) => {
@@ -95,9 +91,8 @@ export default function hi() {
         if (data.move_in && data.move_out) {
             data.semester = classifySemesters(data);
         }
-        data.roommate_demographics = circleColors;
-
-        console.log(formMajorAppliances)
+        data.date_submitted = new Date().toISOString();
+        data.roommate_demographics = formCircleColors;
 
         data.appliances_list = formMajorAppliances;
         data.allowed_list = formAllowed;
@@ -117,7 +112,7 @@ export default function hi() {
         } catch (error) {
             console.error("Error occurred:", error);
         } finally {
-            setFormSubmitting(true);
+            setFormSubmitting(false);
             // changePage(1)
         }
     }
@@ -138,30 +133,17 @@ export default function hi() {
         } catch (error) {
             console.error("Error occurred:", error);
         } finally {
-            setPage(1)
             setIsLoading(false);
         }
     }
 
-
-    useEffect(() => {
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session);
-        });
-
-        const {
-            data: { subscription },
-        } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session);
-        });
-
-        return () => subscription.unsubscribe();
-    }, []);
-
+    const [subleaseDataLoading, setSubleaseDataLoading] = useState(null);
+    // When session loads, see if draft exists
     const [existingFormData, setExistingFormData] = useState(null);
     useEffect(() => {
         const fetchSubleasesDraft = async () => {
             try {
+                setSubleaseDataLoading(true);
                 const { data, error } = await supabase
                     .from("subleases_draft")
                     .select()
@@ -170,15 +152,16 @@ export default function hi() {
 
                 if (error) throw error;
 
+
                 console.log("existing data", data)
-                // since people can only have one draft at a time, we can just get the first one
                 setExistingFormData(data[0]);
                 if (data.length > 0) {
                     setIdNum(data[0].id);
                 }
-
             } catch (error) {
                 console.error("Error occurred while getting existing data:", error);
+            } finally {
+                setSubleaseDataLoading(false);
             }
         };
 
@@ -191,64 +174,11 @@ export default function hi() {
     const [page, setPage] = useState(0);
 
     const [isLoading, setIsLoading] = useState(false);
-    const myButtonRef = useRef(null);
-
-    const triggerButtonClick = () => {
-        if (myButtonRef.current) {
-            myButtonRef.current.click();
-        }
-    };
-
 
     const pages = [
         {
             content: (
-                <div className="">
-                    <h1 className="text-4xl font-bold">
-                        {existingFormData ? "Welcome Back" : "Ready to sublease?"}
-                    </h1>
-
-                    <div className="mt-4 mb-4 text-lg text-gray-500">
-                        {existingFormData ? "We saved your last responses." : "We just have a few things you need to fill out."}
-
-                    </div>
-
-                    <div className=" flex items-center gap-2">
-                        <button
-                            ref={myButtonRef}
-                            className={`w-60 focus:outline-none focus:ring px-4 py-3  text-sm font-medium text-white transition-all bg-gray-700 rounded-full 
-                            ${isLoading ? "opacity-50" : ""}
-                            `}
-                            disabled={existingFormData === null}
-                            onClick={(e) => {
-                                e.preventDefault();
-
-                                if (existingFormData) {
-                                    changePage(2)
-                                } else {
-                                    createListingId();
-                                }
-                            }
-                            }>
-                            {isLoading ? (
-                                <div className="flex items-center justify-center gap-2">
-                                    <svg className="animate-spin w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
-                                    Loading...
-                                </div>
-                            ) : "Get Started"}
-                        </button>
-                        <div className="flex items-center gap-1">
-                            <div className="text-sm text-gray-800">
-                                press <b>Enter</b>
-                            </div>
-                            <ArrowUturnLeftIcon className="-scale-y-100 w-3 h-3 font-semibold" />
-                        </div>
-                    </div>
-
-                </div>
+                <WelcomePage idNum={idNum} isLoading={isLoading} sdl={subleaseDataLoading} existingFormData={existingFormData} />
             )
         },
         {
@@ -258,84 +188,35 @@ export default function hi() {
 
                     <br></br>
 
-                    Your work is saved when you click the "Continue" button, so you can come back later to finish.
-                </div>
-            )
-        },
-        {
-            // page: 1,
-            content: (
-                <div className="">
-                    <label
-                        htmlFor="cover-image"
-                        id="cover-image-label"
-                        className=" block text-lg font-medium"
-                    >
-                        Photos
-                    </label>
-                    <p>
-                        Photos you've personally taken will produce the best response.
-                        Include the bedroom, bathroom, and kitchen/living area.
-                    </p>
-
-                    <input
-                        type="file"
-                        id="cover-image"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="mt-2"
-                        ref={inputFileRef} // Add ref to the input element
-                    />
-                    <div className="flex items-center h-64 gap-2 px-2 mt-2 overflow-x-auto border border-gray-400 rounded-md">
-                        {uploadimgs.length !== 0 ? (
-                            uploadimgs.map((img, index) => (
-                                <CoverImage
-                                    img={img}
-                                    key={index}
-                                    id={idNum}
-                                    index={index}
-                                    loading={loading}
-                                    deleteImage={deleteImage}
-                                />
-                            ))
-                        ) : (
-                            <div className="h-60 w-60 outline outline-black relative rounded-md">
-                                <span
-                                    className="flex items-center justify-center w-full h-full text-center cursor-pointer"
-                                    onClick={() => inputFileRef.current.click()}
-                                >
-                                    No files yet!<br></br>
-                                    Upload an image
-                                </span>
-                            </div>
-                        )}
-                    </div>
+                    {/* Your work is saved when you click the "Continue" button, so you can come back later to finish. */}
+                    Your work is saved when you move onto the next page, so you can come back later to finish.
                 </div>
             )
         },
         {
             content: (
-                <>
-                    <BigPicture daReffy={pageFocus} />
-                </>
+                <ImageUpload idNum={idNum} />
             )
         },
         {
             content: (
-                <Timing daReffy={pageFocus} />
+                <BigPicture pageFocusRef={pageFocus} />
             )
         },
         {
             content: (
-                <Pricing daReffy={pageFocus} />
+                <Timing pageFocusRef={pageFocus} />
+            )
+        },
+        {
+            content: (
+                <Pricing pageFocusRef={pageFocus} />
             )
         },
         {
             content: (
                 <HouseDetails
-                    circleColors={circleColors}
-                    setCircleColorsFunction={setCircleColorsFunction}
-                    daReffy={pageFocus}
+                    pageFocusRef={pageFocus}
                 />
             )
         },
@@ -385,58 +266,68 @@ export default function hi() {
         }
     }
 
-    const [show, setShow] = useState(true);
+    const router = useRouter();
     const changePage = useCallback((number) => {
-        if (page + number + 1 > pages.length) {
+        console.log(page, number, pages.length)
 
-
+        if (page + number === pages.length) {
             setSubmitted();
-
-            return
-        }
-
-        if (page === 0 && 1 === Math.abs(number)) {
-            console.log("Triggering first page button")
-            triggerButtonClick();
+            resetEverything();
+            // redirect to /dashboard
+            router.push("/dashboard")
             return
         }
 
         var form = document.getElementById('myform');
-        setPage((currPage) => {
-            if (currPage + number < 0) {
-                return currPage;
-            } else {
-                if (number > 0) {
-                    if (form.checkValidity()) {
-                        if (submitFormRef.current) {
-                            submitFormRef.current.click();
-                        }
-                        return currPage + number;
-                    } else {
-                        form.reportValidity();
-                        return currPage
-                    }
-                } else {
-                    return currPage + number;
+        let newPage = page + number;
+
+        if (newPage < 0) {
+            newPage = page;
+        } else if (number > 0) {
+            if (form.checkValidity()) {
+                if (submitFormRef.current) {
+                    submitFormRef.current.click();
                 }
+            } else {
+                form.reportValidity();
+                newPage = page;
             }
-        });
-    }, [page]); // add any other dependencies here
+        }
+
+        setPage(newPage);
+    }, [page]);
 
     const handleKeyDown = useCallback((event) => {
         switch (event.keyCode) {
+            // case 37:
+            //     // press left arrow
+            //     if (upButtonRef.current) {
+            //         upButtonRef.current.click();
+            //     }
+            //     break;
             case 38:
-                changePage(-1)
+                // press up arrow
+                if (upButtonRef.current) {
+                    upButtonRef.current.click();
+                }
                 break;
+            // case 39:
+            //     if (downButtonRef.current) {
+            //         downButtonRef.current.click();
+            //     }
+            //     break;
             case 40:
-                changePage(1)
+                if (downButtonRef.current) {
+                    downButtonRef.current.click();
+                }
                 break;
-            case 13:
-                changePage(1)
+
+            // case 13:
+
             default:
                 break;
         }
-    }, [changePage]); // adding changePage as a dependency
+    }, [changePage]);
 
     useEffect(() => {
         window.addEventListener("keydown", handleKeyDown);
@@ -444,14 +335,9 @@ export default function hi() {
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
         };
-    }, [handleKeyDown]); // adding handleKeyDown as a dependency
-
-
-    const submitFormRef = useRef(null);
-
+    }, [handleKeyDown]);
 
     return (
-
         <div >
             <HeadElement title="GT Subleaser | Create a Sublease" />
             {!session ? (
@@ -513,6 +399,7 @@ export default function hi() {
                                                     type="submit"
                                                     ref={submitFormRef}
                                                     className={`focus:outline-none focus:ring px-3 py-1.5  text-sm font-medium text-white transition-all bg-gray-700 rounded-full mt-8`}
+                                                // onClick={() => { changePage(1) }}
                                                 >Continue</button>
                                             ) : null}
                                     </div>
@@ -531,14 +418,27 @@ export default function hi() {
                                     <div className="mr-2.5 font-mono text-gray-900 text-sm">
                                         Page {page + 1}/{pages.length}
                                     </div>
-                                    <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-l">
+                                    <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-l" ref={upButtonRef}
+                                        onClick={() => { changePage(-1) }}
+                                    >
                                         <ArrowUpIcon className="w-5 h-5 font-bold text-white"
-                                            onClick={() => { changePage(-1) }}
+
                                         />
                                     </div>
-                                    <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-r">
+                                    <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-r" ref={downButtonRef}
+                                        onClick={async () => {
+                                            if (existingFormData !== null) {
+                                                if (!idNum) {
+                                                    await createListingId();
+                                                    changePage(1)
+                                                } else {
+                                                    changePage(1)
+                                                }
+                                            }
+                                        }}
+                                    >
                                         <ArrowDownIcon className="w-5 h-5 font-bold text-white"
-                                            onClick={() => { changePage(1) }}
+
                                         />
                                     </div>
                                 </div>
@@ -548,25 +448,11 @@ export default function hi() {
                         </div>
                     </div>
                 </div>
-
-
-
             )
             }
-
-
         </div >
     )
 }
-
-
-// <input
-//                             type="email"
-//                             placeholder="Email"
-
-//                             className=" w-80 focus:outline-none focus:ring px-4 py-3 mt-8 text-sm text-white transition-all bg-gray-700 rounded-full"
-//                         />
-
 
 function Sidebar({ page }) {
     return (
@@ -574,7 +460,7 @@ function Sidebar({ page }) {
             <div className="lg:justify-start relative flex justify-center">
                 <ul className="relative flex flex-col w-full gap-4">
                     <div className="flex flex-col gap-3 pt-8">
-                        <span className={`font-mono text-sm ${page === 1 ? "text-green-500" : "text-gray-500"}`}>
+                        <span className={`font-mono text-sm text-gray-500`}>
                             BIG PICTURE
                         </span>
                         {/* <a href="#cover-image-label"> */}
@@ -612,7 +498,7 @@ function Sidebar({ page }) {
                     <div className="w-full border-b"></div>
 
                     <div className="flex flex-col gap-3">
-                        <span className={`font-mono text-sm ${page === 2 ? "text-green-500" : "text-gray-500"}`}>
+                        <span className={`font-mono text-sm text-gray-500`}>
                             TIMING
                         </span>
 
@@ -639,7 +525,7 @@ function Sidebar({ page }) {
                     <div className="w-full border-b"></div>
 
                     <div className="flex flex-col gap-3">
-                        <span className={`font-mono text-sm ${page === 3 ? "text-green-500" : "text-gray-500"}`}>
+                        <span className={`font-mono text-sm  text-gray-500`}>
                             PRICING
                         </span>
                         {/* <a href="#monthly_price"> */}
@@ -663,7 +549,7 @@ function Sidebar({ page }) {
                     </div>
                     <div className="w-full border-b"></div>
                     <div className="flex flex-col gap-3">
-                        <span className={`font-mono text-sm ${page === 4 ? "text-green-500" : "text-gray-500"}`}>
+                        <span className={`font-mono text-sm text-gray-500`}>
                             HOUSE DETAILS
                         </span>
                         {/* <a href="#total_bedrooms"> */}
@@ -695,7 +581,7 @@ function Sidebar({ page }) {
                     <div className="w-full border-b"></div>
 
                     <div className="flex flex-col gap-3 pb-8">
-                        <span className={`font-mono text-sm ${page > 4 && page < 8 ? "text-green-500" : "text-gray-500"}`}>
+                        <span className={`font-mono text-sm text-gray-500`}>
                             EXTRA
                         </span>
                         {/* <a href="#major_appliances"> */}

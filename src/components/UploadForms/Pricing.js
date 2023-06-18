@@ -1,7 +1,7 @@
 import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function Pricing({ daReffy }) {
+export default function Pricing({ pageFocusRef }) {
   const { formMonthlyPrice, setFormMonthlyPrice } = useContext(FormContext);
   const { formUtilities, setFormUtilities } = useContext(FormContext);
   const { formFees, setFormFees } = useContext(FormContext);
@@ -16,7 +16,7 @@ export default function Pricing({ daReffy }) {
           Monthly Price
         </label>
         <input
-          ref={daReffy}
+          ref={pageFocusRef}
           type="number"
           id="monthly_price"
           name="monthly_price"

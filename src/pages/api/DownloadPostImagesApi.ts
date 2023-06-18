@@ -9,7 +9,7 @@ export default async function DownloadPostImagesApi(
 
   // List all files in the folder
   const { data, error } = await supabase.storage
-    .from("sublease-images")
+    .from("sublease_images")
     .list(`${url}/`);
 
   if (error) {
@@ -22,7 +22,7 @@ export default async function DownloadPostImagesApi(
     let path = `${url}/${file.name}`;
 
     const { data } = supabase.storage
-      .from("sublease-images")
+      .from("sublease_images")
       .getPublicUrl(path);
 
     tempSupabaseURL.push(data["publicUrl"]);

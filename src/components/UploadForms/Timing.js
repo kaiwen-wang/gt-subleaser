@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function Timing({ daReffy }) {
+export default function Timing({ pageFocusRef }) {
   const { formMoveIn: moveInDate, setFormMoveIn: setMoveInDate } =
     useContext(FormContext);
   const { formMoveOut: moveOutDate, setFormMoveOut: setMoveOutDate } =
@@ -41,7 +41,7 @@ export default function Timing({ daReffy }) {
             Earliest Move-in
           </label>
           <input
-            ref={daReffy}
+            ref={pageFocusRef}
             type="date"
             name="move_in"
             className="w-full p-2 border border-gray-400 rounded"

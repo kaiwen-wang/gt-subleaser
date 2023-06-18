@@ -5,7 +5,11 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import {
+  useSession,
+  useSupabaseClient,
+  useUser,
+} from "@supabase/auth-helpers-react";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Dialog } from "@headlessui/react";
@@ -16,9 +20,12 @@ import {
 import Account from "@/components/Account";
 
 export default function UserIcon() {
-  const [session, setSession] = useState(null);
+  const user = useUser();
   const supabase = useSupabaseClient();
 
+  const [avatarUrl, setAvatarUrl] = useState(null);
+
+  const [session, setSession] = useState(null);
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -32,6 +39,53 @@ export default function UserIcon() {
 
     return () => subscription.unsubscribe();
   }, []);
+  useEffect(() => {
+    if (session) {
+      getProfile();
+    }
+  }, [session]);
+  useEffect(() => {
+    if (avatarUrl && !avatarUrl.includes("blob:")) {
+      downloadImage(avatarUrl);
+    }
+  }, [avatarUrl]);
+
+  async function getProfile() {
+    try {
+      let { data, error, status } = await supabase
+        .from("profiles")
+        .select(`first_name, self_introduction, avatar_url`)
+        .eq("id", user.id)
+        .single();
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data.avatar_url) {
+        setAvatarUrl(data.avatar_url);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function downloadImage(path) {
+    try {
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .download(path);
+      if (error) {
+        throw error;
+      }
+      const url = URL.createObjectURL(data);
+
+      setAvatarUrl(url);
+    } catch (error) {
+      console.log("Error downloading image: ", error);
+      // setAvatarUrl(null);
+    }
+  }
 
   let [isOpen, setIsOpen] = useState(false);
   let [isOpen2, setIsOpen2] = useState(false);
@@ -67,9 +121,22 @@ export default function UserIcon() {
         session={session}
       />
       <Menu as="div" className=" relative">
-        <Menu.Button className="bordershadow-scale-600 rounded-full p-1.5 outline outline-0  outline-gray-200 hover:bg-gray-100 sm:text-sm">
+        <Menu.Button
+          className={`${
+            avatarUrl ? "p-0" : "p-1.5"
+          } bordershadow-scale-600 rounded-full outline outline-0 outline-gray-200 overflow-hidden hover:bg-gray-100 sm:text-sm flex items-center    `}
+        >
           {session ? (
-            <UserCircleIcon2 className="w-8 h-8 text-green-500" />
+            avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt="Avatar"
+                className="rounded-full"
+                style={{ height: "2.75rem", width: "2.75rem" }}
+              />
+            ) : (
+              <UserCircleIcon2 className="w-8 h-8 text-green-500" />
+            )
           ) : (
             <UserCircleIcon className="w-8 h-8 text-gray-700" />
           )}

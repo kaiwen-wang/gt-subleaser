@@ -3,14 +3,14 @@ import Title from "@/components/UploadForms/Subsections/Title";
 import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function BigPicture({ daReffy }) {
+export default function BigPicture({ pageFocusRef }) {
   let { formNeighborhood: neighborhood, setFormNeighborhood: setNeighborhood } =
     useContext(FormContext);
 
   return (
     <div className="">
-      <Title daReffy={daReffy} />
-      <Description daReffy={daReffy} />
+      <Title pageFocusRef={pageFocusRef} />
+      <Description pageFocusRef={pageFocusRef} />
       <div className="">
         <label
           htmlFor="Neighborhood"

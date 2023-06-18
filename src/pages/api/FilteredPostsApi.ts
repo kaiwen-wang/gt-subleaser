@@ -14,11 +14,23 @@ export default async function FilteredPostsApi(
   let sortFormula = req.query.sort as string;
   let pages = req.query.pages as string;
 
-  let query = supabase
-    .from("subleases")
+  let query = supabase.from("subleases_draft").select();
+  // .eq("active_post", true)
+  // .range(6 * (parseInt(pages) - 1), 6 * (parseInt(pages) - 1) + 5);
+
+  let query2 = supabase
+    .from("subleases_active")
     .select()
-    // .eq("active_post", true)
     .range(6 * (parseInt(pages) - 1), 6 * (parseInt(pages) - 1) + 5);
+
+  let { data: ids, error: error2 } = await query2;
+
+  if (error2) {
+    res.status(500).json({ error: error2.message });
+  } else {
+    let idArray = ids.map((id) => id.id);
+    query = query.in("id", idArray);
+  }
 
   if (maxPrice !== "") {
     query = query.lte("monthly_price", parseInt(maxPrice));
@@ -53,12 +65,12 @@ export default async function FilteredPostsApi(
   } else if (sortFormula === "decreasingPrice") {
     query.order("monthly_price", { ascending: false });
   } else if (sortFormula === "newest") {
-    query.order("created_at", { ascending: false });
+    query.order("date_submitted", { ascending: false });
   } else if (sortFormula === "oldest") {
-    query.order("created_at", { ascending: true });
+    query.order("date_submitted", { ascending: true });
   }
 
-  const { data, error } = await query;
+  const { data, error } = await query.select(`*, profiles(*)`);
 
   if (error) {
     res.status(500).json({ error: error.message });

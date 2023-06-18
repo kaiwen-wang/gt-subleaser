@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <FormProvider>
           <AppProvider>
             <Component {...pageProps} />
-            <Analytics />
+            <Analytics debug={false} />
           </AppProvider>
         </FormProvider>
       </ThemeProvider>

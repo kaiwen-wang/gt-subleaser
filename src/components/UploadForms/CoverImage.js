@@ -2,30 +2,46 @@ import { TrashIcon, CloudArrowUpIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 export default function CoverImage({ id, index, img, deleteImage, loading }) {
-  async function deleteImageFromServer() {
-    fetch(`/api/DeleteImagesApi?idNum=${id}&imgName=${img.name}`)
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+  async function deleteImageFromServer(imgName) {
+    try {
+      let res = await fetch(
+        `/api/DeleteImagesApi?idNum=${id}&imgName=${imgName}`
+      );
+
+      console.log("CoverImage.js deleteImageFromServer() res: ", res);
+    } catch (error) {
+      console.error("CoverImage.js deleteImageFromServer() ", error);
+    }
   }
+
+  console.log("here is img", img);
 
   return (
     <div className="shrink-0 h-60 w-60 outline outline-black relative rounded-md">
       <Image
-        src={URL.createObjectURL(img)}
+        src={typeof img === "string" ? img : URL.createObjectURL(img)}
         alt="Image you're uploading"
         width={64} // Added required width property
         height={64} // Added required height property
         className={`${loading ? "opacity-50" : ""} h-full w-full`} // Added w-full and h-full
         style={{ objectFit: "cover" }}
       />
-      <div
-        className=" absolute top-0 right-0 mt-2 mr-2 cursor-pointer"
-        onClick={() => deleteImage(index)}
-      >
+      <div className=" absolute top-0 right-0 mt-2 mr-2 cursor-pointer">
         <TrashIcon
           className="backdrop-blur outline drop-shadow w-8 h-8 p-1 text-red-600 bg-white rounded-full"
-          onClick={() => deleteImageFromServer()}
+          onClick={() => {
+            console.log(
+              "HERE IMG NAME",
+              img,
+              img.split("/")[img.split("/").length - 1]
+            );
+            if (typeof img === "string") {
+              deleteImageFromServer(img.split("/")[img.split("/").length - 1]);
+            } else {
+              deleteImageFromServer(img.name);
+            }
+            deleteImage(index);
+          }}
         />
       </div>
       {loading && (

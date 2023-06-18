@@ -21,9 +21,11 @@ const asyncParse = (req: NextApiRequest) =>
 const asyncUpload = async (id: string, file: any) => {
   const fileData = await fs.readFile(file.filepath);
 
+  console.log(id, file.originalFilename, file.mimetype, fileData);
+
   try {
     const { error } = await supabase.storage
-      .from("sublease-images")
+      .from("sublease_images")
       .upload(`${id}/${file.originalFilename}`, fileData, {
         contentType: file.mimetype,
       });

@@ -17,28 +17,50 @@ import { createAnds } from "@/utils/createAnds";
 import { GenderedPeople } from "@/components/PageComponents/SkellyImage";
 import dateDiff from "@/utils/dateDiff";
 import FeedbackModal from "@/components/PageComponents/FeedbackModal";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 
 // Get data for a specific id
 export async function getServerSideProps({ params }) {
   let { data, error } = await supabase
-    .from("subleases")
-    .select()
+    .from("subleases_active")
+    .select(
+      `
+      *,
+      profiles(*),
+      subleases_draft(*)
+    `
+    )
     // .eq("active_post", true)
     .eq("id", params.id);
 
   if (error || !data || data.length === 0) {
-    // show a 404 page
     return {
       notFound: true,
     };
   }
 
   data = data[0];
-  data.semester = createAnds(data.semester);
+
+  let flattenedData = {}
+  for (const [key, value] of Object.entries(data)) {
+    if (key === "profiles") {
+      for (const [key2, value2] of Object.entries(value)) {
+        flattenedData[key2] = value2
+      }
+    } else if (key === "subleases_draft") {
+      for (const [key2, value2] of Object.entries(value)) {
+        flattenedData[key2] = value2
+      }
+    } else {
+      flattenedData[key] = value
+    }
+  }
+
+  flattenedData.semester = createAnds(flattenedData.semester);
 
   return {
     props: {
-      data,
+      data: flattenedData,
     },
   };
 }
@@ -46,8 +68,13 @@ export async function getServerSideProps({ params }) {
 export default function Listing({ data }) {
   const [leaseTime, setLeaseTime] = useState(false);
 
+  useEffect(() => {
+    console.log("hereis d", data)
+  }, [data])
+
+
   const { error } = useSWR(
-    `/api/UpdateTotalViewsApi?id=${data.id}&currentViews=${data.total_views}`,
+    `/api/UpdateTotalViewsApi?id=${data.id}&currentViews=${data.unique_views}`,
     fetcher
   );
 
@@ -58,6 +85,33 @@ export default function Listing({ data }) {
 
   const OPTIONS = {};
 
+
+  const [avatarUrl, setAvatarUrl] = useState(null);
+
+  useEffect(() => {
+    if (data.avatar_url) downloadImage(data.avatar_url);
+  }, [data.avatar_url]);
+
+  async function downloadImage(path) {
+    try {
+      const { data, error } = await supabase.storage
+        .from("avatars")
+        .download(path);
+      if (error) {
+        throw error;
+      }
+      const url = URL.createObjectURL(data);
+
+      setAvatarUrl(url);
+    } catch (error) {
+      console.log("Error downloading image: ", error);
+    }
+  }
+
+
+  const nameConst = data.first_name || data.email.split("@")[0]
+
+
   return (
     <>
       <HeadElement title={"GT Subleaser"} />
@@ -66,18 +120,21 @@ export default function Listing({ data }) {
       <main className="md:max-w-4xl lg:max-w-5xl xl:max-w-6xl lg:pb-12 px-4 pb-6 mx-auto">
         <div className="flex justify-between mt-6">
           <p className="flex gap-2 text-sm text-gray-500">
-            {`Listing ID: ${data.id}`} <span>·</span> Total Views:{" "}
-            {data.total_views}
+            {`Listing ID: ${data.id}`}
+            {/* <span>·</span> Total Views:{" "}
+            {data.unique_views} */}
           </p>
           <p className="text-sm text-gray-500">{`Published ${timeAgo(
-            data.created_at
+            data.date_submitted
           )}`}</p>
         </div>
 
         <div className="flex items-center w-full h-64 gap-2 mt-2 overflow-x-auto overflow-y-hidden border border-black rounded-md">
           {data2 &&
             data2.map((image) => (
-              <div className="shrink-0 relative w-64 h-64">
+              <div className="shrink-0 relative w-64 h-64"
+                key={image}
+              >
                 <img
                   src={image}
                   alt="Image of the lease"
@@ -117,10 +174,11 @@ export default function Listing({ data }) {
               </div>
 
               <span className="text-sm text-gray-500">
-                {data.free_rooms} Bed{" "}
-                {data.private_bathroom
-                  ? `${Math.min(data.total_bathrooms, 1 * data.free_rooms)}`
-                  : `Shared`}{" "}
+                {data.free_bedrooms} Bed{" "}
+                {data.free_bathrooms} {" "}
+                {/* {data.private_bathroom
+                  ? `${Math.min(data.total_bathrooms, 1 * data.free_bedrooms)}`
+                  : `Shared`}{" "} */}
                 Bath in a {data.total_bedrooms}B/{data.total_bathrooms}B
               </span>
             </div>
@@ -349,20 +407,57 @@ export default function Listing({ data }) {
             </div>
           </div>
           <div className="lg:w-5/12 w-full">
-            {!data.created_by ? (
-              <div className="flex flex-col p-4 mb-4 border rounded-lg">
-                <p className="font-medium text-gray-800">Post created by</p>
-                <span>name</span>
+            <div className="flex flex-col p-4 mb-4 border rounded-lg">
+              <div className="flex items-center gap-2">
+                <div
+                  className={`relative w-11 shadow-md h-11 bg-gray-500 rounded-full `}
+                >
+                  {data.avatar_url ? (
+                    <img
+                      className={`${avatarUrl ? "" : "hidden"
+                        } object-cover h-full w-full rounded-full`}
+                      src={avatarUrl}
+                      alt="Profile"
+                    />
+                  ) : (
+                    <UserCircleIcon className=" text-white/90 p-0.5" />
+                  )}
+                </div>
+                <p className="font-medium text-gray-800">
+                  Post created by {nameConst}
+                </p>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    // variable that stores current URL
+                    let url = window.location.href;
+
+                    let subject = encodeURIComponent("[GT Subleaser] Contact Request");
+                    let body = encodeURIComponent("Hi " + nameConst + ",\n\nI am interested in your listing on GT Subleaser.");
+                    let mailtoLink = `mailto:${data.email}?subject=${subject}&body=${body}`;
+
+                    window.open(mailtoLink, '_blank');
+                  }}
+                  className="hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 block px-3 py-1.5 ml-auto text-sm font-medium text-white bg-gray-400 rounded-md shadow-sm"
+                >
+                  Contact
+                </button>
               </div>
-            ) : (
-              null
-            )}
+              <div className="mt-3 font-mono text-xs">
+                Here's their self-introduction:
+              </div>
+              <div className="rounded-xl p-4 mt-1 text-sm bg-gray-100">
+                {data.self_introduction}
+              </div>
+
+            </div>
 
 
             <div className="flex flex-col p-4 border rounded-lg">
               <div className="flex">
                 <div className="">
-                  <span className=" font-medium">Estimated Price:</span> $
+                  {/* <span className=" font-medium">Estimated Price:</span> $
                   {calculateTotalCost(
                     data.monthly_price,
                     data.utilities_fee,
@@ -372,31 +467,14 @@ export default function Listing({ data }) {
                   )}
                   <div className="text-sm">
                     For a total of {dateDiff(data.move_in, data.move_out)}
-                  </div>
+                  </div> */}
                 </div>
-                <button
-                  onClick={() => {
-                    // fetch(
-                    //   `/api/UpdateContactClicksApi?id=${
-                    //     data.id
-                    //   }&contactClicks=${data.contact_clicks + 1}`
-                    // );
 
-                    let copyText = data.contact_email;
-                    navigator.clipboard.writeText(copyText).then(() => {
-                      alert(`${copyText} copied to clipboard.`);
-                    });
-                  }}
-                  className="hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 block px-4 py-2 ml-auto text-sm font-medium text-white bg-gray-400 rounded-md shadow-sm"
-                >
-                  Contact
-                </button>
               </div>
               {/* {data.move_in}
               {data.move_out} */}
-              <div className="mt-4 mb-4 border-b"></div>
               <div className="text-sm">
-                {convertDate(data.move_in)} to {convertDate(data.move_out)}
+                <span className="font-medium">{convertDate(data.move_in)}</span> to  <span className="font-medium">{convertDate(data.move_out)}</span>
               </div>
 
               <div className="mt-4 mb-4 border-b"></div>

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { FormContext } from "/src/components/FormState";
 import { useContext } from "react";
 
-export default function HouseDetails({
-  circleColors,
-  setCircleColorsFunction,
-  daReffy,
-}) {
+export default function HouseDetails({ pageFocusRef }) {
   // const [privateBathroom, setPrivateBathroom] = useState(false);
 
+  const {
+    formCircleColors: circleColors,
+    setFormCircleColors: setCircleColorsFunction,
+  } = useContext(FormContext);
   const {
     formTotalBedrooms: totalBedrooms,
     setFormTotalBedrooms: setTotalBedrooms,
@@ -23,6 +23,8 @@ export default function HouseDetails({
     formFreeBathrooms: freeBathrooms,
     setFormFreeBathrooms: setFreeBathrooms,
   } = useContext(FormContext);
+  const { formGenderPreference, setFormGenderPreference } =
+    useContext(FormContext);
 
   // useEffect(() => {
   //   setPrivateBathroom(
@@ -31,14 +33,23 @@ export default function HouseDetails({
   // }, [totalBathrooms, totalBedrooms]);
 
   useEffect(() => {
+    console.log("rooms AND FREEROOMS!?!?!", totalBedrooms, freeRooms);
     if (totalBedrooms - freeRooms >= 0 && freeRooms >= 0) {
-      circleColors = new Array(totalBedrooms - freeRooms).fill("M");
-      let freeCircleColors = new Array(freeRooms).fill("O");
+      let defaultCircleColors = new Array(totalBedrooms - freeRooms).fill("M");
+      let freeCircleColors = [];
+      if (freeRooms) {
+        freeCircleColors = new Array(freeRooms).fill("O");
+      }
 
-      circleColors = circleColors.concat(freeCircleColors);
-      setCircleColorsFunction(circleColors);
+      setCircleColorsFunction(defaultCircleColors.concat(freeCircleColors));
     }
   }, [totalBedrooms, freeRooms]);
+
+  useEffect(() => {
+    if (circleColors && setCircleColorsFunction) {
+      setCircleColorsFunction(circleColors);
+    }
+  }, [circleColors]);
 
   const handleCircleClick = (index) => {
     const newColors = [...circleColors];
@@ -58,14 +69,14 @@ export default function HouseDetails({
             Total Bedrooms
           </label>
           <input
-            ref={daReffy}
+            ref={pageFocusRef}
             value={totalBedrooms}
             type="number"
             id="total_bedrooms"
             name="total_bedrooms"
             className="w-full p-2 border border-gray-400 rounded"
             min="1"
-            max="20"
+            max="10"
             required
             onWheel={(e) => e.target.blur()}
             onChange={(e) => {
@@ -74,11 +85,11 @@ export default function HouseDetails({
                 setTotalBedrooms(0);
                 // change the value of the input
                 e.target.value = 0;
-              } else if (parseInt(e.target.value) > 20) {
-                // if target value is greater than 20 then set it to 20
-                setTotalBedrooms(20);
+              } else if (parseInt(e.target.value) > 10) {
+                // if target value is greater than 10 then set it to 10
+                setTotalBedrooms(10);
                 // change the value of the input
-                e.target.value = 20;
+                e.target.value = 10;
               } else {
                 setTotalBedrooms(parseInt(e.target.value));
               }
@@ -109,11 +120,11 @@ export default function HouseDetails({
             required
             onWheel={(e) => e.target.blur()}
             onChange={(e) => {
-              if (parseInt(e.target.value) < 1) {
-                // stop the user from entering a num less 1
-                setFreeRooms(1);
+              if (parseInt(e.target.value) < 0) {
+                // stop the user from entering a num less 0
+                setFreeRooms(0);
                 // change the value of the input
-                e.target.value = 1;
+                e.target.value = 0;
               } else if (parseInt(e.target.value) > totalBedrooms) {
                 // stop the user from entering a number greater than total bedrooms
                 setFreeRooms(totalBedrooms);
@@ -171,11 +182,27 @@ export default function HouseDetails({
             name="total_bathrooms"
             className="w-full p-2 border border-gray-400 rounded"
             min="1"
-            // step="0.5"
-            max="20"
+            step="0.5"
+            max="10"
             required
             onWheel={(e) => e.target.blur()}
-            onChange={(e) => setTotalBathrooms(parseInt(e.target.value))}
+            onChange={(e) => {
+              let value = parseFloat(e.target.value);
+              if (value < 0) {
+                setTotalBathrooms(0);
+                e.target.value = 0;
+              } else if (value > 10) {
+                setTotalBathrooms(10);
+                e.target.value = 10;
+              } else if (value % 0.5 !== 0) {
+                // Round down to nearest 0.5 if the value is not a multiple of 0.5
+                value = Math.floor(value * 2) / 2;
+                setTotalBathrooms(value);
+                e.target.value = value;
+              } else {
+                setTotalBathrooms(value);
+              }
+            }}
           />
         </div>
         <div>
@@ -192,11 +219,27 @@ export default function HouseDetails({
             name="free_bathrooms"
             className="w-full p-2 border border-gray-400 rounded"
             min="1"
-            // step="0.5"
+            step="0.5"
             max={totalBathrooms}
             required
             onWheel={(e) => e.target.blur()}
-            onChange={(e) => setFreeBathrooms(parseInt(e.target.value))}
+            onChange={(e) => {
+              let value = parseFloat(e.target.value);
+              if (value < 0) {
+                setFreeBathrooms(0);
+                e.target.value = 0;
+              } else if (value > totalBathrooms) {
+                setFreeBathrooms(totalBathrooms);
+                e.target.value = totalBathrooms;
+              } else if (value % 0.5 !== 0) {
+                // Round down to nearest 0.5 if the value is not a multiple of 0.5
+                value = Math.floor(value * 2) / 2;
+                setFreeBathrooms(value);
+                e.target.value = value;
+              } else {
+                setFreeBathrooms(value);
+              }
+            }}
           />
         </div>
       </div>
@@ -247,6 +290,8 @@ export default function HouseDetails({
         <select
           id="gender_preference"
           name="gender_preference"
+          value={formGenderPreference}
+          onChange={(e) => setFormGenderPreference(e.target.value)}
           className="w-full p-2 mt-1 border border-gray-400 rounded"
         >
           <option value="not-important">Not Important</option>

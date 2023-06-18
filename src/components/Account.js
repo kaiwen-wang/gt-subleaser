@@ -5,7 +5,6 @@ export default function Account({ session }) {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [loading, setLoading] = useState(true);
-
   const [firstName, setFirstName] = useState(null);
   const [selfIntroduction, setSelfIntroduction] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
