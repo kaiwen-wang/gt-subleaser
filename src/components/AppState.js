@@ -24,8 +24,9 @@ export function AppProvider({ children }) {
   async function getSupabasePrices() {
     try {
       let { data, error } = await supabase
-        .from("subleases")
-        .select(`monthly_price`);
+        .from("subleases_draft")
+        .select(`monthly_price`)
+        .eq("submitted", true);
 
       if (error) throw error;
 
