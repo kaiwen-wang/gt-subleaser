@@ -1,9 +1,7 @@
 ### Subleaser Project
 
-Image 1:
 ![](https://i.gyazo.com/e77e547baece847f116855532959177c.gif)
 
-Image 2:
 ![](https://gyazo.com/c019e69a16a9938533c4db7af2d2a82a.gif)
 
 
