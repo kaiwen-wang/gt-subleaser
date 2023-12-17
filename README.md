@@ -1,5 +1,10 @@
 ### Subleaser Project
 
+![](https://gyazo.com/e77e547baece847f116855532959177c.gif)
+
+![](https://gyazo.com/c019e69a16a9938533c4db7af2d2a82a.gif)
+
+
 Quick project I did over the summer.
 
 Areas of improvement included styling, working with forms, communicating with a backend, and thinking about the business area and what people need to sublease things.
@@ -31,8 +36,4 @@ State:
 
 Backend:
 - Supabase
-
-![](https://gyazo.com/e77e547baece847f116855532959177c.gif)
-
-![](https://gyazo.com/c019e69a16a9938533c4db7af2d2a82a.gif)
 
