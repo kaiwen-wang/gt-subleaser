@@ -54,7 +54,7 @@ export default function hi() {
     const { resetEverything } = useContext(FormContext);
 
     // auth
-    const [session, setSession] = useState(null);
+    const [session, setSession] = useState(undefined);
     const supabase = useSupabaseClient();
     useEffect(() => {
         supabase.auth.getSession().then(({ data: { session } }) => {
@@ -337,119 +337,129 @@ export default function hi() {
         };
     }, [handleKeyDown]);
 
+    useEffect(() => {
+        console.log(session, "SELSKFJASDK")
+    }, [session])
+
     return (
         <div >
             <HeadElement title="GT Subleaser | Create a Sublease" />
-            {!session ? (
-                <LoginPage />
-            ) : (
-                <div className="flex flex-row h-screen">
-                    <div className="!lg:left-0 absolute -left-[280px] top-0 ml-0 flex h-screen w-0 flex-col  lg:relative lg:left-0 lg:w-[420px]">
-                        <div className=" relative top-0 flex flex-col w-auto h-screen overflow-auto bg-white border-r">
-                            <div className="sticky top-0 z-20 bg-white border-b">
-                                <div className="lg:height-auto bg-scale-200 lg:flex flex-col hidden gap-8 pt-8 pb-8">
-                                    <a className="flex items-center gap-3 px-10" href="/">
-                                        <span className="text-2xl font-semibold">
-                                            🐝 GT Subleaser
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <Sidebar page={page} />
-                        </div>
+            {session === undefined ?
+                (
+                    <div className=" flex items-center justify-center h-screen">
+                        Loading...
                     </div>
-                    <div className="lg:relative lg:ml-0 absolute w-full h-screen overflow-auto">
-                        <div className="relative flex flex-col min-h-screen">
-                            <nav className="flex h-[65px] items-center justify-end border-b ">
-                                <div className=" flex items-center justify-between w-full gap-2 pr-4 mx-auto">
-                                    <a className="lg:invisible visible ml-4 text-xl font-semibold" href="/">
-                                        🐝 GT Subleaser
-                                    </a>
-                                    <div className="flex gap-2">
-
-                                        <Toggle />
-                                        <UserIcon />
+                ) : session === null ? (
+                    <LoginPage />
+                ) : (
+                    <div className="flex flex-row h-screen">
+                        <div className="!lg:left-0 absolute -left-[280px] top-0 ml-0 flex h-screen w-0 flex-col  lg:relative lg:left-0 lg:w-[420px]">
+                            <div className=" relative top-0 flex flex-col w-auto h-screen overflow-auto bg-white border-r">
+                                <div className="sticky top-0 z-20 bg-white border-b">
+                                    <div className="lg:height-auto bg-scale-200 lg:flex flex-col hidden gap-8 pt-8 pb-8">
+                                        <a className="flex items-center gap-3 px-10" href="/">
+                                            <span className="text-2xl font-semibold">
+                                                🐝 GT Subleaser
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
-                            </nav>
+                                <Sidebar page={page} />
+                            </div>
+                        </div>
+                        <div className="lg:relative lg:ml-0 absolute w-full h-screen overflow-auto">
+                            <div className="relative flex flex-col min-h-screen">
+                                <nav className="flex h-[65px] items-center justify-end border-b ">
+                                    <div className=" flex items-center justify-between w-full gap-2 pr-4 mx-auto">
+                                        <a className="lg:invisible visible ml-4 text-xl font-semibold" href="/">
+                                            🐝 GT Subleaser
+                                        </a>
+                                        <div className="flex gap-2">
 
-
-                            <div className=" relative flex items-center justify-center flex-grow">
-                                <div className="hover:opacity-50 absolute top-0 left-0 h-1 transition-all duration-300 ease-out"
-                                    style={{
-                                        width: `${(page / (pages.length - 1)) * 100}%`,
-                                    }}
-                                >
-                                    <div className="w-full h-full bg-green-500" />
-                                </div>
-
-                                <form
-                                    id="myform"
-                                    onSubmit={handleFormSubmit}
-                                    className="flex-grow max-w-3xl px-4 mx-auto"
-                                >
-                                    <div className="-translate-y-12">
-                                        {/* <Fade show={show}> */}
-                                        {pages[page] && pages[page].content}
-                                        {/* </Fade> */}
-                                        {page > 1 ?
-                                            (
-
-                                                <button
-                                                    type="submit"
-                                                    ref={submitFormRef}
-                                                    className={`focus:outline-none focus:ring px-3 py-1.5  text-sm font-medium text-white transition-all bg-gray-700 rounded-full mt-8`}
-                                                // onClick={() => { changePage(1) }}
-                                                >Continue</button>
-                                            ) : null}
+                                            <Toggle />
+                                            <UserIcon />
+                                        </div>
                                     </div>
-                                </form>
+                                </nav>
 
-                                <div className="absolute top-0 right-0 flex items-center mt-2.5 mr-4">
-                                    <div className="font-mono text-sm text-gray-700">
-                                        {page > 1 ?
-                                            "ID: " + idNum
-                                            :
-                                            null}
-                                    </div>
-                                </div>
 
-                                <div className="absolute bottom-0 right-0 flex items-center m-2.5">
-                                    <div className="mr-2.5 font-mono text-gray-900 text-sm">
-                                        Page {page + 1}/{pages.length}
-                                    </div>
-                                    <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-l" ref={upButtonRef}
-                                        onClick={() => { changePage(-1) }}
-                                    >
-                                        <ArrowUpIcon className="w-5 h-5 font-bold text-white"
-
-                                        />
-                                    </div>
-                                    <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-r" ref={downButtonRef}
-                                        onClick={async () => {
-                                            if (existingFormData !== null) {
-                                                if (!idNum) {
-                                                    await createListingId();
-                                                    changePage(1)
-                                                } else {
-                                                    changePage(1)
-                                                }
-                                            }
+                                <div className=" relative flex items-center justify-center flex-grow">
+                                    <div className="hover:opacity-50 absolute top-0 left-0 h-1 transition-all duration-300 ease-out"
+                                        style={{
+                                            width: `${(page / (pages.length - 1)) * 100}%`,
                                         }}
                                     >
-                                        <ArrowDownIcon className="w-5 h-5 font-bold text-white"
-
-                                        />
+                                        <div className="w-full h-full bg-green-500" />
                                     </div>
+
+                                    <form
+                                        id="myform"
+                                        onSubmit={handleFormSubmit}
+                                        className="flex-grow max-w-3xl px-4 mx-auto"
+                                    >
+                                        <div className="-translate-y-12">
+                                            {/* <Fade show={show}> */}
+                                            {pages[page] && pages[page].content}
+                                            {/* </Fade> */}
+                                            {page > 1 ?
+                                                (
+
+                                                    <button
+                                                        type="submit"
+                                                        ref={submitFormRef}
+                                                        className={`focus:outline-none focus:ring px-3 py-1.5  text-sm font-medium text-white transition-all bg-gray-700 rounded-full mt-8`}
+                                                    // onClick={() => { changePage(1) }}
+                                                    >Continue</button>
+                                                ) : null}
+                                        </div>
+                                    </form>
+
+                                    <div className="absolute top-0 right-0 flex items-center mt-2.5 mr-4">
+                                        <div className="font-mono text-sm text-gray-700">
+                                            {page > 1 ?
+                                                "ID: " + idNum
+                                                :
+                                                null}
+                                        </div>
+                                    </div>
+
+                                    <div className="absolute bottom-0 right-0 flex items-center m-2.5">
+                                        <div className="mr-2.5 font-mono text-gray-900 text-sm">
+                                            Page {page + 1}/{pages.length}
+                                        </div>
+                                        <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-l" ref={upButtonRef}
+                                            onClick={() => { changePage(-1) }}
+                                        >
+                                            <ArrowUpIcon className="w-5 h-5 font-bold text-white"
+
+                                            />
+                                        </div>
+                                        <div className="hover:bg-gray-800 px-3 py-2 bg-gray-700 rounded-r" ref={downButtonRef}
+                                            onClick={async () => {
+                                                if (existingFormData !== null) {
+                                                    if (!idNum) {
+                                                        await createListingId();
+                                                        changePage(1)
+                                                    } else {
+                                                        changePage(1)
+                                                    }
+                                                }
+                                            }}
+                                        >
+                                            <ArrowDownIcon className="w-5 h-5 font-bold text-white"
+
+                                            />
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
-                </div>
-            )
+                )
             }
+
         </div >
     )
 }

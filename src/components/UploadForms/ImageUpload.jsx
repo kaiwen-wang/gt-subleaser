@@ -6,7 +6,7 @@ import { fetcher } from "@/utils/fetcher";
 export function ImageUpload({ idNum }) {
     const inputFileRef = useRef(null);
 
-    const [uploadimgs, setuploadimgs] = useState([]);
+    const [uploadimgs, setuploadimgs] = useState(undefined);
 
     function deleteImage(index) {
         const newImages = [...uploadimgs];
@@ -14,19 +14,23 @@ export function ImageUpload({ idNum }) {
         setuploadimgs(newImages);
     }
 
-    const { data: data2, error: error2 } = useSWR(
+    // If the post images are there, set the images.
+    const { data, error, isLoading } = useSWR(
         `/api/DownloadPostImagesApi?url=${idNum}`,
         fetcher
     );
     useEffect(() => {
-        if (data2) {
-            setuploadimgs(data2);
+        console.log("the second data", data, isLoading
+        )
+        if (data) {
+            setuploadimgs(data);
+        } else {
+            setuploadimgs([])
         }
-    }, [data2]);
+    }, [data]);
 
 
     const [loading, setLoading] = useState(false);
-
     const handleImageUpload = async (e) => {
         setLoading(true)
         console.log("Uploading image", e.target.files);
@@ -68,28 +72,33 @@ export function ImageUpload({ idNum }) {
                 ref={inputFileRef} // Add ref to the input element
             />
             <div className="flex items-center h-64 gap-2 px-2 mt-2 overflow-x-auto border border-gray-400 rounded-md">
-                {uploadimgs.length !== 0 ? (
-                    uploadimgs.reverse().map((img, index) => (
-                        <CoverImage
-                            img={img}
-                            key={index}
-                            id={idNum}
-                            index={index}
-                            loading={loading}
-                            deleteImage={deleteImage}
-                        />
-                    ))
-                ) : (
-                    <div className="h-60 w-60 outline outline-black relative rounded-md">
-                        <span
-                            className="flex items-center justify-center w-full h-full text-center cursor-pointer"
-                            onClick={() => inputFileRef.current.click()}
-                        >
-                            No files yet!<br></br>
-                            Upload an image
-                        </span>
-                    </div>
-                )}
+                {isLoading || uploadimgs === undefined ?
+                    "Loading..."
+                    :
+                    (
+                        uploadimgs.length !== 0 ? (
+                            uploadimgs.reverse().map((img, index) => (
+                                <CoverImage
+                                    img={img}
+                                    key={index}
+                                    id={idNum}
+                                    index={index}
+                                    loading={loading}
+                                    deleteImage={deleteImage}
+                                />
+                            ))
+                        ) : (
+                            <div className="h-60 w-60 outline outline-black relative rounded-md">
+                                <span
+                                    className="flex items-center justify-center w-full h-full text-center cursor-pointer"
+                                    onClick={() => inputFileRef.current.click()}
+                                >
+                                    No files yet!<br></br>
+                                    Upload an image
+                                </span>
+                            </div>
+                        )
+                    )}
             </div>
         </div>
     )

@@ -24,10 +24,10 @@ export default function LoginPage({ props }) {
 
   return (
     <>
-      <div className="isolate fixed inset-0 bg-black bg-opacity-25" />
+      {/* <div className="isolate fixed inset-0 bg-black bg-opacity-25" /> */}
 
       <div className="absolute inset-0 flex items-center justify-center min-h-full p-4 text-center">
-        <div className="rounded-2xl w-full max-w-sm p-6 text-left align-middle bg-white shadow-xl">
+        <div className="rounded-2xl w-full max-w-sm p-6 text-left align-middle border border-black shadow-xl">
           <h1 className="text-lg font-medium leading-6 text-gray-900">
             Log In
           </h1>
