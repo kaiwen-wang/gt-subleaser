@@ -2,6 +2,9 @@
 
 ![](https://gyazo.com/c019e69a16a9938533c4db7af2d2a82a.gif)
 
+<img width="1009" alt="image" src="https://github.com/kaiwen-wang/gt-subleaser/assets/33988111/80d7d89c-f3b5-4b6c-a458-3098b01ec7bc">
+<img width="1007" alt="image" src="https://github.com/kaiwen-wang/gt-subleaser/assets/33988111/e7dc2004-7575-4d9a-94fd-ea1dd46f6e21">
+
 ![](https://i.gyazo.com/e77e547baece847f116855532959177c.gif)
 
 Front view: (gif not showing) https://gyazo.com/e77e547baece847f116855532959177c
