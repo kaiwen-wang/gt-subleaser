@@ -9,7 +9,6 @@
 
 Front view: (gif not showing) https://gyazo.com/e77e547baece847f116855532959177c
 
-
 Quick project I did over the summer.
 
 Areas of improvement included styling, working with forms, communicating with a backend, and thinking about the business area and what people need to sublease things.
